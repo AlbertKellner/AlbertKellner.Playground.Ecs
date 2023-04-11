@@ -1,4 +1,7 @@
+using Playground.Ecs;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.RegisterApplicationServices();
 
 // Add services to the container.
 
@@ -21,5 +24,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.ConfigureMiddleware();
+
+app.RegisterEndpoints();
 
 app.Run();
