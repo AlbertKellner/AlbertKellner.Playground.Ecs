@@ -1,4 +1,4 @@
-﻿namespace Playground.Ecs
+﻿namespace Playground.ControllerApi.Infrastructure
 {
     public static partial class MiddlewareInitializer
     {

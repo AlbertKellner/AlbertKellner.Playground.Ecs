@@ -1,4 +1,4 @@
-﻿namespace Playground.Ecs
+﻿namespace Playground.MinimalApi.Infrastructure
 {
     public static partial class ServiceInitializer
     {

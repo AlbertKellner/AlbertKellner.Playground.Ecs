@@ -1,9 +1,15 @@
-using Playground.MinimalApi.EndPoints;
-using Playground.MinimalApi.Infrastructure;
-using Swashbuckle.AspNetCore.SwaggerUI;
+using Playground.ControllerApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.RegisterApplicationServices();
+builder.Services.AddApiVersioning(ServiceInitializer.RegisterApiVersioning());
+
+//builder.Services.AddVersionedApiExplorer(
+//    options =>
+//    {
+//        options.GroupNameFormat = "'v'VVV";
+//        options.SubstituteApiVersionInUrl = true;
+//    });
 
 // Add services to the container.
 
@@ -14,6 +20,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -22,19 +35,5 @@ app.MapControllers();
 
 app.ConfigureMiddleware();
 
-app.RegisterEndpoints();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1.1");
-    });
-    app.UseDeveloperExceptionPage();
-}
-
-
-
 app.Run();
+
