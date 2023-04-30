@@ -56,11 +56,7 @@ namespace Microsoft.AspNetCore.Builder
                 options.AssumeDefaultVersionWhenUnspecified = true;
                 options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
                 options.ReportApiVersions = true;
-                options.ApiVersionReader = ApiVersionReader.Combine(
-                        new QueryStringApiVersionReader("api-version"),
-                        new HeaderApiVersionReader("X-Version"),
-                        new MediaTypeApiVersionReader("ver")
-                        );
+                options.ApiVersionReader = new HeaderApiVersionReader("X-Version");
             });
         }
 

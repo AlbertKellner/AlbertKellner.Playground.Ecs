@@ -6,14 +6,13 @@ namespace Playground.ControllerApi.Controllers.v2_0
 {
     [ApiController]
     [ApiVersion("2.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]")]
     [Produces("application/json")]
     public class ToDoItemsController : ControllerBase
     {
         private static List<ToDoItem> _toDoItems = new List<ToDoItem>();
 
         [HttpGet("{id}")]
-        [MapToApiVersion("2.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult GetById(
