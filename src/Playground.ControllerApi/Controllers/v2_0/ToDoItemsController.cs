@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Playground.ControllerApi.Models;
+using Playground.Models;
 
-namespace Playground.ControllerApi.Controllers.v2_0
+namespace Playground.Controllers.v2_0
 {
     [ApiController]
     [ApiVersion("2.0")]

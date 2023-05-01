@@ -6,7 +6,7 @@ namespace Playground.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/[controller]")]
-    public class ToDoItemsController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private static List<ToDoItem> _toDoItems = new List<ToDoItem>();
 

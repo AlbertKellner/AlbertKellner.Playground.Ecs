@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Playground.ControllerApi.Models
+namespace Playground.Models
 {
     public class ToDoItem
     {
