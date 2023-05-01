@@ -5,7 +5,11 @@ using Playground.Application.Features.ToDoItems.Create.Models;
 using Playground.Application.Features.ToDoItems.Delete.Models;
 using Playground.Application.Features.ToDoItems.GetAll.Models;
 using Playground.Application.Features.ToDoItems.GetById.Models;
+using Playground.Application.Features.ToDoItems.IsCompleted.Models;
+using Playground.Application.Features.ToDoItems.PatchTaskName.Models;
 using Playground.Application.Features.ToDoItems.Update.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel;
 using System.Net;
 
 namespace Playground.Controllers
@@ -121,6 +125,68 @@ namespace Playground.Controllers
             CancellationToken cancellationToken)
         {
             input.SetId(id);
+
+            if (input.IsInvalid())
+            {
+                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+
+                return BadRequest(input.ErrosList());
+            }
+
+            var output = await _mediator.Send(input, cancellationToken);
+
+            if (output != null && output.IsUpdated())
+            {
+                return NoContent();
+            }
+
+            // Adicionar log de erro
+
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpPatch("{id:long}/task-name/{taskName}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> PatchTaskNameAsync(
+            [FromRoute] long id,
+            [FromRoute] string taskName,
+            CancellationToken cancellationToken)
+        {
+            var input = new PatchTaskNameToDoItemInput();
+            input.SetId(id);
+            input.SetTaskName(taskName);
+
+            if (input.IsInvalid())
+            {
+                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+
+                return BadRequest(input.ErrosList());
+            }
+
+            var output = await _mediator.Send(input, cancellationToken);
+
+            if (output != null && output.IsUpdated())
+            {
+                return NoContent();
+            }
+
+            // Adicionar log de erro
+
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpPatch("{id:long}/is-completed/{isCompleted}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> PatchIsCompletedAsync(
+            [FromRoute] long id,
+            [FromRoute] bool isCompleted,
+            CancellationToken cancellationToken)
+        {
+            var input = new IsCompletedToDoItemInput();
+            input.SetId(id);
+            input.SetIsCompleted(isCompleted);
 
             if (input.IsInvalid())
             {
