@@ -28,21 +28,20 @@ namespace Microsoft.AspNetCore.Builder
             services.AddSwaggerGen();
             services.ConfigureSwaggerGen(options =>
             {
-                // For each supported version, add a new SwaggerDoc
                 options.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
                         Version = "v1",
-                        Title = "Test Api v1",
-                        Description = "A test API version 1.0"
+                        Title = "Playground.API - version 1.0",
+                        Description = "Playground"
                     });
 
                 options.SwaggerDoc("v2",
                     new OpenApiInfo
                     {
                         Version = "v2",
-                        Title = "Test Api v2",
-                        Description = "A test API version 2.0"
+                        Title = "Playground.API - version 2.0",
+                        Description = "Playground"
                     });
 
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -54,7 +53,7 @@ namespace Microsoft.AspNetCore.Builder
             services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+                options.DefaultApiVersion = new Mvc.ApiVersion(1, 0);
                 options.ReportApiVersions = true;
                 options.ApiVersionReader = new HeaderApiVersionReader("X-Version");
             });
