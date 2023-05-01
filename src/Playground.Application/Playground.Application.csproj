@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\ToDoItems\GetById\Entities\" />
+    <Folder Include="Features\ToDoItems\GetById\Interface\" />
+    <Folder Include="Features\ToDoItems\GetById\Repositories\Script\" />
     <Folder Include="Features\ToDoItems\Create\Interface\" />
     <Folder Include="Features\ToDoItems\Create\Entities\" />
     <Folder Include="Features\ToDoItems\Create\Repositories\Script\" />
@@ -17,6 +20,7 @@
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
 </Project>

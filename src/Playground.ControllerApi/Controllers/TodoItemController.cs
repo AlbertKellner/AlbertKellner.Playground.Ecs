@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Playground.Application.Features.ToDoItems.Create.Models;
+using Playground.Application.Features.ToDoItems.GetById.Models;
 using Playground.Models;
 using System.Net;
 
@@ -22,13 +23,13 @@ namespace Playground.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(CreateToDoItemOutput), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(GetByIdToDoItemOutput), StatusCodes.Status201Created)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Create(
             [FromBody] CreateToDoItemInput input,
             CancellationToken cancellationToken)
         {
-            if (input.IsInvalid)
+            if (input.IsInvalid())
             {
                 //Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
 
@@ -37,7 +38,7 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output.IsCreated)
+            if (output != null && output.IsCreated)
             {
                 return CreatedAtRoute(
                     routeName: "GetById",
@@ -52,10 +53,34 @@ namespace Playground.Controllers
 
         [HttpGet("{id:int}", Name = "GetById")]
         public async Task<IActionResult> GetByIdAsync(
-            [FromRoute] int id,
+            [FromRoute] long id,
+            [FromQuery] GetByIdToDoItemInput input,
             CancellationToken cancellationToken)
         {
-            return Ok();
+            input.SetId(id);
+
+            if (input.IsInvalid())
+            {
+                //Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+
+                return BadRequest(input.ErrosList());
+            }
+
+            var output = await _mediator.Send(input, cancellationToken);
+
+            if (output == null)
+            {
+                //Adicionar log de erro
+
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+
+            if (output.IsValid)
+            {
+                return Ok(output);
+            }
+                
+            return NoContent();
         }
     }
 }

@@ -5,12 +5,12 @@ namespace Playground.Application.Features.ToDoItems.Create.UseCase
 {
     public class CreateToDoItemUseCaseHandler : IRequestHandler<CreateToDoItemInput, CreateToDoItemOutput>
     {
-        public async Task<CreateToDoItemOutput> Handle(CreateToDoItemInput request, CancellationToken cancellationToken)
+        public async Task<CreateToDoItemOutput> Handle(CreateToDoItemInput input, CancellationToken cancellationToken)
         {
             return new CreateToDoItemOutput
             {
                 Id = 1,
-                Task = request.Task,
+                Task = input.Task,
                 IsCompleted = false
             };
         }
