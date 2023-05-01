@@ -1,5 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using Microsoft.AspNetCore.Hosting;
+using Autofac;
+using Microsoft.AspNetCore.Mvc;
+using Playground.Application.Shared.AutofacModules;
+using System;
+using Autofac.Core;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -7,6 +16,8 @@ namespace Microsoft.AspNetCore.Builder
     {
         public static IServiceCollection RegisterCustomServices(this IServiceCollection services)
         {
+            ConfigureMediatR(services);
+
             RegisterCustomDependencies(services);
 
             RegisterSwagger(services);
@@ -15,13 +26,24 @@ namespace Microsoft.AspNetCore.Builder
 
             RegisterAddVersionedApiExplorer(services);
 
+            services.AddMvc().AddControllersAsServices();
+
             return services;
+        }
+
+        public static void ConfigureMediatR(IServiceCollection services)
+        {
+            services.AddMediatR(cfg =>
+             {
+                 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+             });
         }
 
         private static void RegisterCustomDependencies(IServiceCollection services)
         {
             //services.AddTransient<IInitialRespositoryAPI, InitialRespositoryAPI>();
         }
+        
 
         private static void RegisterSwagger(IServiceCollection services)
         {

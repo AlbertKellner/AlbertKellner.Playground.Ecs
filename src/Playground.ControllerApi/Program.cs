@@ -1,14 +1,28 @@
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.RegisterCustomServices();
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+using Autofac;
+using Autofac.Core;
+using Autofac.Extensions.DependencyInjection;
+using Playground.Application.Shared.AutofacModules;
 
-var app = builder.Build();
-app.RegisterCustomMiddleware();
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthorization();
-app.MapControllers();
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+        
+        builder.RegisterCustomWebApplicationBuilder();
 
-app.Run();
+        builder.Services.RegisterCustomServices();
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
 
+        var app = builder.Build();
+
+        app.RegisterCustomMiddleware();
+        app.UseHttpsRedirection();
+        app.UseRouting();
+        app.UseAuthorization();
+        app.MapControllers();
+
+        app.Run();
+    }
+}

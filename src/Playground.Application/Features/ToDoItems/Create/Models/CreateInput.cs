@@ -1,6 +1,11 @@
-﻿namespace Playground.Application.Features.ToDoItems.Create.Models
+﻿using MediatR;
+
+namespace Playground.Application.Features.ToDoItems.Create.Models
 {
-    internal class CreateInput
+    public class CreateInput : IRequest<CreateOutput>
     {
+        public int Id { get; set; }
+        public string Task { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

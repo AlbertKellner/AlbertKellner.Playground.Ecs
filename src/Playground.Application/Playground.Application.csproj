@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,6 +10,13 @@
     <Folder Include="Features\ToDoItems\Create\Interface\" />
     <Folder Include="Features\ToDoItems\Create\Entities\" />
     <Folder Include="Features\ToDoItems\Create\Repositories\Script\" />
+    <Folder Include="Shared\Factories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.0.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="MediatR" Version="12.0.1" />
   </ItemGroup>
 
 </Project>
