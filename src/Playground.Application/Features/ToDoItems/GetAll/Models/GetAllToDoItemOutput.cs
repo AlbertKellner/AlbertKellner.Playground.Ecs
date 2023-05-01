@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Playground.Application.Features.ToDoItems.Create.Models
+namespace Playground.Application.Features.ToDoItems.GetAll.Models
 {
-    public class CreateToDoItemOutput
+    public class GetAllToDoItemOutput
     {
         [JsonPropertyName("id")]
         public long Id { get; set; }
@@ -13,6 +13,8 @@ namespace Playground.Application.Features.ToDoItems.Create.Models
         [JsonPropertyName("is_completed")]
         public bool IsCompleted { get; set; }
 
-        public bool IsCreated() => Id > 0;
+        public bool IsValid() => 
+            Id > 0
+            && !string.IsNullOrEmpty(Task);
     }
 }

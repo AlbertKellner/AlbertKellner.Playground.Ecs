@@ -13,8 +13,7 @@ namespace Playground.Application.Features.ToDoItems.GetById.Models
         [JsonPropertyName("is_completed")]
         public bool IsCompleted { get; set; }
 
-        [JsonIgnore]
-        public bool IsValid => 
+        public bool IsValid() => 
             Id > 0
             && !string.IsNullOrEmpty(Task);
     }
