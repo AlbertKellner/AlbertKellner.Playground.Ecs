@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Playground.Application.Features.ToDoItems.Create.Models;
 using Playground.Application.Features.ToDoItems.GetAll.Models;
 using Playground.Application.Features.ToDoItems.GetById.Models;
+using Playground.Application.Features.ToDoItems.Update.Models;
 using System.Net;
 
 namespace Playground.Controllers
@@ -24,7 +25,7 @@ namespace Playground.Controllers
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(CreateToDoItemOutput), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateToDoItemOutput), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create(
             [FromBody] CreateToDoItemInput input,
             CancellationToken cancellationToken)
@@ -51,10 +52,10 @@ namespace Playground.Controllers
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
-        [HttpGet("{id:int}", Name = "GetById")]
+        [HttpGet("{id:long}", Name = "GetById")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(GetByIdToDoItemOutput), StatusCodes.Status200OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType(typeof(GetByIdToDoItemOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByIdAsync(
             [FromRoute] long id,
             [FromQuery] GetByIdToDoItemInput input,
@@ -87,8 +88,8 @@ namespace Playground.Controllers
         }
         
         [HttpGet()]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(GetAllToDoItemOutput), StatusCodes.Status200OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType(typeof(GetAllToDoItemOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllAsync(
             CancellationToken cancellationToken)
         {
@@ -107,6 +108,35 @@ namespace Playground.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPut("{id:long}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> Update(
+            [FromRoute] long id,
+            [FromBody] UpdateToDoItemInput input,
+            CancellationToken cancellationToken)
+        {
+            input.SetId(id);
+
+            if (input.IsInvalid())
+            {
+                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+
+                return BadRequest(input.ErrosList());
+            }
+
+            var output = await _mediator.Send(input, cancellationToken);
+
+            if (output != null && output.IsUpdated())
+            {
+                return NoContent();
+            }
+
+            // Adicionar log de erro
+
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
     }
 }

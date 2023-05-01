@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\ToDoItems\Delete\Entities\" />
+    <Folder Include="Features\ToDoItems\Delete\Interface\" />
+    <Folder Include="Features\ToDoItems\Delete\Repositories\Script\" />
+    <Folder Include="Features\ToDoItems\Update\Entities\" />
+    <Folder Include="Features\ToDoItems\Update\Interface\" />
+    <Folder Include="Features\ToDoItems\Update\Repositories\Script\" />
     <Folder Include="Features\ToDoItems\GetAll\Entities\" />
     <Folder Include="Features\ToDoItems\GetAll\Interface\" />
     <Folder Include="Features\ToDoItems\GetAll\Repositories\Script\" />
