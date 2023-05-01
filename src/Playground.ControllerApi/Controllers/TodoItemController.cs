@@ -1,6 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Playground.Application.Features.ToDoItems.Create.Models;
+using Playground.Application.Features.ToDoItems.Delete.Models;
 using Playground.Application.Features.ToDoItems.GetAll.Models;
 using Playground.Application.Features.ToDoItems.GetById.Models;
 using Playground.Application.Features.ToDoItems.Update.Models;
@@ -130,6 +132,32 @@ namespace Playground.Controllers
             var output = await _mediator.Send(input, cancellationToken);
 
             if (output != null && output.IsUpdated())
+            {
+                return NoContent();
+            }
+
+            // Adicionar log de erro
+
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpDelete("{id:long}")]
+        public async Task<IActionResult> Delete(
+            [FromRoute] long id,
+            CancellationToken cancellationToken)
+        {
+            var input = new DeleteToDoItemInput(id);
+
+            if (input.IsInvalid())
+            {
+                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+
+                return BadRequest(input.ErrosList());
+            }
+
+            var output = await _mediator.Send(input, cancellationToken);
+
+            if (output != null && output.IsDeleted)
             {
                 return NoContent();
             }

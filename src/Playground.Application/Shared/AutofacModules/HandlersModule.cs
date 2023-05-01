@@ -2,6 +2,8 @@
 using MediatR;
 using Playground.Application.Features.ToDoItems.Create.Models;
 using Playground.Application.Features.ToDoItems.Create.UseCase;
+using Playground.Application.Features.ToDoItems.Delete.Models;
+using Playground.Application.Features.ToDoItems.Delete.UseCase;
 using Playground.Application.Features.ToDoItems.GetAll.Models;
 using Playground.Application.Features.ToDoItems.GetAll.UseCase;
 using Playground.Application.Features.ToDoItems.GetById.Models;
@@ -27,6 +29,9 @@ namespace Playground.Application.Shared.AutofacModules
 
             builder.RegisterAssemblyTypes(typeof(UpdateToDoItemInput).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
             builder.RegisterAssemblyTypes(typeof(UpdateToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(DeleteToDoItemInput).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(DeleteToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
         }
     }
 }
