@@ -1,14 +1,12 @@
-using Autofac;
-using Autofac.Core;
-using Autofac.Extensions.DependencyInjection;
-using Playground.Application.Shared.AutofacModules;
-
+using Serilog;
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        
+
+        builder.Host.UseSerilog();
+
         builder.RegisterCustomWebApplicationBuilder();
 
         builder.Services.RegisterCustomServices();
@@ -24,5 +22,15 @@ internal class Program
         app.MapControllers();
 
         app.Run();
+
+        FlushLogsBeforeCloseApplication();
+    }
+
+    /// <summary>
+    /// Para garantir que os logs sejam descartados corretamente ao encerrar o aplicativo
+    /// </summary>
+    static void FlushLogsBeforeCloseApplication()
+    {
+        Log.CloseAndFlush();
     }
 }

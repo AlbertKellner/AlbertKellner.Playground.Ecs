@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Playground.Application.Shared.AutofacModules;
 using Autofac.Extensions.DependencyInjection;
+using Serilog;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -8,6 +9,8 @@ namespace Microsoft.AspNetCore.Builder
     {
         public static WebApplicationBuilder RegisterCustomWebApplicationBuilder(this WebApplicationBuilder builder)
         {
+            SerilogConfig();
+
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
                         .ConfigureContainer<ContainerBuilder>(builder =>
                         {
@@ -16,5 +19,12 @@ namespace Microsoft.AspNetCore.Builder
 
             return builder;
         }
+
+        private static void SerilogConfig() => 
+            Log.Logger =
+                new LoggerConfiguration()
+                    .MinimumLevel.Information()
+                    .WriteTo.Console()
+                    .CreateLogger();
     }
 }

@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Playground.Application.Features.ToDoItems.Create.Models;
 using Playground.Application.Features.ToDoItems.Delete.Models;
 using Playground.Application.Features.ToDoItems.GetAll.Models;
@@ -8,9 +7,8 @@ using Playground.Application.Features.ToDoItems.GetById.Models;
 using Playground.Application.Features.ToDoItems.IsCompleted.Models;
 using Playground.Application.Features.ToDoItems.PatchTaskName.Models;
 using Playground.Application.Features.ToDoItems.Update.Models;
-using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel;
 using System.Net;
+using Microsoft.Extensions.Logging;
 
 namespace Playground.Controllers
 {
@@ -22,23 +20,25 @@ namespace Playground.Controllers
     public class ToDoItemController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<AuthenticationController> _logger;
 
         public ToDoItemController(
-            IMediator mediator)
+            IMediator mediator, ILogger<AuthenticationController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(CreateToDoItemOutput), (int)HttpStatusCode.Created)]
-        public async Task<IActionResult> Create(
+        public async Task<IActionResult> CreateAsync(
             [FromBody] CreateToDoItemInput input,
             CancellationToken cancellationToken)
         {
             if (input.IsInvalid())
             {
-                //Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+                _logger.LogWarning($"[Api][ToDoItemController][CreateAsync][BadRequest] input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
@@ -47,15 +47,18 @@ namespace Playground.Controllers
 
             if (output != null && output.IsCreated())
             {
+                _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created] input:({input.ToInformation()})");
+
                 return CreatedAtRoute(
                     routeName: "GetById",
                     routeValues: new { id = output.Id },
                     value: output);
             }
 
-            //Adicionar log de erro
+            _logger.LogError($"[Api][ToDoItemController][CreateAsync][InternalServerError] input:({input.ToError()})");
 
-            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            //TODO: Adicionar middleware de tratamento de exception por filter result
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError); 
         }
 
         [HttpGet("{id:long}", Name = "GetById")]
@@ -89,10 +92,10 @@ namespace Playground.Controllers
             {
                 return Ok(output);
             }
-                
+
             return NoContent();
         }
-        
+
         [HttpGet()]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(GetAllToDoItemOutput), (int)HttpStatusCode.OK)]
