@@ -20,12 +20,17 @@ namespace Microsoft.AspNetCore.Builder
             return builder;
         }
 
-        private static void SerilogConfig() => 
+        private static void SerilogConfig()
+        {
+            const string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] {Message:lj}{NewLine}{Exception}";
+
             Log.Logger =
-                new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .MinimumLevel.Information()
-                    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] {Message:lj}{NewLine}{Exception}")
-                    .CreateLogger();
+                    new LoggerConfiguration()
+                        .Enrich.FromLogContext()
+                        .MinimumLevel.Information()
+                        .WriteTo.Console(outputTemplate: outputTemplate)
+                        .WriteTo.File("log.txt", outputTemplate: outputTemplate)
+                        .CreateLogger();
+        }
     }
 }
