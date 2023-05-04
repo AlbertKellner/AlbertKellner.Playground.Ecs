@@ -9,6 +9,7 @@ using Playground.Application.Features.ToDoItems.PatchTaskName.Models;
 using Playground.Application.Features.ToDoItems.Update.Models;
 using System.Net;
 using Microsoft.Extensions.Logging;
+using Playground.Models;
 
 namespace Playground.Controllers
 {
@@ -47,7 +48,7 @@ namespace Playground.Controllers
 
             if (output != null && output.IsCreated())
             {
-                _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created] input:({input.ToInformation()})");
+                _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created]");
 
                 return CreatedAtRoute(
                     routeName: "GetById",

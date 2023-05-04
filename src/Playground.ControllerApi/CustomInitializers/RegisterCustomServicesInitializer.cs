@@ -1,14 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using Microsoft.AspNetCore.Hosting;
-using Autofac;
-using Microsoft.AspNetCore.Mvc;
-using Playground.Application.Shared.AutofacModules;
-using System;
-using Autofac.Core;
+using Playground.Filter;
+using Playground.Handlers;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -27,6 +20,21 @@ namespace Microsoft.AspNetCore.Builder
             RegisterAddVersionedApiExplorer(services);
 
             services.AddMvc().AddControllersAsServices();
+
+            services.AddTransient<CorrelationIdHandler>();
+
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(LogActionFilter));
+            });
+
+            //services.AddRefitClient<IMyApiClient>()
+            //    .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration["ApiBaseUrl"]))
+            //    .AddHttpMessageHandler<CorrelationIdHandler>();
+
+            //services.AddHttpClient("MyHttpClient")
+            //    .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration["ApiBaseUrl"]))
+            //    .AddHttpMessageHandler<CorrelationIdHandler>();
 
             return services;
         }
@@ -67,6 +75,7 @@ namespace Microsoft.AspNetCore.Builder
                     });
 
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                options.OperationFilter<AddCorrelationIdHeaderFilter>();
             });
         }
 

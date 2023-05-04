@@ -1,4 +1,6 @@
-﻿namespace Microsoft.AspNetCore.Builder
+﻿using Playground.Middleware;
+
+namespace Microsoft.AspNetCore.Builder
 {
     public static partial class RegisterCustomMiddlewareInitializer
     {
@@ -8,6 +10,8 @@
             {
                 app.ConfigureSwagger();
             }
+
+            app.UseMiddleware<CorrelationIdMiddleware>();
 
             return app;
         }

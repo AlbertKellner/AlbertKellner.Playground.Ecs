@@ -23,8 +23,9 @@ namespace Microsoft.AspNetCore.Builder
         private static void SerilogConfig() => 
             Log.Logger =
                 new LoggerConfiguration()
+                    .Enrich.FromLogContext()
                     .MinimumLevel.Information()
-                    .WriteTo.Console()
+                    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] {Message:lj}{NewLine}{Exception}")
                     .CreateLogger();
     }
 }
