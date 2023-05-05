@@ -1,6 +1,6 @@
 ﻿using Playground.Models;
 
-namespace Playground.Handlers
+namespace Playground.Application.Infrastructure.Handlers
 {
     public class CorrelationIdHandler : DelegatingHandler
     {

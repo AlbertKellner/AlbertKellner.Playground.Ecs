@@ -2,7 +2,7 @@
 using Playground.Models;
 using Serilog.Context;
 
-namespace Playground.Filter
+namespace Playground.Application.Infrastructure.Filter
 {
     public class LogActionFilter : IActionFilter
     {

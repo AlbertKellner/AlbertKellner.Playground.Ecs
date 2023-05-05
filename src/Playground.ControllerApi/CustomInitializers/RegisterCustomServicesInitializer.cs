@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
-using Playground.Filter;
-using Playground.Handlers;
+using Playground.Application.Infrastructure.Filter;
+using Playground.Application.Infrastructure.Handlers;
 
 namespace Microsoft.AspNetCore.Builder
 {

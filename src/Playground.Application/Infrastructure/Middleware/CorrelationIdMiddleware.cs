@@ -1,7 +1,9 @@
-﻿using Playground.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Playground.Models;
 using System.Text.Json;
 
-namespace Playground.Middleware
+namespace Playground.Application.Infrastructure.Middleware
 {
     public class CorrelationIdMiddleware
     {
@@ -32,7 +34,7 @@ namespace Playground.Middleware
                     context.Response.ContentType = "application/json";
 
                     var errorResponse = new { error = $"CorrelationId inválido. CorrelationId fornecido: {correlationIdValue}. Ele deve ser um GUID válido." };
-                    
+
                     await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
 
                     _logger.LogWarning($"[Middleware][CorrelationId][BadRequest] CorrelationId inválido. CorrelationId fornecido: {correlationIdValue}");

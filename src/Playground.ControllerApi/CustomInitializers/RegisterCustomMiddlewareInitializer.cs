@@ -1,4 +1,4 @@
-﻿using Playground.Middleware;
+﻿using Playground.Application.Infrastructure.Middleware;
 
 namespace Microsoft.AspNetCore.Builder
 {
