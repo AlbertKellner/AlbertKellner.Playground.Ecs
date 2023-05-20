@@ -163,7 +163,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+                _logger.LogWarning($"[Api][ToDoItemController][PatchTaskNameAsync][BadRequest] input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
@@ -175,7 +175,7 @@ namespace Playground.Controllers
                 return NoContent();
             }
 
-            // Adicionar log de erro
+            _logger.LogError($"[Api][ToDoItemController][PatchTaskNameAsync][InternalServerError] input:({input.ToError()})");
 
             return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
@@ -194,7 +194,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+                _logger.LogWarning($"[Api][ToDoItemController][PatchIsCompletedAsync][BadRequest] input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
@@ -206,13 +206,13 @@ namespace Playground.Controllers
                 return NoContent();
             }
 
-            // Adicionar log de erro
+            _logger.LogError($"[Api][ToDoItemController][PatchIsCompletedAsync][InternalServerError] input:({input.ToError()})");
 
             return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
 
         [HttpDelete("{id:long}")]
-        public async Task<IActionResult> Delete(
+        public async Task<IActionResult> DeleteAsync(
             [FromRoute] long id,
             CancellationToken cancellationToken)
         {
@@ -220,7 +220,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+                _logger.LogWarning($"[Api][ToDoItemController][DeleteAsync][BadRequest] input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
@@ -232,7 +232,7 @@ namespace Playground.Controllers
                 return NoContent();
             }
 
-            // Adicionar log de erro
+            _logger.LogError($"[Api][ToDoItemController][DeleteAsync][InternalServerError] input:({input.ToError()})");
 
             return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }

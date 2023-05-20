@@ -1,9 +1,12 @@
-﻿using MediatR;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using MediatR;
+using Playground.Application.Shared.Features.Models;
 using System.Text.Json.Serialization;
 
 namespace Playground.Application.Features.ToDoItems.IsCompleted.Models
 {
-    public class IsCompletedToDoItemInput : IRequest<IsCompletedToDoItemOutput>
+    public class IsCompletedToDoItemInput : ValidatableInputBase, IRequest<IsCompletedToDoItemOutput>
     {
         [JsonPropertyName("id")]
         public long Id { get; set; }
@@ -11,24 +14,20 @@ namespace Playground.Application.Features.ToDoItems.IsCompleted.Models
         [JsonPropertyName("is_completed")]
         public bool IsCompleted { get; set; }
 
-        public IEnumerable<string> ErrosList()
-        {
-            var validationErrors = new List<string>
-            {
-                Id <= 0 ? $"{nameof(Id)} precisa ser maior que zero" : string.Empty
-            };
-
-            validationErrors.RemoveAll(item => item == string.Empty);
-
-            return validationErrors;
-        }
-
-        public bool IsInvalid() => ErrosList().Any();
-
-        public string FormattedErrosList() => $"({string.Join("|", ErrosList())})";
-
         public void SetId(long id) => Id = id;
 
         public void SetIsCompleted(bool isCompleted) => IsCompleted = isCompleted;
+
+        public override IEnumerable<string> ErrosList()
+        {
+            ClearErrorMessages();
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero")
+                );
+
+            return ValidationMessages();
+        }
     }
 }
