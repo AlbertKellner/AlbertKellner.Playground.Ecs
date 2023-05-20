@@ -26,6 +26,7 @@ namespace Microsoft.AspNetCore.Builder
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(LogActionFilter));
+                options.Filters.Add<HttpGlobalExceptionFilter>();
             });
 
             //services.AddRefitClient<IMyApiClient>()
