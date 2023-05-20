@@ -8,8 +8,6 @@ using Playground.Application.Features.ToDoItems.IsCompleted.Models;
 using Playground.Application.Features.ToDoItems.PatchTaskName.Models;
 using Playground.Application.Features.ToDoItems.Update.Models;
 using System.Net;
-using Microsoft.Extensions.Logging;
-using Playground.Models;
 
 namespace Playground.Controllers
 {
