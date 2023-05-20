@@ -1,10 +1,13 @@
-﻿using MediatR;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using MediatR;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Playground.Application.Shared.Features.Models;
 using System.Text.Json.Serialization;
 
 namespace Playground.Application.Features.ToDoItems.Update.Models
 {
-    public class UpdateToDoItemInput : IRequest<UpdateToDoItemOutput>
+    public class UpdateToDoItemInput : ValidatableInputBase, IRequest<UpdateToDoItemOutput>
     {
         [BindNever]
         [JsonIgnore]
@@ -17,23 +20,19 @@ namespace Playground.Application.Features.ToDoItems.Update.Models
         [JsonPropertyName("is_completed")]
         public bool IsCompleted { get; set; }
 
-        public IEnumerable<string> ErrosList()
-        {
-            var validationErrors = new List<string>
-            {
-                Id <= 0 ? $"{nameof(Id)} precisa ser maior que zero" : string.Empty,
-                string.IsNullOrWhiteSpace(Task) ? $"{nameof(Task)} precisa ser preenchido" : string.Empty
-            };
-
-            validationErrors.RemoveAll(item => item == string.Empty);
-
-            return validationErrors;
-        }
-
-        public bool IsInvalid() => ErrosList().Any();
-
-        public string FormattedErrosList() => $"({string.Join("|", ErrosList())})";
-
         public void SetId(long id) => Id = id;
+
+        public override IEnumerable<string> ErrosList()
+        {
+            ClearErrorMessages();
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsNotNullOrWhiteSpace(Task, nameof(Task), $"{nameof(Task)} não pode ser vazio ou somente espaços em branco")
+                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero")
+                );
+
+            return ValidationMessages();
+        }
     }
 }

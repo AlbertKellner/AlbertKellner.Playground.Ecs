@@ -24,7 +24,8 @@ namespace Playground.Controllers
         private readonly ILogger<AuthenticationController> _logger;
 
         public ToDoItemController(
-            IMediator mediator, ILogger<AuthenticationController> logger)
+            IMediator mediator, 
+            ILogger<AuthenticationController> logger)
         {
             _mediator = mediator;
             _logger = logger;
@@ -74,7 +75,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                //Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][BadRequest] input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
@@ -83,7 +84,7 @@ namespace Playground.Controllers
 
             if (output == null)
             {
-                //Adicionar log de erro
+                _logger.LogError($"[Api][ToDoItemController][GetByIdAsync][InternalServerError] input:({input.ToError()})");
 
                 return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
@@ -106,7 +107,7 @@ namespace Playground.Controllers
 
             if (output == null)
             {
-                //Adicionar log de erro
+                _logger.LogError($"[Api][ToDoItemController][GetAllAsync][InternalServerError])");
 
                 return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
@@ -122,7 +123,7 @@ namespace Playground.Controllers
         [HttpPut("{id:long}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> Update(
+        public async Task<IActionResult> UpdateAsync(
             [FromRoute] long id,
             [FromBody] UpdateToDoItemInput input,
             CancellationToken cancellationToken)
@@ -131,7 +132,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                // Adicionar logs com o padrão API_ClassName_Método => inputModel => TipoDeOcorrenciaComMessage
+                _logger.LogWarning($"[Api][ToDoItemController][UpdateAsync][BadRequest] input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
@@ -143,7 +144,7 @@ namespace Playground.Controllers
                 return NoContent();
             }
 
-            // Adicionar log de erro
+            _logger.LogError($"[Api][ToDoItemController][UpdateAsync][InternalServerError] input:({input.ToError()})");
 
             return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }

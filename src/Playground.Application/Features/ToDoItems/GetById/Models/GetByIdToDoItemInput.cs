@@ -1,34 +1,30 @@
-﻿using MediatR;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using MediatR;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Playground.Application.Shared.Features.Models;
 using System.Text.Json.Serialization;
 
 namespace Playground.Application.Features.ToDoItems.GetById.Models
 {
-    public class GetByIdToDoItemInput : IRequest<GetByIdToDoItemOutput>
+    public class GetByIdToDoItemInput : ValidatableInputBase, IRequest<GetByIdToDoItemOutput>
     {
         [BindNever]
         [JsonPropertyName("id")]
-        public long Id { get; set; }
+        public long Id { get; internal set; }
 
-        public IEnumerable<string> ErrosList()
+        public void SetId(long id) => Id = id;
+
+        public override IEnumerable<string> ErrosList()
         {
-            var validationErrors = new List<string>
-            {
-                Id <= 0 ? $"{nameof(Id)} precisa ser maior que zero" : string.Empty
-            };
+            ClearErrorMessages();
 
-            validationErrors.RemoveAll(item => item == string.Empty);
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero")
+                );
 
-            return validationErrors;
+            return ValidationMessages();
         }
-
-        public void SetId(long id)
-        {
-            Id = id;
-        }
-
-        public bool IsInvalid() => ErrosList().Any();
-
-        public string FormattedErrosList() => $"({string.Join("|", ErrosList())})";
     }
 }
