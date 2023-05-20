@@ -3,7 +3,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Playground.Application.Infrastructure.Filter
 {
-    public class AddCorrelationIdHeaderFilter : IOperationFilter
+    public class AddCorrelationIdHeaderOnOpenApiFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {

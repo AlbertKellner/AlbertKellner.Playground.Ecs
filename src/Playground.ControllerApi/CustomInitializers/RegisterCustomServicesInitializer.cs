@@ -76,7 +76,7 @@ namespace Microsoft.AspNetCore.Builder
                     });
 
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                options.OperationFilter<AddCorrelationIdHeaderFilter>();
+                options.OperationFilter<AddCorrelationIdHeaderOnOpenApiFilter>();
             });
         }
 
