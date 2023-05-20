@@ -59,7 +59,7 @@ namespace Playground.Controllers
             _logger.LogError($"[Api][ToDoItemController][CreateAsync][InternalServerError] input:({input.ToError()})");
 
             //TODO: Adicionar middleware de tratamento de exception por filter result
-            return new StatusCodeResult(StatusCodes.Status500InternalServerError); 
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError); 
         }
 
         [HttpGet("{id:long}", Name = "GetById")]
@@ -86,7 +86,7 @@ namespace Playground.Controllers
             {
                 //Adicionar log de erro
 
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
 
             if (output.IsValid())
@@ -109,7 +109,7 @@ namespace Playground.Controllers
             {
                 //Adicionar log de erro
 
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
 
             if (output.Any())
@@ -146,7 +146,7 @@ namespace Playground.Controllers
 
             // Adicionar log de erro
 
-            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
 
         [HttpPatch("{id:long}/task-name/{taskName}")]
@@ -177,7 +177,7 @@ namespace Playground.Controllers
 
             // Adicionar log de erro
 
-            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
 
         [HttpPatch("{id:long}/is-completed/{isCompleted}")]
@@ -208,7 +208,7 @@ namespace Playground.Controllers
 
             // Adicionar log de erro
 
-            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
 
         [HttpDelete("{id:long}")]
@@ -234,7 +234,7 @@ namespace Playground.Controllers
 
             // Adicionar log de erro
 
-            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
     }
 }

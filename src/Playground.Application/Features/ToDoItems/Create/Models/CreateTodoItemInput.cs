@@ -1,9 +1,12 @@
 ﻿using MediatR;
 using System.Text.Json.Serialization;
+using Flunt.Notifications;
+using Flunt.Validations;
+using Playground.Application.Shared.Features.Models;
 
 namespace Playground.Application.Features.ToDoItems.Create.Models
 {
-    public class CreateToDoItemInput : IRequest<CreateToDoItemOutput>
+    public class CreateToDoItemInput : ValidatableInputBase, IRequest<CreateToDoItemOutput>
     {
         [JsonPropertyName("task")]
         public string Task { get; set; } = string.Empty;
@@ -11,34 +14,16 @@ namespace Playground.Application.Features.ToDoItems.Create.Models
         [JsonPropertyName("is_completed")]
         public bool IsCompleted = false;
 
-        public IEnumerable<string> ErrosList()
+        public override IEnumerable<string> ErrosList()
         {
-            var validationErrors = new List<string>
-            {
-                string.IsNullOrWhiteSpace(Task) ? $"{nameof(Task)} precisa ser preenchido" : string.Empty
-            };
+            ClearErrorMessages();
+            
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsNotNullOrWhiteSpace(Task, nameof(Task), $"{nameof(Task)} should not be empty or whitespace")
+                );
 
-            validationErrors.RemoveAll(item => item == string.Empty);
-
-            return validationErrors;
-        }
-
-        public bool IsInvalid() => ErrosList().Any();
-
-        public string FormattedErrosList() => $"({string.Join("|", ErrosList())})";
-    }
-
-    public static class CreateToDoItemInputExtensions
-    {
-        public static string ToWarning(this CreateToDoItemInput input)
-        {
-            return $@"{nameof(input.Task)}:{input.Task}|{nameof(input.IsCompleted)}:{input.IsCompleted}|{nameof(input.FormattedErrosList)}:{input.FormattedErrosList()}";
-        }
-
-        public static string ToError(this CreateToDoItemInput input)
-        {
-            return $@"{nameof(input.Task)}:{input.Task}|{nameof(input.IsCompleted)}:{input.IsCompleted}";
+            return ValidationMessages();
         }
     }
-
 }
