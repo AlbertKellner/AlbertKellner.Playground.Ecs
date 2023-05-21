@@ -25,7 +25,7 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void SerilogConfig()
         {
-            const string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
+            const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
 
             Log.Logger =
                     new LoggerConfiguration()
