@@ -16,9 +16,9 @@ namespace Microsoft.AspNetCore.Builder
                         .ConfigureContainer<ContainerBuilder>(builder =>
                         {
                             builder.RegisterModule(new HandlersModule());
-                        });
+                            builder.RegisterModule(new ApiModule());
 
-            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+                        });
 
             return builder;
         }

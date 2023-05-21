@@ -59,6 +59,8 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
+                _logger.LogInformation($"[Api][PokemonController][GetByNameAsync][Ok] input:({input.ToInformation()})");
+
                 return Ok(output);
             }
 

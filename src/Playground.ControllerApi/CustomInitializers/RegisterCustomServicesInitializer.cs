@@ -29,14 +29,6 @@ namespace Microsoft.AspNetCore.Builder
                 options.Filters.Add<HttpGlobalExceptionFilter>();
             });
 
-            //services.AddRefitClient<IMyApiClient>()
-            //    .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration["ApiBaseUrl"]))
-            //    .AddHttpMessageHandler<CorrelationIdHandler>();
-
-            //services.AddHttpClient("MyHttpClient")
-            //    .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration["ApiBaseUrl"]))
-            //    .AddHttpMessageHandler<CorrelationIdHandler>();
-
             return services;
         }
 

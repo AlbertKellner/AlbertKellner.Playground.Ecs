@@ -11,5 +11,10 @@
         {
             return $@"{nameof(input.Name)}:{input.Name}";
         }
+
+        public static string ToInformation(this PokemonGetByNameInput input)
+        {
+            return $@"{nameof(input.Name)}:{input.Name}";
+        }
     }
 }
