@@ -30,7 +30,7 @@ namespace Playground.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{name:string}")]
+        [HttpGet("name/{name}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(PokemonGetByNameOutput), (int)HttpStatusCode.OK)]

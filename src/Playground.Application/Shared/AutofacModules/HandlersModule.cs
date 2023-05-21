@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using MediatR;
+using Playground.Application.Features.Pokemon.GetByName.Models;
+using Playground.Application.Features.Pokemon.GetByName.UseCase;
 using Playground.Application.Features.ToDoItems.Create.Models;
 using Playground.Application.Features.ToDoItems.Create.UseCase;
 using Playground.Application.Features.ToDoItems.Delete.Models;
@@ -42,6 +44,9 @@ namespace Playground.Application.Shared.AutofacModules
 
             builder.RegisterAssemblyTypes(typeof(IsCompletedToDoItemInput).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
             builder.RegisterAssemblyTypes(typeof(IsCompletedToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(PokemonGetByNameInput).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(PokemonGetByNameUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
         }
     }
 }
