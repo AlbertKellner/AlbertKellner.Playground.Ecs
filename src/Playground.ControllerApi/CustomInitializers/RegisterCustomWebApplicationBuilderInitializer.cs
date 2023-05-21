@@ -17,6 +17,8 @@ namespace Microsoft.AspNetCore.Builder
                             builder.RegisterModule(new HandlersModule());
                         });
 
+            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
             return builder;
         }
 
