@@ -1,9 +1,7 @@
 ﻿using Flunt.Notifications;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Playground.Application.Shared.Features.Models
 {
-    [BindNever]
     public abstract class ValidatableInputBase : Notifiable<Notification>
     {
         public abstract IEnumerable<string> ErrosList();

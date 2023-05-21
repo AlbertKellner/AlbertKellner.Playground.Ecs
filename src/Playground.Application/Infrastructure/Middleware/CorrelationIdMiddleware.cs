@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Playground.Models;
+using Playground.Application.Shared.AsyncLocals;
 using System.Text.Json;
 
 namespace Playground.Application.Infrastructure.Middleware

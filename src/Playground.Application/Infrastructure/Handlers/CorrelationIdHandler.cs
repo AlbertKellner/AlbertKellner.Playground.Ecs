@@ -1,4 +1,4 @@
-﻿using Playground.Models;
+﻿using Playground.Application.Shared.AsyncLocals;
 
 namespace Playground.Application.Infrastructure.Handlers
 {

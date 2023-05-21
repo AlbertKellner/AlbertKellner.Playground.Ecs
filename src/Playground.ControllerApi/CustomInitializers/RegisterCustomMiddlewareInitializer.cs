@@ -11,6 +11,7 @@ namespace Microsoft.AspNetCore.Builder
                 app.ConfigureSwagger();
             }
 
+            app.UseMiddleware<ExecutionTimeMiddleware>();
             app.UseMiddleware<CorrelationIdMiddleware>();
 
             return app;

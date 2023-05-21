@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Playground.Models;
+using Playground.Application.Shared.AsyncLocals;
 using Serilog.Context;
 
 namespace Playground.Application.Infrastructure.Filter

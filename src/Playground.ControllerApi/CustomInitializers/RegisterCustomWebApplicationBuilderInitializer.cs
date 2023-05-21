@@ -2,6 +2,7 @@
 using Playground.Application.Shared.AutofacModules;
 using Autofac.Extensions.DependencyInjection;
 using Serilog;
+using Playground.Application.Shared;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -24,11 +25,12 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void SerilogConfig()
         {
-            const string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] {Message:lj}{NewLine}{Exception}";
+            const string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
 
             Log.Logger =
                     new LoggerConfiguration()
                         .Enrich.FromLogContext()
+                        .Enrich.With<ExecutionTimeEnricher>()
                         .MinimumLevel.Information()
                         .WriteTo.Console(outputTemplate: outputTemplate)
                         .WriteTo.File("log.txt", outputTemplate: outputTemplate)

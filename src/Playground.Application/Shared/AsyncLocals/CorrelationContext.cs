@@ -1,6 +1,6 @@
 ﻿using Serilog.Context;
 
-namespace Playground.Models
+namespace Playground.Application.Shared.AsyncLocals
 {
     public static class CorrelationContext
     {
