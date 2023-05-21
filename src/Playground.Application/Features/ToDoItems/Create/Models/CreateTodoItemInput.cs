@@ -9,7 +9,7 @@ namespace Playground.Application.Features.ToDoItems.Create.Models
     public class CreateToDoItemInput : ValidatableInputBase, IRequest<CreateToDoItemOutput>
     {
         [JsonPropertyName("task")]
-        public string Task { get; internal set; } = string.Empty;
+        public string Task { get; set; } = string.Empty;
 
         [JsonPropertyName("is_completed")]
         public bool IsCompleted = false;
