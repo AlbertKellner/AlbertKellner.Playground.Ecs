@@ -19,11 +19,11 @@ namespace Playground.Controllers
     public class ToDoItemController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<AuthenticationController> _logger;
+        private readonly ILogger<ToDoItemController> _logger;
 
         public ToDoItemController(
             IMediator mediator, 
-            ILogger<AuthenticationController> logger)
+            ILogger<ToDoItemController> logger)
         {
             _mediator = mediator;
             _logger = logger;
