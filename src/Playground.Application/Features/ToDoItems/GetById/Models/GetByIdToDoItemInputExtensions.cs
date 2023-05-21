@@ -1,6 +1,4 @@
-﻿using Playground.Application.Features.ToDoItems.GetById.Models;
-
-namespace Playground.Application.Features.ToDoItems.Create.Models
+﻿namespace Playground.Application.Features.ToDoItems.GetById.Models
 {
     public static class GetByIdToDoItemInputExtensions
     {

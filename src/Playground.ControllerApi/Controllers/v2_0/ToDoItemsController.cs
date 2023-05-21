@@ -1,31 +1,61 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Playground.Models;
+using Playground.Application.Features.ToDoItems.GetById.Models;
+using System.Net;
 
 namespace Playground.Controllers.v2_0
 {
     [ApiController]
     [ApiVersion("2.0")]
-    [Route("api/[controller]")]
+    [Route("todo")]
     [Produces("application/json")]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public class ToDoItemsController : ControllerBase
     {
-        private static List<ToDoItem> _toDoItems = new List<ToDoItem>();
+        private readonly IMediator _mediator;
+        private readonly ILogger<ToDoItemController> _logger;
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GetById(
-         [FromRoute] int id,
-         [FromHeader(Name = "token")] string userToken)
+        public ToDoItemsController(
+            IMediator mediator,
+            ILogger<ToDoItemController> logger)
         {
-            var item = _toDoItems.FirstOrDefault(x => x.Id == id);
+            _mediator = mediator;
+            _logger = logger;
+        }
 
-            if (item == null)
+        [HttpGet("{id:long}", Name = "GetById")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType(typeof(GetByIdToDoItemOutput), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetByIdAsync(
+            [FromRoute] long id,
+            [FromQuery] GetByIdToDoItemInput input,
+            CancellationToken cancellationToken)
+        {
+            input.SetId(id);
+
+            if (input.IsInvalid())
             {
-                return NotFound();
+                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][BadRequest] input:({input.ToWarning()})");
+
+                return BadRequest(input.ErrosList());
             }
 
-            return Ok(item);
+            var output = await _mediator.Send(input, cancellationToken);
+
+            if (output == null)
+            {
+                _logger.LogError($"[Api][ToDoItemController][GetByIdAsync][InternalServerError] input:({input.ToError()})");
+
+                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+            }
+
+            if (output.IsValid())
+            {
+                return Ok(output);
+            }
+
+            return NoContent();
         }
     }
 }
