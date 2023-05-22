@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Pokemon\GetByName\Entities\" />
-    <Folder Include="Features\Pokemon\GetByName\Interface\" />
-    <Folder Include="Features\Pokemon\GetByName\Repositories\Script\" />
     <Folder Include="Features\ToDoItems\PatchIsCompleted\Entities\" />
     <Folder Include="Features\ToDoItems\PatchIsCompleted\Interface\" />
     <Folder Include="Features\ToDoItems\PatchIsCompleted\Repositories\Script\" />

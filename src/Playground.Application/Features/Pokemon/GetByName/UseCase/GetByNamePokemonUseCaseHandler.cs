@@ -5,29 +5,29 @@ using Playground.Application.Shared.ExternalServices.Interfaces;
 
 namespace Playground.Application.Features.Pokemon.GetByName.UseCase
 {
-    public class PokemonGetByNameUseCaseHandler : IRequestHandler<PokemonGetByNameInput, PokemonGetByNameOutput>
+    public class GetByNamePokemonUseCaseHandler : IRequestHandler<GetByNamePokemonInput, GetByNamePokemonOutput>
     {
         private readonly IPokemonApi _pokemonApi;
-        private readonly ILogger<PokemonGetByNameUseCaseHandler> _logger;
+        private readonly ILogger<GetByNamePokemonUseCaseHandler> _logger;
 
-        public PokemonGetByNameUseCaseHandler(
+        public GetByNamePokemonUseCaseHandler(
             IPokemonApi pokemonApi,
-            ILogger<PokemonGetByNameUseCaseHandler> logger)
+            ILogger<GetByNamePokemonUseCaseHandler> logger)
         {
             _pokemonApi = pokemonApi;
             _logger = logger;
         }
 
-        public async Task<PokemonGetByNameOutput> Handle(PokemonGetByNameInput input, CancellationToken cancellationToken)
+        public async Task<GetByNamePokemonOutput> Handle(GetByNamePokemonInput input, CancellationToken cancellationToken)
         {
             var pokemonApiDto = await _pokemonApi.GetByNameAsync(input.Name, cancellationToken);
 
-             var output = new PokemonGetByNameOutput
+             var output = new GetByNamePokemonOutput
             {
                 Name = pokemonApiDto.Name
             };
 
-            _logger.LogInformation($"[Features][PokemonGetByNameUseCaseHandler][Handle][Ok] input:({input.ToInformation()})");
+            _logger.LogInformation($"[Features][GetByNamePokemonUseCaseHandler][Handle][Ok] input:({input.ToInformation()})");
 
             return output;
         }

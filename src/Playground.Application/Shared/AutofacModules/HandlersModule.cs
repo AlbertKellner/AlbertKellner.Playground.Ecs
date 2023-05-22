@@ -45,8 +45,8 @@ namespace Playground.Application.Shared.AutofacModules
             builder.RegisterAssemblyTypes(typeof(IsCompletedToDoItemInput).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
             builder.RegisterAssemblyTypes(typeof(IsCompletedToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
 
-            builder.RegisterAssemblyTypes(typeof(PokemonGetByNameInput).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(PokemonGetByNameUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterAssemblyTypes(typeof(GetByNamePokemonInput).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(GetByNamePokemonUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
         }
     }
 }

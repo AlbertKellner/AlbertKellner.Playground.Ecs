@@ -2,7 +2,7 @@
 
 namespace Playground.Application.Features.Pokemon.GetByName.Models
 {
-    public class PokemonGetByNameOutput
+    public class GetByNamePokemonOutput
     {
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;

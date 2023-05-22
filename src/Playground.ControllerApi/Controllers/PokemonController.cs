@@ -33,10 +33,10 @@ namespace Playground.Controllers
         [HttpGet("name/{name}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [ProducesResponseType(typeof(PokemonGetByNameOutput), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(GetByNamePokemonOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByNameAsync(
             [FromRoute] string name,
-            [FromQuery] PokemonGetByNameInput input,
+            [FromQuery] GetByNamePokemonInput input,
             CancellationToken cancellationToken)
         {
             input.SetName(name);

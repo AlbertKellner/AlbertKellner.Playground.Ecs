@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Playground.Application.Features.Pokemon.GetByName.Models
 {
-    public class PokemonGetByNameInput : ValidatableInputBase, IRequest<PokemonGetByNameOutput>
+    public class GetByNamePokemonInput : ValidatableInputBase, IRequest<GetByNamePokemonOutput>
     {
         [BindNever]
         [JsonPropertyName("name")]
