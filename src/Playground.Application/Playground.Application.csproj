@@ -28,15 +28,14 @@
     <Folder Include="Features\ToDoItems\GetById\Entities\" />
     <Folder Include="Features\ToDoItems\GetById\Interface\" />
     <Folder Include="Features\ToDoItems\GetById\Repositories\Script\" />
-    <Folder Include="Features\ToDoItems\Create\Interface\" />
     <Folder Include="Features\ToDoItems\Create\Entities\" />
-    <Folder Include="Features\ToDoItems\Create\Repositories\Script\" />
     <Folder Include="Shared\Factories\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Flunt" Version="2.0.5" />
     <PackageReference Include="MediatR" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />

@@ -6,6 +6,7 @@ using Polly;
 using Polly.Timeout;
 using System.Net;
 using Microsoft.Extensions.Caching.Memory;
+using Playground.Application.Infrastructure.Configuration;
 
 namespace Playground.Application.Shared.ExternalServices
 {
@@ -18,23 +19,19 @@ namespace Playground.Application.Shared.ExternalServices
 
         public PokemonApi(
             ILogger<IPokemonApi> logger,
-            IMemoryCache memoryCache)
+            IMemoryCache memoryCache,
+            ExternalApiOptions apiOptions)
         {
             _logger = logger;
             _memoryCache = memoryCache;
 
-            string baseUrl = "https://pokeapi.co/api/v2";
-            int retryCount = 3;
-            int sleepDuration = 2;
-            int timeoutInSeconds = 10;
-
-            _pokemonApi = RestService.For<IPokemonApi>(baseUrl);
+            _pokemonApi = RestService.For<IPokemonApi>(apiOptions.PokemonApiUrl);
 
             var retryPolicy = Policy
                 .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NotFound)
-                .WaitAndRetryAsync(retryCount, retryAttempt => TimeSpan.FromSeconds(sleepDuration * retryAttempt));
+                .WaitAndRetryAsync(apiOptions.PokemonApiRetryCount, retryAttempt => TimeSpan.FromSeconds(apiOptions.PokemonApiSleepDuration * retryAttempt));
 
-            var timeoutPolicy = Policy.TimeoutAsync(timeoutInSeconds, TimeoutStrategy.Pessimistic);
+            var timeoutPolicy = Policy.TimeoutAsync(apiOptions.PokemonApiTimeout, TimeoutStrategy.Pessimistic);
 
             _policyWrap = Policy.WrapAsync(retryPolicy, timeoutPolicy);
         }

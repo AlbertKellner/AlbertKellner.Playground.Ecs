@@ -3,6 +3,9 @@ using Playground.Application.Shared.AutofacModules;
 using Autofac.Extensions.DependencyInjection;
 using Serilog;
 using Playground.Application.Shared;
+using Playground.Application.Features.ToDoItems.Create.Interface;
+using System.Data.SqlClient;
+using Playground.Application.Features.ToDoItems.Create.Repositories;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -12,13 +15,13 @@ namespace Microsoft.AspNetCore.Builder
         {
             SerilogConfig();
 
-            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                        .ConfigureContainer<ContainerBuilder>(builder =>
+            builder.Host.UseServiceProviderFactory<ContainerBuilder>(new AutofacServiceProviderFactory())
+                        .ConfigureContainer((Action<ContainerBuilder>)(builder =>
                         {
                             builder.RegisterModule(new HandlersModule());
                             builder.RegisterModule(new ApiModule());
-
-                        });
+                            RegisterDependencies(builder);
+                        }));
 
             return builder;
         }
@@ -35,6 +38,25 @@ namespace Microsoft.AspNetCore.Builder
                         .WriteTo.Console(outputTemplate: outputTemplate)
                         .WriteTo.File("log.txt", outputTemplate: outputTemplate)
                         .CreateLogger();
+        }
+
+        private static void RegisterDependencies(ContainerBuilder builder)
+        {
+            builder.Register(container =>
+            {
+                //// Use configuration to get connection string
+                //var configuration = container.Resolve<IConfiguration>();
+                //var connectionString = configuration.GetConnectionString("TodoDatabase");
+
+                //// Use a connection factory to create connections
+                //var connectionFactory = container.Resolve<IDbConnectionFactory>();
+                //var connection = connectionFactory.CreateConnection(connectionString);
+
+                var connectionString = "Data Source=localhost;Initial Catalog=TodoDataBase;Integrated Security=SSPI";
+                var connection = new SqlConnection(connectionString);
+
+                return new CreateTodoItemRepository(connection);
+            }).As<ICreateTodoItemRepository>();
         }
     }
 }
