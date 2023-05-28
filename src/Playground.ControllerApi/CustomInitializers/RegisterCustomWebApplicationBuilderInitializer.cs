@@ -46,18 +46,22 @@ namespace Microsoft.AspNetCore.Builder
             builder.Services.AddSingleton(settings);
         }
 
-        private static void SerilogConfig()
+        private static void SerilogConfig(WebHostBuilderContext context)
         {
             const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
 
-            Log.Logger =
-                    new LoggerConfiguration()
-                        .Enrich.FromLogContext()
-                        .Enrich.With<ExecutionTimeEnricher>()
-                        .MinimumLevel.Information()
-                        .WriteTo.Console(outputTemplate: outputTemplate)
-                        .WriteTo.File("log.txt", outputTemplate: outputTemplate)
-                        .CreateLogger();
+            var loggerConfiguration = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .Enrich.With<ExecutionTimeEnricher>()
+                .MinimumLevel.Information()
+                .WriteTo.Console(outputTemplate: outputTemplate);
+
+            if (context.HostingEnvironment.IsDevelopment())
+            {
+                loggerConfiguration.WriteTo.File("log.txt", outputTemplate: outputTemplate);
+            }
+
+            Log.Logger = loggerConfiguration.CreateLogger();
         }
 
         private static void RegisterDependencies(ContainerBuilder builder)
