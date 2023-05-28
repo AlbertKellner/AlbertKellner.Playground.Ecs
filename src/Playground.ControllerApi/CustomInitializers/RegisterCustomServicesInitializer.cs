@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Versioning;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
 using Playground.Application.Infrastructure.Filter;
 using Playground.Application.Infrastructure.Handlers;
@@ -27,6 +28,32 @@ namespace Microsoft.AspNetCore.Builder
             {
                 options.Filters.Add(typeof(LogActionFilter));
                 options.Filters.Add<HttpGlobalExceptionFilter>();
+
+                options.CacheProfiles.Add("ResponseCache:1Second", new CacheProfile()
+                {
+                    Duration = 1,
+                    Location = ResponseCacheLocation.Any,
+                    VaryByHeader = "Token",
+                    VaryByQueryKeys = new[] { "*" }
+                });
+
+                options.CacheProfiles.Add("ResponseCache:5Seconds", new CacheProfile()
+                {
+                    Duration = 5,
+                    Location = ResponseCacheLocation.Any
+                });
+
+                options.CacheProfiles.Add("ResponseCache:30Seconds", new CacheProfile()
+                {
+                    Duration = 30,
+                    Location = ResponseCacheLocation.Any
+                });
+
+                options.CacheProfiles.Add("ResponseCache:2Minutes", new CacheProfile()
+                {
+                    Duration = 120,
+                    Location = ResponseCacheLocation.Any
+                });
             });
 
             return services;
@@ -44,7 +71,7 @@ namespace Microsoft.AspNetCore.Builder
         {
             //services.AddTransient<IInitialRespositoryAPI, InitialRespositoryAPI>();
         }
-        
+
 
         private static void RegisterSwagger(IServiceCollection services)
         {

@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Builder
     {
         public static WebApplicationBuilder RegisterCustomWebApplicationBuilder(this WebApplicationBuilder builder)
         {
-            SerilogConfig();
+            SerilogConfig(builder.Environment);
             
             ServiceProviderFactory(builder);
 
@@ -46,7 +46,7 @@ namespace Microsoft.AspNetCore.Builder
             builder.Services.AddSingleton(settings);
         }
 
-        private static void SerilogConfig(WebHostBuilderContext context)
+        private static void SerilogConfig(IWebHostEnvironment environment)
         {
             const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
 
@@ -56,7 +56,7 @@ namespace Microsoft.AspNetCore.Builder
                 .MinimumLevel.Information()
                 .WriteTo.Console(outputTemplate: outputTemplate);
 
-            if (context.HostingEnvironment.IsDevelopment())
+            if (environment.IsDevelopment())
             {
                 loggerConfiguration.WriteTo.File("log.txt", outputTemplate: outputTemplate);
             }
