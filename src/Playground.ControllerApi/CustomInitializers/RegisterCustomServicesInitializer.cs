@@ -29,34 +29,23 @@ namespace Microsoft.AspNetCore.Builder
                 options.Filters.Add(typeof(LogActionFilter));
                 options.Filters.Add<HttpGlobalExceptionFilter>();
 
-                options.CacheProfiles.Add("ResponseCache:1Second", new CacheProfile()
-                {
-                    Duration = 1,
-                    Location = ResponseCacheLocation.Any,
-                    VaryByHeader = "Token",
-                    VaryByQueryKeys = new[] { "*" }
-                });
-
-                options.CacheProfiles.Add("ResponseCache:5Seconds", new CacheProfile()
-                {
-                    Duration = 5,
-                    Location = ResponseCacheLocation.Any
-                });
-
-                options.CacheProfiles.Add("ResponseCache:30Seconds", new CacheProfile()
-                {
-                    Duration = 30,
-                    Location = ResponseCacheLocation.Any
-                });
-
-                options.CacheProfiles.Add("ResponseCache:2Minutes", new CacheProfile()
-                {
-                    Duration = 120,
-                    Location = ResponseCacheLocation.Any
-                });
+                AddCacheProfile(options, durationInSeconds: 1, "ResponseCache:1Second");
+                AddCacheProfile(options, durationInSeconds: 5, "ResponseCache:5Seconds");
+                AddCacheProfile(options, durationInSeconds: 15, "ResponseCache:15Seconds");
+                AddCacheProfile(options, durationInSeconds: 120, "ResponseCache:2Minutes");
             });
 
             return services;
+        }
+
+        private static void AddCacheProfile(MvcOptions options, int durationInSeconds, string profileName)
+        {
+            options.CacheProfiles.Add(profileName, new CacheProfile()
+            {
+                Duration = durationInSeconds,
+                Location = ResponseCacheLocation.Any,
+                VaryByHeader = "CorrelationId"
+            });
         }
 
         public static void ConfigureMediatR(IServiceCollection services)
