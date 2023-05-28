@@ -6,6 +6,7 @@ using Playground.Application.Shared;
 using Playground.Application.Features.ToDoItems.Create.Interface;
 using System.Data.SqlClient;
 using Playground.Application.Features.ToDoItems.Create.Repositories;
+using Playground.Application.Infrastructure.Configuration;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -14,16 +15,35 @@ namespace Microsoft.AspNetCore.Builder
         public static WebApplicationBuilder RegisterCustomWebApplicationBuilder(this WebApplicationBuilder builder)
         {
             SerilogConfig();
+            
+            ServiceProviderFactory(builder);
 
-            builder.Host.UseServiceProviderFactory<ContainerBuilder>(new AutofacServiceProviderFactory())
-                        .ConfigureContainer((Action<ContainerBuilder>)(builder =>
-                        {
-                            builder.RegisterModule(new HandlersModule());
-                            builder.RegisterModule(new ApiModule());
-                            RegisterDependencies(builder);
-                        }));
+            LoadEnvironmentOptions(builder);
 
             return builder;
+        }
+
+        private static void ServiceProviderFactory(WebApplicationBuilder builder) => 
+            builder.Host.UseServiceProviderFactory<ContainerBuilder>(new AutofacServiceProviderFactory())
+                .ConfigureContainer((Action<ContainerBuilder>)(builder =>
+                {
+                    builder.RegisterModule(new HandlersModule());
+                    builder.RegisterModule(new ApiModule());
+                    RegisterDependencies(builder);
+                }));
+
+        private static void LoadEnvironmentOptions(WebApplicationBuilder builder)
+        {
+            builder.Configuration
+                .SetBasePath(builder.Environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            var settings = new ExternalApiOptions();
+            builder.Configuration.GetSection("ExternalApiOptions").Bind(settings);
+
+            builder.Services.AddSingleton(settings);
         }
 
         private static void SerilogConfig()
