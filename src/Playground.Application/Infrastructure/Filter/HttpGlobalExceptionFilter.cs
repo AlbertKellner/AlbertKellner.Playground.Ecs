@@ -26,7 +26,7 @@ namespace Playground.Application.Infrastructure.Filter
                 return;
             }
 
-            _logger.LogError(context.Exception, $"[ExceptionFilter][OnException] {context.Exception.Message}");
+            _logger.LogCritical(context.Exception, $"[ExceptionFilter][OnException] {context.Exception.Message}");
 
             context.ExceptionHandled = true;
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

@@ -16,22 +16,23 @@ namespace Playground.Application.Shared.ExternalServices
         private readonly IPokemonApi _pokemonApi;
         private readonly IAsyncPolicy _policyWrap;
         private readonly IMemoryCache _memoryCache;
+        private readonly ExternalApiOptions _externalApiOptions;
 
         public PokemonApi(
             ILogger<IPokemonApi> logger,
             IMemoryCache memoryCache,
-            ExternalApiOptions apiOptions)
+            ExternalApiOptions externalApiOptions)
         {
             _logger = logger;
             _memoryCache = memoryCache;
-
-            _pokemonApi = RestService.For<IPokemonApi>(apiOptions.PokemonApiUrl);
+            _externalApiOptions = externalApiOptions;
+            _pokemonApi = RestService.For<IPokemonApi>(externalApiOptions.PokemonApiUrl);
 
             var retryPolicy = Policy
                 .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NotFound)
-                .WaitAndRetryAsync(apiOptions.PokemonApiRetryCount, retryAttempt => TimeSpan.FromSeconds(apiOptions.PokemonApiSleepDuration * retryAttempt));
+                .WaitAndRetryAsync(externalApiOptions.PokemonApiRetryCount, retryAttempt => TimeSpan.FromSeconds(externalApiOptions.PokemonApiSleepDuration * retryAttempt));
 
-            var timeoutPolicy = Policy.TimeoutAsync(apiOptions.PokemonApiTimeout, TimeoutStrategy.Pessimistic);
+            var timeoutPolicy = Policy.TimeoutAsync(externalApiOptions.PokemonApiTimeout, TimeoutStrategy.Pessimistic);
 
             _policyWrap = Policy.WrapAsync(retryPolicy, timeoutPolicy);
         }
@@ -39,6 +40,8 @@ namespace Playground.Application.Shared.ExternalServices
         public async Task<PokemonOutApiDto> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"[Shared][PokemonApi][GetByNameAsync][Start] input:({name})");
+            _logger.LogDebug($"[Shared][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApiUrl}");
+
 
             return await _memoryCache.GetOrCreateAsync(name, async entry =>
             {
