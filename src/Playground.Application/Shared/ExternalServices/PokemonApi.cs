@@ -31,7 +31,8 @@ namespace Playground.Application.Shared.ExternalServices
 
             var retryPolicy = Policy
                 .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NotFound)
-                .WaitAndRetryAsync(externalApiOptions.PokemonApiRetryCount, retryAttempt => TimeSpan.FromSeconds(externalApiOptions.PokemonApiSleepDuration * retryAttempt));
+                .WaitAndRetryAsync(externalApiOptions.PokemonApiRetryCount, retryAttempt 
+                    => TimeSpan.FromSeconds(externalApiOptions.PokemonApiSleepDuration * retryAttempt));
 
             var timeoutPolicy = Policy.TimeoutAsync(externalApiOptions.PokemonApiTimeout, TimeoutStrategy.Pessimistic);
 
