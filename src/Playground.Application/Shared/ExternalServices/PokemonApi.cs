@@ -32,7 +32,6 @@ namespace Playground.Application.Shared.ExternalServices
             var httpClient = new HttpClient { BaseAddress = new Uri(externalApiOptions.PokemonApiUrl) }; //TODO: Otimizar
             httpClient.DefaultRequestHeaders.Add("CorrelationId", CorrelationContext.GetCorrelationId().ToString());
             _pokemonApi = RestService.For<IPokemonApi>(httpClient);
-            //_pokemonApi = RestService.For<IPokemonApi>(externalApiOptions.PokemonApiUrl);
 
             var retryPolicy = Policy
                 .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NotFound)
@@ -48,7 +47,7 @@ namespace Playground.Application.Shared.ExternalServices
         {
             _logger.LogInformation($"[Shared][PokemonApi][GetByNameAsync][Start] input:({name})");
 
-            return await _memoryCache.GetOrCreateAsync(name, async entry =>
+            return await _memoryCache.GetOrCreateAsync($"{name}-{CorrelationContext.GetCorrelationId()}", async entry =>
             {
                 PokemonOutApiDto attemptResult = new();
                 PokemonOutApiDto apiResult = new();
@@ -95,7 +94,7 @@ namespace Playground.Application.Shared.ExternalServices
                     _logger.LogTroubleshooting($"[Troubleshooting][Shared][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApiUrl}");
                     _logger.LogTroubleshooting($"[Troubleshooting][Shared][PokemonApi][GetByNameAsync] apiResult:{apiResult.ToTroubleshooting()}");
 
-                    entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(3) : TimeSpan.FromSeconds(1));
+                    entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(10) : TimeSpan.FromSeconds(5)); //TODO: Extract to configJson
                 }
 
                 _logger.LogInformation($"[Shared][PokemonApi][GetByNameAsync][Ok] input:({name})");
