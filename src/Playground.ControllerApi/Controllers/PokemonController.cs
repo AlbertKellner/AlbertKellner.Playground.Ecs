@@ -30,7 +30,7 @@ namespace Playground.Controllers
             _logger = logger;
         }
 
-        [HttpGet("name/{name}")]
+        [HttpGet("external-name/{name}")]
         [ResponseCache(CacheProfileName = "ResponseCache:1Second")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]

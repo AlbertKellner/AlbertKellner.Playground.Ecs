@@ -6,7 +6,7 @@ namespace Playground.Application.Shared.ExternalServices.Interfaces
     public interface IPokemonApi
     {
         //[Get("/pokemon/{name}")]
-        [Get("/pokemon-local/{name}")]
+        [Get("/pokemon-local/internal-name/{name}")]
         Task<PokemonOutApiDto> GetByNameAsync(string name, CancellationToken cancellationToken);
     }
 }

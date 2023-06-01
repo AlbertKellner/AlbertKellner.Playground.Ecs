@@ -20,7 +20,7 @@ namespace Playground.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("internal-name/{name}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(PokemonOutApiDto), (int)HttpStatusCode.OK)]
         public IActionResult GetByNameAsync(
