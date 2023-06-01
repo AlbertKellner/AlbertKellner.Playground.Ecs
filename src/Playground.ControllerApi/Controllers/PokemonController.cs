@@ -1,14 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Playground.Application.Features.Pokemon.GetByName.Models;
-using Playground.Application.Features.ToDoItems.Create.Models;
-using Playground.Application.Features.ToDoItems.Delete.Models;
-using Playground.Application.Features.ToDoItems.GetAll.Models;
-using Playground.Application.Features.ToDoItems.GetById.Models;
-using Playground.Application.Features.ToDoItems.IsCompleted.Models;
-using Playground.Application.Features.ToDoItems.PatchTaskName.Models;
-using Playground.Application.Features.ToDoItems.Update.Models;
 using Playground.Application.Shared.Domain.ApiDto;
+using Playground.configs;
 using System.Net;
 
 namespace Playground.Controllers
@@ -32,7 +26,7 @@ namespace Playground.Controllers
         }
 
         [HttpGet("external-name/{name}")]
-        [ResponseCache(CacheProfileName = "ResponseCache:1Second")]
+        [ResponseCache(CacheProfileName = ResponseCacheProfile.For1Second)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(GetByNamePokemonOutput), (int)HttpStatusCode.OK)]
@@ -77,12 +71,12 @@ namespace Playground.Controllers
         {
             if (name == "pikachu")
             {
-                _logger.LogInformation($"[Api][PokemonLocalController][GetByNameInternalAsync][Ok] input:({name})");
+                _logger.LogInformation($"[Api][PokemonController][GetByNameInternalAsync][Ok] input:({name})");
 
                 return Ok(new PokemonOutApiDto { Name = "pikachu" });
             }
 
-            _logger.LogInformation($"[Api][PokemonLocalController][GetByNameInternalAsync][NoContent] input:({name})");
+            _logger.LogInformation($"[Api][PokemonController][GetByNameInternalAsync][NoContent] input:({name})");
 
             return NoContent();
         }

@@ -34,7 +34,7 @@ namespace Playground.Application.Shared.ExternalServices
             _pokemonApi = RestService.For<IPokemonApi>(httpClient);
 
             var retryPolicy = Policy
-                .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NotFound)
+                .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NoContent)
                 .WaitAndRetryAsync(externalApiOptions.PokemonApiRetryCount, retryAttempt 
                     => TimeSpan.FromSeconds(externalApiOptions.PokemonApiSleepDuration * retryAttempt));
 
@@ -72,9 +72,9 @@ namespace Playground.Application.Shared.ExternalServices
                     throw;
                 }
                 catch (ApiException exception) when
-                    (exception.StatusCode is HttpStatusCode.NotFound)
+                    (exception.StatusCode is HttpStatusCode.NoContent)
                 {
-                    _logger.LogWarning($"[Shared][PokemonApi][GetByNameAsync][NotFound] input:({name})");
+                    _logger.LogWarning($"[Shared][PokemonApi][GetByNameAsync][NoContent] input:({name})");
                 }
                 catch (ApiException exception) when
                     (exception.StatusCode is HttpStatusCode.InternalServerError)

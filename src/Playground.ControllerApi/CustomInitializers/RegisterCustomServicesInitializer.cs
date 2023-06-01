@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
 using Playground.Application.Infrastructure.Filter;
 using Playground.Application.Infrastructure.Handlers;
+using Playground.configs;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -29,10 +30,10 @@ namespace Microsoft.AspNetCore.Builder
                 options.Filters.Add(typeof(LogActionFilter));
                 options.Filters.Add<HttpGlobalExceptionFilter>();
 
-                AddCacheProfile(options, durationInSeconds: 1, "ResponseCache:1Second");
-                AddCacheProfile(options, durationInSeconds: 5, "ResponseCache:5Seconds");
-                AddCacheProfile(options, durationInSeconds: 15, "ResponseCache:15Seconds");
-                AddCacheProfile(options, durationInSeconds: 120, "ResponseCache:2Minutes");
+                AddCacheProfile(options, durationInSeconds: 1, ResponseCacheProfile.For1Second);
+                AddCacheProfile(options, durationInSeconds: 5, ResponseCacheProfile.For5Seconds);
+                AddCacheProfile(options, durationInSeconds: 15, ResponseCacheProfile.For15Seconds);
+                AddCacheProfile(options, durationInSeconds: 120, ResponseCacheProfile.For2Minutes);
             });
 
             return services;
