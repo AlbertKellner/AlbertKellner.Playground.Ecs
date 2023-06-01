@@ -31,7 +31,7 @@ namespace Playground.Controllers
         }
 
         [HttpGet("name/{name}")]
-        [ResponseCache(CacheProfileName = "ResponseCache:15Seconds")]
+        [ResponseCache(CacheProfileName = "ResponseCache:1Second")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(GetByNamePokemonOutput), (int)HttpStatusCode.OK)]

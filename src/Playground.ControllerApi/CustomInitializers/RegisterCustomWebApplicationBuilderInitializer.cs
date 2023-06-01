@@ -54,7 +54,7 @@ namespace Microsoft.AspNetCore.Builder
                 .Enrich.FromLogContext()
                 .Enrich.With<ExecutionTimeEnricher>()
                 .MinimumLevel.Information()
-                .WriteTo.Console(outputTemplate: outputTemplate);
+                .WriteTo.Async(a => a.Console(outputTemplate: outputTemplate));
 
             if (environment.IsDevelopment())
             {

@@ -7,6 +7,7 @@ using Polly.Timeout;
 using System.Net;
 using Microsoft.Extensions.Caching.Memory;
 using Playground.Application.Infrastructure.Configuration;
+using Playground.Application.Infrastructure.Extensions;
 
 namespace Playground.Application.Shared.ExternalServices
 {
@@ -40,12 +41,11 @@ namespace Playground.Application.Shared.ExternalServices
         public async Task<PokemonOutApiDto> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"[Shared][PokemonApi][GetByNameAsync][Start] input:({name})");
-            _logger.LogDebug($"[Shared][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApiUrl}");
-
 
             return await _memoryCache.GetOrCreateAsync(name, async entry =>
             {
                 PokemonOutApiDto attemptResult = new();
+                PokemonOutApiDto apiResult = new();
 
                 try
                 {
@@ -55,7 +55,9 @@ namespace Playground.Application.Shared.ExternalServices
                         _logger.Log(attempt == 1 ? LogLevel.Information : LogLevel.Warning,
                                     $"[Shared][PokemonApi][GetByNameAsync][Attempt {attempt++}] input:({name})");
 
-                        return await _pokemonApi.GetByNameAsync(name, ct);
+                        apiResult = await _pokemonApi.GetByNameAsync(name, ct);
+
+                        return apiResult;
                     }, cancellationToken);
                 }
                 catch (TaskCanceledException exception)
@@ -84,7 +86,10 @@ namespace Playground.Application.Shared.ExternalServices
                 }
                 finally
                 {
-                    entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(10) : TimeSpan.FromSeconds(5));
+                    _logger.LogTroubleshooting($"[Troubleshooting][Shared][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApiUrl}");
+                    _logger.LogTroubleshooting($"[Troubleshooting][Shared][PokemonApi][GetByNameAsync] apiResult:{apiResult.ToTroubleshooting()}");
+
+                    entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(3) : TimeSpan.FromSeconds(1));
                 }
 
                 _logger.LogInformation($"[Shared][PokemonApi][GetByNameAsync][Ok] input:({name})");
