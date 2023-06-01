@@ -8,6 +8,7 @@ using System.Net;
 using Microsoft.Extensions.Caching.Memory;
 using Playground.Application.Infrastructure.Configuration;
 using Playground.Application.Infrastructure.Extensions;
+using Playground.Application.Shared.AsyncLocals;
 
 namespace Playground.Application.Shared.ExternalServices
 {
@@ -27,7 +28,11 @@ namespace Playground.Application.Shared.ExternalServices
             _logger = logger;
             _memoryCache = memoryCache;
             _externalApiOptions = externalApiOptions;
-            _pokemonApi = RestService.For<IPokemonApi>(externalApiOptions.PokemonApiUrl);
+
+            var httpClient = new HttpClient { BaseAddress = new Uri(externalApiOptions.PokemonApiUrl) }; //TODO: Otimizar
+            httpClient.DefaultRequestHeaders.Add("CorrelationId", CorrelationContext.GetCorrelationId().ToString());
+            _pokemonApi = RestService.For<IPokemonApi>(httpClient);
+            //_pokemonApi = RestService.For<IPokemonApi>(externalApiOptions.PokemonApiUrl);
 
             var retryPolicy = Policy
                 .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NotFound)
