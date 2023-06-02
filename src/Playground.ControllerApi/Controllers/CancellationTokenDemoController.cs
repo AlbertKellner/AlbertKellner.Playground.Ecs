@@ -22,7 +22,7 @@ namespace Playground.Controllers
 
         [HttpGet("with")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [ProducesResponseType(typeof(GetByNamePokemonOutput), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public IActionResult WithCancellationTokenDemo(
             CancellationToken cancellationToken)
         {
@@ -49,7 +49,7 @@ namespace Playground.Controllers
         }
 
         [HttpGet("without")]
-        [ProducesResponseType(typeof(GetByNamePokemonOutput), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public IActionResult WithoutCancellationTokenDemo()
         {
             _logger.LogInformation($"[Api][CancellationTokenDemoController][WithoutCancellationTokenDemo][Start] Iniciando Execução");
