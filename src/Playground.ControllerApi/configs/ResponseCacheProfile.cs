@@ -1,4 +1,4 @@
-﻿namespace Playground.configs
+﻿namespace Playground.Configs
 {
     public static class ResponseCacheProfile
     {

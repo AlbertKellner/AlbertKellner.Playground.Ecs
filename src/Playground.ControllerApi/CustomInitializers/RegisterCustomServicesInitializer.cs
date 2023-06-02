@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
 using Playground.Application.Infrastructure.Filter;
 using Playground.Application.Infrastructure.Handlers;
-using Playground.configs;
+using Playground.Configs;
+
 
 namespace Microsoft.AspNetCore.Builder
 {

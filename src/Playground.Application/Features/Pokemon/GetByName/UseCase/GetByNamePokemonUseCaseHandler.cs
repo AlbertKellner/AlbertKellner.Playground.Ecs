@@ -24,7 +24,9 @@ namespace Playground.Application.Features.Pokemon.GetByName.UseCase
 
              var output = new GetByNamePokemonOutput
             {
-                Name = pokemonApiDto.Name
+                Name = pokemonApiDto.Name,
+                BaseExperience = pokemonApiDto.BaseExperience,
+                LocationAreaEncounters = pokemonApiDto.LocationAreaEncounters
             };
 
             _logger.LogInformation($"[Features][GetByNamePokemonUseCaseHandler][Handle][Ok] input:({input.ToInformation()})");

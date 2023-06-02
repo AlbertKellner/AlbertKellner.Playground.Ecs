@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Playground.Application.Features.Pokemon.GetByName.Models;
 using Playground.Application.Shared.Domain.ApiDto;
-using Playground.configs;
+using Playground.Configs;
 using System.Net;
 
 namespace Playground.Controllers
@@ -73,7 +73,13 @@ namespace Playground.Controllers
             {
                 _logger.LogInformation($"[Api][PokemonController][GetByNameInternalAsync][Ok] input:({name})");
 
-                return Ok(new PokemonOutApiDto { Name = "pikachu" });
+                return Ok(
+                    new PokemonOutApiDto
+                    {
+                        Name = "pikachu",
+                        BaseExperience = 112,
+                        LocationAreaEncounters = "Grass"
+                    });
             }
 
             _logger.LogInformation($"[Api][PokemonController][GetByNameInternalAsync][NoContent] input:({name})");
