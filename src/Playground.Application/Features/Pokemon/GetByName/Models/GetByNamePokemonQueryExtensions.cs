@@ -1,6 +1,6 @@
 ﻿namespace Playground.Application.Features.Pokemon.GetByName.Models
 {
-    public static class GetByNamePokemonInputExtensions
+    public static class GetByNamePokemonQueryExtensions
     {
         public static string ToWarning(this GetByNamePokemonQuery input)
         {
