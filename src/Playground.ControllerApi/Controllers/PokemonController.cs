@@ -32,7 +32,7 @@ namespace Playground.Controllers
         [ProducesResponseType(typeof(GetByNamePokemonOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByNameExternalAsync(
             [FromRoute] string name,
-            [FromQuery] GetByNamePokemonInput input,
+            [FromQuery] GetByNamePokemonQuery input,
             CancellationToken cancellationToken)
         {
             input.SetName(name);

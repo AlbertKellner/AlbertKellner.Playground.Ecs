@@ -33,7 +33,7 @@ namespace Playground.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(CreateToDoItemOutput), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> CreateAsync(
-            [FromBody] CreateToDoItemInput input,
+            [FromBody] CreateToDoItemCommand input,
             CancellationToken cancellationToken)
         {
             if (input.IsInvalid())
@@ -66,7 +66,7 @@ namespace Playground.Controllers
         [ProducesResponseType(typeof(GetByIdToDoItemOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByIdAsync(
             [FromRoute] long id,
-            [FromQuery] GetByIdToDoItemInput input,
+            [FromQuery] GetByIdToDoItemQuery input,
             CancellationToken cancellationToken)
         {
             input.SetId(id);
@@ -101,7 +101,7 @@ namespace Playground.Controllers
         public async Task<IActionResult> GetAllAsync(
             CancellationToken cancellationToken)
         {
-            var output = await _mediator.Send(new GetAllToDoItemInput(), cancellationToken);
+            var output = await _mediator.Send(new GetAllToDoItemQuery(), cancellationToken);
 
             if (output == null)
             {
@@ -123,7 +123,7 @@ namespace Playground.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> UpdateAsync(
             [FromRoute] long id,
-            [FromBody] UpdateToDoItemInput input,
+            [FromBody] UpdateToDoItemCommand input,
             CancellationToken cancellationToken)
         {
             input.SetId(id);
@@ -155,7 +155,7 @@ namespace Playground.Controllers
             [FromRoute] string taskName,
             CancellationToken cancellationToken)
         {
-            var input = new PatchTaskNameToDoItemInput();
+            var input = new PatchTaskNameToDoItemCommand();
             input.SetId(id);
             input.SetTaskName(taskName);
 
@@ -186,7 +186,7 @@ namespace Playground.Controllers
             [FromRoute] bool isCompleted,
             CancellationToken cancellationToken)
         {
-            var input = new IsCompletedToDoItemInput();
+            var input = new IsCompletedToDoItemCommand();
             input.SetId(id);
             input.SetIsCompleted(isCompleted);
 
@@ -214,7 +214,7 @@ namespace Playground.Controllers
             [FromRoute] long id,
             CancellationToken cancellationToken)
         {
-            var input = new DeleteToDoItemInput(id);
+            var input = new DeleteToDoItemCommand(id);
 
             if (input.IsInvalid())
             {

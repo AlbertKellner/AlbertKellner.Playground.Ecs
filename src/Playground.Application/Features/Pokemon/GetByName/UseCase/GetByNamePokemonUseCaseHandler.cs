@@ -5,7 +5,7 @@ using Playground.Application.Shared.ExternalServices.Interfaces;
 
 namespace Playground.Application.Features.Pokemon.GetByName.UseCase
 {
-    public class GetByNamePokemonUseCaseHandler : IRequestHandler<GetByNamePokemonInput, GetByNamePokemonOutput>
+    public class GetByNamePokemonUseCaseHandler : IRequestHandler<GetByNamePokemonQuery, GetByNamePokemonOutput>
     {
         private readonly IPokemonApi _pokemonApi;
         private readonly ILogger<GetByNamePokemonUseCaseHandler> _logger;
@@ -18,7 +18,7 @@ namespace Playground.Application.Features.Pokemon.GetByName.UseCase
             _logger = logger;
         }
 
-        public async Task<GetByNamePokemonOutput> Handle(GetByNamePokemonInput input, CancellationToken cancellationToken)
+        public async Task<GetByNamePokemonOutput> Handle(GetByNamePokemonQuery input, CancellationToken cancellationToken)
         {
             var pokemonApiDto = await _pokemonApi.GetByNameAsync(input.Name, cancellationToken);
 

@@ -2,17 +2,17 @@
 {
     public static class GetByNamePokemonInputExtensions
     {
-        public static string ToWarning(this GetByNamePokemonInput input)
+        public static string ToWarning(this GetByNamePokemonQuery input)
         {
             return $@"{nameof(input.Name)}:{input.Name}|{nameof(input.FormattedErrosList)}:{input.FormattedErrosList()}";
         }
 
-        public static string ToError(this GetByNamePokemonInput input)
+        public static string ToError(this GetByNamePokemonQuery input)
         {
             return $@"{nameof(input.Name)}:{input.Name}";
         }
 
-        public static string ToInformation(this GetByNamePokemonInput input)
+        public static string ToInformation(this GetByNamePokemonQuery input)
         {
             return $@"{nameof(input.Name)}:{input.Name}";
         }

@@ -3,9 +3,9 @@ using Playground.Application.Features.ToDoItems.Command.PatchTaskName.Models;
 
 namespace Playground.Application.Features.ToDoItems.Command.PatchTaskName.UseCase
 {
-    public class PatchTaskNameToDoItemUseCaseHandler : IRequestHandler<PatchTaskNameToDoItemInput, PatchTaskNameToDoItemOutput>
+    public class PatchTaskNameToDoItemUseCaseHandler : IRequestHandler<PatchTaskNameToDoItemCommand, PatchTaskNameToDoItemOutput>
     {
-        public async Task<PatchTaskNameToDoItemOutput> Handle(PatchTaskNameToDoItemInput input, CancellationToken cancellationToken)
+        public async Task<PatchTaskNameToDoItemOutput> Handle(PatchTaskNameToDoItemCommand input, CancellationToken cancellationToken)
         {
             return new PatchTaskNameToDoItemOutput
             {

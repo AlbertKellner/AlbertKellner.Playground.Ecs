@@ -4,6 +4,6 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.Interface
 {
     public interface ICreateTodoItemRepository
     {
-        Task<CreateToDoItemOutput> CreateToDoItemAsync(CreateToDoItemInput input, CancellationToken cancellationToken);
+        Task<CreateToDoItemOutput> CreateToDoItemAsync(CreateToDoItemCommand input, CancellationToken cancellationToken);
     }
 }

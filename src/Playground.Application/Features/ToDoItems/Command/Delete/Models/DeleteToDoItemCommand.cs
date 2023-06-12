@@ -8,9 +8,9 @@ using System.Text.Json.Serialization;
 namespace Playground.Application.Features.ToDoItems.Command.Delete.Models
 {
     [BindNever]
-    public class DeleteToDoItemInput : ValidatableInputBase, IRequest<DeleteToDoItemOutput>
+    public class DeleteToDoItemCommand : ValidatableInputBase, IRequest<DeleteToDoItemOutput>
     {
-        public DeleteToDoItemInput(long id)
+        public DeleteToDoItemCommand(long id)
         {
             Id = id;
         }

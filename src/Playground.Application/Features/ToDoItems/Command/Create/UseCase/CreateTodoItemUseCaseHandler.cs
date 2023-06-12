@@ -4,7 +4,7 @@ using Playground.Application.Features.ToDoItems.Command.Create.Models;
 
 namespace Playground.Application.Features.ToDoItems.Command.Create.UseCase
 {
-    public class CreateToDoItemUseCaseHandler : IRequestHandler<CreateToDoItemInput, CreateToDoItemOutput>
+    public class CreateToDoItemUseCaseHandler : IRequestHandler<CreateToDoItemCommand, CreateToDoItemOutput>
     {
         private readonly ICreateTodoItemRepository _createTodoItemRepository;
 
@@ -13,7 +13,7 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.UseCase
             _createTodoItemRepository = createTodoItemRepository;
         }
 
-        public async Task<CreateToDoItemOutput> Handle(CreateToDoItemInput input, CancellationToken cancellationToken)
+        public async Task<CreateToDoItemOutput> Handle(CreateToDoItemCommand input, CancellationToken cancellationToken)
         {
             var result = await _createTodoItemRepository.CreateToDoItemAsync(input, cancellationToken);
 

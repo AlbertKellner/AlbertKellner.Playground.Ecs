@@ -29,7 +29,7 @@ namespace Playground.Controllers.v2_0
         [ProducesResponseType(typeof(GetByIdToDoItemOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByIdAsync(
             [FromRoute] long id,
-            [FromQuery] GetByIdToDoItemInput input,
+            [FromQuery] GetByIdToDoItemQuery input,
             CancellationToken cancellationToken)
         {
             input.SetId(id);

@@ -3,9 +3,9 @@ using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 
 namespace Playground.Application.Features.ToDoItems.Query.GetById.UseCase
 {
-    public class GetByIdToDoItemUseCaseHandler : IRequestHandler<GetByIdToDoItemInput, GetByIdToDoItemOutput>
+    public class GetByIdToDoItemUseCaseHandler : IRequestHandler<GetByIdToDoItemQuery, GetByIdToDoItemOutput>
     {
-        public async Task<GetByIdToDoItemOutput> Handle(GetByIdToDoItemInput input, CancellationToken cancellationToken)
+        public async Task<GetByIdToDoItemOutput> Handle(GetByIdToDoItemQuery input, CancellationToken cancellationToken)
         {
             var items = new List<GetByIdToDoItemOutput>
             {

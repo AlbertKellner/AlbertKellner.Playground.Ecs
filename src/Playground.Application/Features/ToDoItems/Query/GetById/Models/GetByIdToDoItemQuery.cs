@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Playground.Application.Shared.Features.Models;
 using System.Text.Json.Serialization;
 
-namespace Playground.Application.Features.Pokemon.GetByName.Models
+namespace Playground.Application.Features.ToDoItems.Query.GetById.Models
 {
-    public class GetByNamePokemonInput : ValidatableInputBase, IRequest<GetByNamePokemonOutput>
+    public class GetByIdToDoItemQuery : ValidatableInputBase, IRequest<GetByIdToDoItemOutput>
     {
         [BindNever]
-        [JsonPropertyName("name")]
-        public string Name { get; internal set; } = string.Empty;
+        [JsonPropertyName("id")]
+        public long Id { get; internal set; }
 
-        public void SetName(string name) => Name = name;
+        public void SetId(long id) => Id = id;
 
         public override IEnumerable<string> ErrosList()
         {
@@ -21,7 +21,7 @@ namespace Playground.Application.Features.Pokemon.GetByName.Models
 
             AddNotifications(new Contract<Notification>()
                 .Requires()
-                .IsNotNullOrEmpty(Name, nameof(Name), $"{nameof(Name)} deve estar preenchido")
+                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero")
                 );
 
             return ValidationMessages();

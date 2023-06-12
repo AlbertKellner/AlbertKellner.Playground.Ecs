@@ -1,26 +1,19 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
 using MediatR;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Playground.Application.Shared.Features.Models;
-using System.Text.Json.Serialization;
 
-namespace Playground.Application.Features.ToDoItems.Command.Update.Models
+namespace Playground.Application.Features.ToDoItems.Command.PatchTaskName.Models
 {
-    public class UpdateToDoItemInput : ValidatableInputBase, IRequest<UpdateToDoItemOutput>
+    public class PatchTaskNameToDoItemCommand : ValidatableInputBase, IRequest<PatchTaskNameToDoItemOutput>
     {
-        [BindNever]
-        [JsonIgnore]
-        [JsonPropertyName("id")]
         public long Id { get; private set; }
 
-        [JsonPropertyName("task")]
         public string Task { get; set; } = string.Empty;
 
-        [JsonPropertyName("is_completed")]
-        public bool IsCompleted { get; set; }
-
         public void SetId(long id) => Id = id;
+
+        public void SetTaskName(string taskName) => Task = taskName;
 
         public override IEnumerable<string> ErrosList()
         {

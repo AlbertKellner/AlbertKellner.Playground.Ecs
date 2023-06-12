@@ -2,18 +2,21 @@
 using Flunt.Validations;
 using MediatR;
 using Playground.Application.Shared.Features.Models;
+using System.Text.Json.Serialization;
 
-namespace Playground.Application.Features.ToDoItems.Command.PatchTaskName.Models
+namespace Playground.Application.Features.ToDoItems.Command.PatchIsCompleted.Models
 {
-    public class PatchTaskNameToDoItemInput : ValidatableInputBase, IRequest<PatchTaskNameToDoItemOutput>
+    public class IsCompletedToDoItemCommand : ValidatableInputBase, IRequest<IsCompletedToDoItemOutput>
     {
-        public long Id { get; private set; }
+        [JsonPropertyName("id")]
+        public long Id { get; set; }
 
-        public string Task { get; set; } = string.Empty;
+        [JsonPropertyName("is_completed")]
+        public bool IsCompleted { get; set; }
 
         public void SetId(long id) => Id = id;
 
-        public void SetTaskName(string taskName) => Task = taskName;
+        public void SetIsCompleted(bool isCompleted) => IsCompleted = isCompleted;
 
         public override IEnumerable<string> ErrosList()
         {
@@ -21,7 +24,6 @@ namespace Playground.Application.Features.ToDoItems.Command.PatchTaskName.Models
 
             AddNotifications(new Contract<Notification>()
                 .Requires()
-                .IsNotNullOrWhiteSpace(Task, nameof(Task), $"{nameof(Task)} não pode ser vazio ou somente espaços em branco")
                 .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero")
                 );
 

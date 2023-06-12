@@ -15,7 +15,7 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.Repositories
             _connection = connection;
         }
 
-        public async Task<CreateToDoItemOutput> CreateToDoItemAsync(CreateToDoItemInput input, CancellationToken cancellationToken)
+        public async Task<CreateToDoItemOutput> CreateToDoItemAsync(CreateToDoItemCommand input, CancellationToken cancellationToken)
         {
             return await _connection.QueryFirstOrDefaultAsync<CreateToDoItemOutput>(new CommandDefinition(
                 commandText: CreateTodoItemRepositoryScript.SqlScript,
