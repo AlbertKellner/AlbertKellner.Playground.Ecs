@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Playground.Application.Features.ToDoItems.GetById.Models;
+using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 using System.Net;
 
 namespace Playground.Controllers.v2_0

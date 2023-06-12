@@ -3,10 +3,10 @@ using Playground.Application.Shared.AutofacModules;
 using Autofac.Extensions.DependencyInjection;
 using Serilog;
 using Playground.Application.Shared;
-using Playground.Application.Features.ToDoItems.Create.Interface;
 using System.Data.SqlClient;
-using Playground.Application.Features.ToDoItems.Create.Repositories;
 using Playground.Application.Infrastructure.Configuration;
+using Playground.Application.Features.ToDoItems.Command.Create.Interface;
+using Playground.Application.Features.ToDoItems.Command.Create.Repositories;
 
 namespace Microsoft.AspNetCore.Builder
 {

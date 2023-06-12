@@ -1,12 +1,12 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Playground.Application.Features.ToDoItems.Create.Models;
-using Playground.Application.Features.ToDoItems.Delete.Models;
-using Playground.Application.Features.ToDoItems.GetAll.Models;
-using Playground.Application.Features.ToDoItems.GetById.Models;
-using Playground.Application.Features.ToDoItems.IsCompleted.Models;
-using Playground.Application.Features.ToDoItems.PatchTaskName.Models;
-using Playground.Application.Features.ToDoItems.Update.Models;
+using Playground.Application.Features.ToDoItems.Command.Create.Models;
+using Playground.Application.Features.ToDoItems.Command.Delete.Models;
+using Playground.Application.Features.ToDoItems.Command.PatchIsCompleted.Models;
+using Playground.Application.Features.ToDoItems.Command.PatchTaskName.Models;
+using Playground.Application.Features.ToDoItems.Command.Update.Models;
+using Playground.Application.Features.ToDoItems.Query.GetAll.Models;
+using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 using System.Net;
 
 namespace Playground.Controllers

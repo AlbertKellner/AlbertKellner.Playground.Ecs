@@ -7,25 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\ToDoItems\PatchIsCompleted\Entities\" />
-    <Folder Include="Features\ToDoItems\PatchIsCompleted\Interface\" />
-    <Folder Include="Features\ToDoItems\PatchIsCompleted\Repositories\Script\" />
-    <Folder Include="Features\ToDoItems\Delete\Entities\" />
-    <Folder Include="Features\ToDoItems\Delete\Interface\" />
-    <Folder Include="Features\ToDoItems\Delete\Repositories\Script\" />
-    <Folder Include="Features\ToDoItems\PatchTaskName\Entities\" />
-    <Folder Include="Features\ToDoItems\PatchTaskName\Interface\" />
-    <Folder Include="Features\ToDoItems\PatchTaskName\Repositories\Script\" />
-    <Folder Include="Features\ToDoItems\Update\Entities\" />
-    <Folder Include="Features\ToDoItems\Update\Interface\" />
-    <Folder Include="Features\ToDoItems\Update\Repositories\Script\" />
-    <Folder Include="Features\ToDoItems\GetAll\Entities\" />
-    <Folder Include="Features\ToDoItems\GetAll\Interface\" />
-    <Folder Include="Features\ToDoItems\GetAll\Repositories\Script\" />
-    <Folder Include="Features\ToDoItems\GetById\Entities\" />
-    <Folder Include="Features\ToDoItems\GetById\Interface\" />
-    <Folder Include="Features\ToDoItems\GetById\Repositories\Script\" />
-    <Folder Include="Features\ToDoItems\Create\Entities\" />
+    <Folder Include="Features\ToDoItems\Command\PatchIsCompleted\Entities\" />
+    <Folder Include="Features\ToDoItems\Command\PatchIsCompleted\Interface\" />
+    <Folder Include="Features\ToDoItems\Command\PatchIsCompleted\Repositories\Script\" />
+    <Folder Include="Features\ToDoItems\Command\Delete\Entities\" />
+    <Folder Include="Features\ToDoItems\Command\Delete\Interface\" />
+    <Folder Include="Features\ToDoItems\Command\Delete\Repositories\Script\" />
+    <Folder Include="Features\ToDoItems\Command\PatchTaskName\Entities\" />
+    <Folder Include="Features\ToDoItems\Command\PatchTaskName\Interface\" />
+    <Folder Include="Features\ToDoItems\Command\PatchTaskName\Repositories\Script\" />
+    <Folder Include="Features\ToDoItems\Command\Update\Entities\" />
+    <Folder Include="Features\ToDoItems\Command\Update\Interface\" />
+    <Folder Include="Features\ToDoItems\Command\Update\Repositories\Script\" />
+    <Folder Include="Features\ToDoItems\Query\GetAll\Entities\" />
+    <Folder Include="Features\ToDoItems\Query\GetAll\Interface\" />
+    <Folder Include="Features\ToDoItems\Query\GetAll\Repositories\Script\" />
+    <Folder Include="Features\ToDoItems\Query\GetById\Entities\" />
+    <Folder Include="Features\ToDoItems\Query\GetById\Interface\" />
+    <Folder Include="Features\ToDoItems\Query\GetById\Repositories\Script\" />
+    <Folder Include="Features\ToDoItems\Command\Create\Entities\" />
     <Folder Include="Shared\Factories\" />
   </ItemGroup>
 
