@@ -3,6 +3,7 @@ using Flunt.Validations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Playground.Application.Shared.Features.Models;
+using System.Diagnostics.Contracts;
 using System.Text.Json.Serialization;
 
 namespace Playground.Application.Features.Pokemon.GetByName.Models
@@ -17,14 +18,11 @@ namespace Playground.Application.Features.Pokemon.GetByName.Models
 
         public override IEnumerable<string> ErrosList()
         {
-            ClearErrorMessages();
-
-            AddNotifications(new Contract<Notification>()
+            var contract = new Contract<Notification>()
                 .Requires()
-                .IsNotNullOrEmpty(Name, nameof(Name), $"{nameof(Name)} deve estar preenchido")
-                );
+                .IsNotNullOrEmpty(Name, nameof(Name), $"{nameof(Name)} deve estar preenchido");
 
-            return ValidationMessages();
+            return GenerateErrorList(contract);
         }
     }
 }

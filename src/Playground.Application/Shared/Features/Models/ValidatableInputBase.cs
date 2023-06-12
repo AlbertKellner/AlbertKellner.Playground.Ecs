@@ -1,4 +1,5 @@
 ﻿using Flunt.Notifications;
+using Flunt.Validations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Playground.Application.Shared.Features.Models
@@ -10,10 +11,18 @@ namespace Playground.Application.Shared.Features.Models
 
         public bool IsInvalid() => ErrosList().Any();
 
-        public void ClearErrorMessages() => Clear();
-
         public string FormattedErrosList() => $"({string.Join("|", ErrosList())})";
 
-        public IEnumerable<string> ValidationMessages() => Notifications.Select(notification => notification.Message);
+        protected IEnumerable<string> GenerateErrorList(Contract<Notification> contract)
+        {
+            var errorMessages = new List<string>();
+
+            if (!contract.IsValid)
+            {
+                errorMessages.AddRange(contract.Notifications.Select(notification => notification.Message));
+            }
+
+            return errorMessages;
+        }
     }
 }

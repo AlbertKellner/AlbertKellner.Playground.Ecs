@@ -24,15 +24,12 @@ namespace Playground.Application.Features.ToDoItems.Command.Update.Models
 
         public override IEnumerable<string> ErrosList()
         {
-            ClearErrorMessages();
-
-            AddNotifications(new Contract<Notification>()
+            var contract = new Contract<Notification>()
                 .Requires()
                 .IsNotNullOrWhiteSpace(Task, nameof(Task), $"{nameof(Task)} não pode ser vazio ou somente espaços em branco")
-                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero")
-                );
+                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero");
 
-            return ValidationMessages();
+            return GenerateErrorList(contract);
         }
     }
 }

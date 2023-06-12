@@ -17,14 +17,11 @@ namespace Playground.Application.Features.ToDoItems.Query.GetById.Models
 
         public override IEnumerable<string> ErrosList()
         {
-            ClearErrorMessages();
-
-            AddNotifications(new Contract<Notification>()
+            var contract = new Contract<Notification>()
                 .Requires()
-                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero")
-                );
+                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero");
 
-            return ValidationMessages();
+            return GenerateErrorList(contract);
         }
     }
 }

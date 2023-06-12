@@ -16,14 +16,11 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.Models
 
         public override IEnumerable<string> ErrosList()
         {
-            ClearErrorMessages();
-
-            AddNotifications(new Contract<Notification>()
+            var contract = new Contract<Notification>()
                 .Requires()
-                .IsNotNullOrWhiteSpace(Task, nameof(Task), $"{nameof(Task)} não pode ser vazio ou somente espaços em branco")
-                );
+                .IsNotNullOrWhiteSpace(Task, nameof(Task), $"{nameof(Task)} não pode ser vazio ou somente espaços em branco");
 
-            return ValidationMessages();
+            return GenerateErrorList(contract);
         }
     }
 }
