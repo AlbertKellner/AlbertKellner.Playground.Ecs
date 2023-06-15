@@ -48,12 +48,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][Ok]");
+                _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][Ok] input:({input.ToInformation()})");
 
                 return Ok(output);
             }
 
-            _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][NoContent]");
+            _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][NoContent] input:({input.ToInformation()})");
 
             return NoContent();
         }

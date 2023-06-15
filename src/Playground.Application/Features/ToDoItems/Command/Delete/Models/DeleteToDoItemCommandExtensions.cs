@@ -7,7 +7,7 @@
             return $@"{nameof(input.Id)}:{input.Id}|{nameof(input.FormattedErrosList)}:{input.FormattedErrosList()}";
         }
 
-        public static string ToError(this DeleteToDoItemCommand input)
+        public static string ToInformation(this DeleteToDoItemCommand input)
         {
             return $@"{nameof(input.Id)}:{input.Id}";
         }

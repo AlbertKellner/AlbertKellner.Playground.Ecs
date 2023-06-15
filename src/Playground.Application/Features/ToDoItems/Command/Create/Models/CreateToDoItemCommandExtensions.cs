@@ -7,7 +7,7 @@
             return $@"{nameof(input.Task)}:{input.Task}|{nameof(input.IsCompleted)}:{input.IsCompleted}|{nameof(input.FormattedErrosList)}:{input.FormattedErrosList()}";
         }
 
-        public static string ToError(this CreateToDoItemCommand input)
+        public static string ToInformation(this CreateToDoItemCommand input)
         {
             return $@"{nameof(input.Task)}:{input.Task}|{nameof(input.IsCompleted)}:{input.IsCompleted}";
         }

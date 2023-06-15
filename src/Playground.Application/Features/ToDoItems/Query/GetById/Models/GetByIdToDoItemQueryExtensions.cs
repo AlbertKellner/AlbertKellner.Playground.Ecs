@@ -7,7 +7,7 @@
             return $@"{nameof(input.Id)}:{input.Id}|{nameof(input.FormattedErrosList)}:{input.FormattedErrosList()}";
         }
 
-        public static string ToError(this GetByIdToDoItemQuery input)
+        public static string ToInformation(this GetByIdToDoItemQuery input)
         {
             return $@"{nameof(input.Id)}:{input.Id}";
         }

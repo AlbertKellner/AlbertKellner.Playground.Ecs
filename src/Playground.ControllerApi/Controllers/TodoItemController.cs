@@ -45,7 +45,7 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created]");
+            _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created] input:({input.ToInformation()})");
 
             return CreatedAtRoute(
                 routeName: "GetById",
@@ -75,12 +75,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][Ok]");
+                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][Ok] input:({input.ToInformation()})");
 
                 return Ok(output);
             }
 
-            _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][NoContent]");
+            _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][NoContent] input:({input.ToInformation()})");
 
             return NoContent();
         }
@@ -123,12 +123,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][Ok]");
+                _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][Ok] input:({input.ToInformation()})");
 
                 return Ok();
             }
 
-            _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][NoContent]");
+            _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][NoContent] input:({input.ToInformation()})");
 
             return NoContent();
         }
@@ -157,12 +157,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][Ok]");
+                _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][Ok] input:({input.ToInformation()})");
 
                 return Ok();
             }
 
-            _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][NoContent]");
+            _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][NoContent] input:({input.ToInformation()})");
             
             return NoContent();
         }
@@ -191,12 +191,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][Ok]");
+                _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][Ok] input:({input.ToInformation()})");
 
                 return Ok();
             }
 
-            _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][NoContent]");
+            _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][NoContent] input:({input.ToInformation()})");
 
             return NoContent();
         }
@@ -222,12 +222,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][Ok]");
+                _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][Ok] input:({input.ToInformation()})");
 
                 return Ok();
             }
 
-            _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][NoContent]");
+            _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][NoContent] input:({input.ToInformation()})");
 
             return NoContent();
         }
