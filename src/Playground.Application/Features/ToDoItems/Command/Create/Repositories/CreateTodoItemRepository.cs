@@ -17,11 +17,13 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.Repositories
 
         public async Task<CreateToDoItemOutput> CreateToDoItemAsync(CreateToDoItemCommand input, CancellationToken cancellationToken)
         {
-            return await _connection.QueryFirstOrDefaultAsync<CreateToDoItemOutput>(new CommandDefinition(
-                commandText: CreateTodoItemRepositoryScript.SqlScript,
-                cancellationToken: cancellationToken,
-                commandTimeout: 1
-            ));
+            return new() { Id = 1 };
+
+            //return await _connection.QueryFirstOrDefaultAsync<CreateToDoItemOutput>(new CommandDefinition(
+            //    commandText: CreateTodoItemRepositoryScript.SqlScript,
+            //    cancellationToken: cancellationToken,
+            //    commandTimeout: 1
+            //));
         }
     }
 }
