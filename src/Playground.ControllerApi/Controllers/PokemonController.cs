@@ -27,8 +27,8 @@ namespace Playground.Controllers
 
         [HttpGet("external-name/{name}")]
         [ResponseCache(CacheProfileName = ResponseCacheProfile.For1Second)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetByNamePokemonOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByNameExternalAsync(
             [FromRoute] string name,
@@ -46,19 +46,14 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output == null)
-            {
-                _logger.LogError($"[Api][PokemonController][GetByNameExternalAsync][InternalServerError] input:({input.ToError()})");
-
-                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
-            }
-
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][Ok] input:({input.ToInformation()})");
+                _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][Ok]");
 
                 return Ok(output);
             }
+
+            _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][NoContent]");
 
             return NoContent();
         }

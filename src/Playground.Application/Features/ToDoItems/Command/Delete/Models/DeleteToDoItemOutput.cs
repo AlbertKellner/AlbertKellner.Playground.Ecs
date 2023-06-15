@@ -2,6 +2,6 @@
 {
     public class DeleteToDoItemOutput
     {
-        public bool IsDeleted { get; set; }
+        public bool IsValid() => true;
     }
 }

@@ -22,7 +22,7 @@ namespace Playground.Controllers
         private readonly ILogger<ToDoItemController> _logger;
 
         public ToDoItemController(
-            IMediator mediator, 
+            IMediator mediator,
             ILogger<ToDoItemController> logger)
         {
             _mediator = mediator;
@@ -45,24 +45,17 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output != null && output.IsCreated())
-            {
-                _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created]");
+            _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created]");
 
-                return CreatedAtRoute(
-                    routeName: "GetById",
-                    routeValues: new { id = output.Id },
-                    value: output);
-            }
-
-            _logger.LogError($"[Api][ToDoItemController][CreateAsync][InternalServerError] input:({input.ToError()})");
-
-            return new StatusCodeResult((int)HttpStatusCode.InternalServerError); 
+            return CreatedAtRoute(
+                routeName: "GetById",
+                routeValues: new { id = output.Id },
+                default);
         }
 
         [HttpGet("{id:long}", Name = "GetById")]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetByIdToDoItemOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByIdAsync(
             [FromRoute] long id,
@@ -80,17 +73,14 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output == null)
-            {
-                _logger.LogError($"[Api][ToDoItemController][GetByIdAsync][InternalServerError] input:({input.ToError()})");
-
-                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
-            }
-
             if (output.IsValid())
             {
+                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][Ok]");
+
                 return Ok(output);
             }
+
+            _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][NoContent]");
 
             return NoContent();
         }
@@ -103,13 +93,6 @@ namespace Playground.Controllers
         {
             var output = await _mediator.Send(new GetAllToDoItemQuery(), cancellationToken);
 
-            if (output == null)
-            {
-                _logger.LogError($"[Api][ToDoItemController][GetAllAsync][InternalServerError])");
-
-                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
-            }
-
             if (output.Any())
             {
                 return Ok(output);
@@ -119,6 +102,7 @@ namespace Playground.Controllers
         }
 
         [HttpPut("{id:long}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> UpdateAsync(
@@ -137,17 +121,20 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output != null && output.IsUpdated())
+            if (output.IsValid())
             {
-                return NoContent();
+                _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][Ok]");
+
+                return Ok();
             }
 
-            _logger.LogError($"[Api][ToDoItemController][UpdateAsync][InternalServerError] input:({input.ToError()})");
+            _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][NoContent]");
 
-            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+            return NoContent();
         }
 
         [HttpPatch("{id:long}/task-name/{taskName}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> PatchTaskNameAsync(
@@ -168,17 +155,20 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output != null && output.IsUpdated())
+            if (output.IsValid())
             {
-                return NoContent();
+                _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][Ok]");
+
+                return Ok();
             }
 
-            _logger.LogError($"[Api][ToDoItemController][PatchTaskNameAsync][InternalServerError] input:({input.ToError()})");
-
-            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+            _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][NoContent]");
+            
+            return NoContent();
         }
 
         [HttpPatch("{id:long}/is-completed/{isCompleted}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> PatchIsCompletedAsync(
@@ -199,17 +189,22 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output != null && output.IsUpdated())
+            if (output.IsValid())
             {
-                return NoContent();
+                _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][Ok]");
+
+                return Ok();
             }
 
-            _logger.LogError($"[Api][ToDoItemController][PatchIsCompletedAsync][InternalServerError] input:({input.ToError()})");
+            _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][NoContent]");
 
-            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+            return NoContent();
         }
 
         [HttpDelete("{id:long}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> DeleteAsync(
             [FromRoute] long id,
             CancellationToken cancellationToken)
@@ -225,14 +220,16 @@ namespace Playground.Controllers
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output != null && output.IsDeleted)
+            if (output.IsValid())
             {
-                return NoContent();
+                _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][Ok]");
+
+                return Ok();
             }
 
-            _logger.LogError($"[Api][ToDoItemController][DeleteAsync][InternalServerError] input:({input.ToError()})");
+            _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][NoContent]");
 
-            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+            return NoContent();
         }
     }
 }

@@ -7,10 +7,7 @@ namespace Playground.Application.Features.ToDoItems.Command.Delete.UseCase
     {
         public async Task<DeleteToDoItemOutput> Handle(DeleteToDoItemCommand input, CancellationToken cancellationToken)
         {
-            return new DeleteToDoItemOutput
-            {
-                IsDeleted = true
-            };
+            return new();
         }
     }
 }

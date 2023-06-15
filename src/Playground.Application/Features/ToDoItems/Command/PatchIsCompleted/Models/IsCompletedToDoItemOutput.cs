@@ -10,6 +10,6 @@ namespace Playground.Application.Features.ToDoItems.Command.PatchIsCompleted.Mod
         [JsonPropertyName("is_completed")]
         public bool IsCompleted { get; set; }
 
-        public bool IsUpdated() => Id > 0;
+        public bool IsValid() => Id > 0;
     }
 }

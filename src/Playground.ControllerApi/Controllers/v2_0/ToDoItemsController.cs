@@ -24,8 +24,8 @@ namespace Playground.Controllers.v2_0
         }
 
         [HttpGet("{id:long}", Name = "GetById")]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetByIdToDoItemOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByIdAsync(
             [FromRoute] long id,
@@ -36,24 +36,21 @@ namespace Playground.Controllers.v2_0
 
             if (input.IsInvalid())
             {
-                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][BadRequest] input:({input.ToWarning()})");
+                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][BadRequest] V2 Teste - input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
 
             var output = await _mediator.Send(input, cancellationToken);
 
-            if (output == null)
-            {
-                _logger.LogError($"[Api][ToDoItemController][GetByIdAsync][InternalServerError] input:({input.ToError()})");
-
-                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
-            }
-
             if (output.IsValid())
             {
+                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][Ok]");
+
                 return Ok(output);
             }
+
+            _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][NoContent]");
 
             return NoContent();
         }
