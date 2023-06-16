@@ -4,12 +4,12 @@
     {
         public static string ToWarning(this PatchTaskNameToDoItemCommand input)
         {
-            return $@"{nameof(input.Id)}:{input.Id}|{nameof(input.Task)}:{input.Task}|{nameof(input.FormattedErrosList)}:{input.FormattedErrosList()}";
+            return $@"{nameof(input.Id)}:{input.Id}|{nameof(input.TaskName)}:{input.TaskName}|{nameof(input.FormattedErrosList)}:{input.FormattedErrosList()}";
         }
 
         public static string ToInformation(this PatchTaskNameToDoItemCommand input)
         {
-            return $@"{nameof(input.Id)}:{input.Id}|{nameof(input.Task)}:{input.Task}";
+            return $@"{nameof(input.Id)}:{input.Id}|{nameof(input.TaskName)}:{input.TaskName}";
         }
     }
 }

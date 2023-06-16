@@ -140,9 +140,9 @@ namespace Playground.Controllers
         public async Task<IActionResult> PatchTaskNameAsync(
             [FromRoute] long id,
             [FromRoute] string taskName,
+            [FromRoute] PatchTaskNameToDoItemCommand input,
             CancellationToken cancellationToken)
         {
-            var input = new PatchTaskNameToDoItemCommand();
             input.SetId(id);
             input.SetTaskName(taskName);
 

@@ -10,7 +10,7 @@ namespace Playground.Application.Features.ToDoItems.Command.PatchTaskName.UseCas
             return new PatchTaskNameToDoItemOutput
             {
                 Id = input.Id,
-                Task = input.Task
+                Task = input.TaskName
             };
         }
     }
