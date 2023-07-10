@@ -3,10 +3,13 @@ using Playground.Application.Shared.AutofacModules;
 using Autofac.Extensions.DependencyInjection;
 using Serilog;
 using Playground.Application.Shared;
-using System.Data.SqlClient;
 using Playground.Application.Infrastructure.Configuration;
-using Playground.Application.Features.ToDoItems.Command.Create.Interface;
-using Playground.Application.Features.ToDoItems.Command.Create.Repositories;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
+using Playground.Application.Features.Country.Command.Create.Repositories;
+using Playground.Application.Features.Country.Command.Create.Interface;
+using Playground.Application.Shared.Domain;
+using MySqlConnector;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -42,6 +45,7 @@ namespace Microsoft.AspNetCore.Builder
 
             var settings = new ExternalApiOptions();
             builder.Configuration.GetSection("ExternalApiOptions").Bind(settings);
+            builder.Configuration.GetSection("ConnectionStrings").Bind(settings);
 
             builder.Services.AddSingleton(settings);
         }
@@ -66,21 +70,18 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void RegisterDependencies(ContainerBuilder builder)
         {
+            ThreadPool.SetMinThreads(50, 50);
+
             builder.Register(container =>
             {
-                //// Use configuration to get connection string
-                //var configuration = container.Resolve<IConfiguration>();
-                //var connectionString = configuration.GetConnectionString("TodoDatabase");
+                var memoryCache = container.Resolve<IMemoryCache>();
+                var databaseOptions = container.Resolve<IOptions<ConnectionstringsOptions>>();
 
-                //// Use a connection factory to create connections
-                //var connectionFactory = container.Resolve<IDbConnectionFactory>();
-                //var connection = connectionFactory.CreateConnection(connectionString);
+                //var connection = new MySqlConnection(databaseOptions.Value.MySqlConnectionString);
+                var connection = new MySqlConnection("server=localhost;user id=admin;password=123456;database=world;");
 
-                var connectionString = "Data Source=localhost;Initial Catalog=TodoDataBase;Integrated Security=SSPI";
-                var connection = new SqlConnection(connectionString);
-
-                return new CreateTodoItemRepository(connection);
-            }).As<ICreateTodoItemRepository>();
+                return new GetAllCountryRepository(connection, memoryCache);
+            }).As<IGetAllCountryRepository>();
         }
     }
 }

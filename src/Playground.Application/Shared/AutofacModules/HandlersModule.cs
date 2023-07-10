@@ -1,5 +1,9 @@
 ﻿using Autofac;
 using MediatR;
+using Playground.Application.Features.Country.Query.GetAll.Models;
+using Playground.Application.Features.Country.Query.GetAll.UseCase;
+using Playground.Application.Features.Country.Query.GetByName.Models;
+using Playground.Application.Features.Country.Query.GetByName.UseCase;
 using Playground.Application.Features.Pokemon.GetByName.Models;
 using Playground.Application.Features.Pokemon.GetByName.UseCase;
 using Playground.Application.Features.ToDoItems.Command.Create.Models;
@@ -47,6 +51,12 @@ namespace Playground.Application.Shared.AutofacModules
 
             builder.RegisterAssemblyTypes(typeof(GetByNamePokemonQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
             builder.RegisterAssemblyTypes(typeof(GetByNamePokemonUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(GetByNameCountryQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(GetByNameCountryUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(GetAllCountryQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(GetAllCountryUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
         }
     }
 }
