@@ -33,7 +33,11 @@ namespace Playground.Application.Infrastructure.Filter
 
             if (_environment.IsDevelopment())
             {
-                context.Result = new ObjectResult(new { message = context.Exception });
+                context.Result = new ObjectResult(new
+                        {
+                            message = context.Exception.Message,
+                            stackTrace = context.Exception.StackTrace
+                        });
             }
             else
             {
