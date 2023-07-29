@@ -10,6 +10,7 @@ using Playground.Application.Features.Country.Command.Create.Repositories;
 using Playground.Application.Features.Country.Command.Create.Interface;
 using Playground.Application.Shared.Domain;
 using MySqlConnector;
+using Serilog.Events;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -17,8 +18,8 @@ namespace Microsoft.AspNetCore.Builder
     {
         public static WebApplicationBuilder RegisterCustomWebApplicationBuilder(this WebApplicationBuilder builder)
         {
-            SerilogConfig(builder.Environment);
-            
+            SerilogConfig(builder, builder.Environment);
+
             ServiceProviderFactory(builder);
 
             LoadEnvironmentOptions(builder);
@@ -26,7 +27,7 @@ namespace Microsoft.AspNetCore.Builder
             return builder;
         }
 
-        private static void ServiceProviderFactory(WebApplicationBuilder builder) => 
+        private static void ServiceProviderFactory(WebApplicationBuilder builder) =>
             builder.Host.UseServiceProviderFactory<ContainerBuilder>(new AutofacServiceProviderFactory())
                 .ConfigureContainer((Action<ContainerBuilder>)(builder =>
                 {
@@ -50,14 +51,16 @@ namespace Microsoft.AspNetCore.Builder
             builder.Services.AddSingleton(settings);
         }
 
-        private static void SerilogConfig(IWebHostEnvironment environment)
+        private static void SerilogConfig(WebApplicationBuilder builder, IWebHostEnvironment environment)
         {
             const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
 
             var loggerConfiguration = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
                 .Enrich.FromLogContext()
                 .Enrich.With<ExecutionTimeEnricher>()
                 .MinimumLevel.Information()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .WriteTo.Async(a => a.Console(outputTemplate: outputTemplate));
 
             if (environment.IsDevelopment())
