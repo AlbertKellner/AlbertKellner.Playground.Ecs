@@ -39,7 +39,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                _logger.LogWarning($"[Api][PokemonController][GetByNameExternalAsync][BadRequest] input:({input.ToWarning()})");
+                _logger.LogWarning("[Api][PokemonController][GetByNameExternalAsync][BadRequest] input:({@input})", input.ToWarning());
 
                 return BadRequest(input.ErrosList());
             }

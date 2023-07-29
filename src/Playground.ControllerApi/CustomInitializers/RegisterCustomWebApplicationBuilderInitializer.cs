@@ -53,6 +53,7 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void SerilogConfig(WebApplicationBuilder builder, IWebHostEnvironment environment)
         {
+            //const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception} \n {Properties:j} \n";
             const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
 
             var loggerConfiguration = new LoggerConfiguration()

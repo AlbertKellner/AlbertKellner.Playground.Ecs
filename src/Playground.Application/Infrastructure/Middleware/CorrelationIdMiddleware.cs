@@ -37,7 +37,7 @@ namespace Playground.Application.Infrastructure.Middleware
 
                     await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
 
-                    _logger.LogWarning($"[Middleware][CorrelationId][BadRequest] CorrelationId inválido. CorrelationId fornecido: {correlationIdValue}");
+                    _logger.LogWarning("[Middleware][CorrelationId][BadRequest] CorrelationId inválido. CorrelationId fornecido: {@CorrelationId}", correlationIdValue.ToString());
 
                     return;
                 }
@@ -48,7 +48,7 @@ namespace Playground.Application.Infrastructure.Middleware
 
                 CorrelationContext.SetCorrelationId(correlationId);
 
-                _logger.LogWarning($"[Middleware][CorrelationId] CorrelationId ausente. Gerando novo CorrelationId: {correlationId}");
+                _logger.LogWarning("[Middleware][CorrelationId] CorrelationId ausente. Gerando novo CorrelationId: {@CorrelationId}", correlationId);
             }
 
             context.Response.OnStarting(() =>
