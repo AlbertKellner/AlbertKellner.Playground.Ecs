@@ -53,8 +53,8 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void SerilogConfig(WebApplicationBuilder builder, IWebHostEnvironment environment)
         {
-            //const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception} \n {Properties:j} \n";
-            const string outputTemplate = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
+            const string outputTemplateWithoutProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}";
+            const string outputTemplateWithProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] {Message:lj} {NewLine}{Exception}{Properties:j}{NewLine}{NewLine}";
 
             var loggerConfiguration = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
@@ -62,11 +62,11 @@ namespace Microsoft.AspNetCore.Builder
                 .Enrich.With<ExecutionTimeEnricher>()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .WriteTo.Async(a => a.Console(outputTemplate: outputTemplate));
+                .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateWithoutProperties));
 
             if (environment.IsDevelopment())
             {
-                loggerConfiguration.WriteTo.File("log.txt", outputTemplate: outputTemplate);
+                loggerConfiguration.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, outputTemplate: outputTemplateWithProperties);
             }
 
             Log.Logger = loggerConfiguration.CreateLogger();

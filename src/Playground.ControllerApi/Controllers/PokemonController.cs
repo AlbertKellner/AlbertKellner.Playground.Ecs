@@ -48,12 +48,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][Ok] input:({input.ToInformation()})");
+                _logger.LogInformation("[Api][PokemonController][GetByNameExternalAsync][Ok] input:({@input})", input.ToInformation());
 
                 return Ok(output);
             }
 
-            _logger.LogInformation($"[Api][PokemonController][GetByNameExternalAsync][NoContent] input:({input.ToInformation()})");
+            _logger.LogInformation("[Api][PokemonController][GetByNameExternalAsync][NoContent] input:({@input})", input.ToInformation());
 
             return NoContent();
         }
@@ -66,7 +66,7 @@ namespace Playground.Controllers
         {
             if (name == "pikachu")
             {
-                _logger.LogInformation($"[Api][PokemonController][GetByNameInternalAsync][Ok] input:({name})");
+                _logger.LogInformation("[Api][PokemonController][GetByNameInternalAsync][Ok] input:({@pokemonName})", name);
 
                 return Ok(
                     new PokemonOutApiDto
@@ -77,7 +77,7 @@ namespace Playground.Controllers
                     });
             }
 
-            _logger.LogInformation($"[Api][PokemonController][GetByNameInternalAsync][NoContent] input:({name})");
+            _logger.LogInformation("[Api][PokemonController][GetByNameInternalAsync][NoContent] input:({@pokemonName})", name);
 
             return NoContent();
         }

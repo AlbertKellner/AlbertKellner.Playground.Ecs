@@ -45,7 +45,7 @@ namespace Playground.Application.Shared.ExternalServices
 
         public async Task<PokemonOutApiDto> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"[Shared][PokemonApi][GetByNameAsync][Start] input:({name})");
+            _logger.LogInformation("[Shared][PokemonApi][GetByNameAsync][Start] input:({@pokemonName})", name);
 
             return await _memoryCache.GetOrCreateAsync($"{name}-{CorrelationContext.GetCorrelationId()}", async entry =>
             {
@@ -58,7 +58,7 @@ namespace Playground.Application.Shared.ExternalServices
                     attemptResult = await _policyWrap.ExecuteAsync(async (ct) =>
                     {
                         _logger.Log(attempt == 1 ? LogLevel.Information : LogLevel.Warning,
-                                    $"[Shared][PokemonApi][GetByNameAsync][Attempt {attempt++}] input:({name})");
+                                    "[Shared][PokemonApi][GetByNameAsync][Attempt {@attemptNumber}] input:({pokemonName})", attempt++, name);
 
                         apiResult = await _pokemonApi.GetByNameAsync(name, ct);
 
@@ -97,7 +97,7 @@ namespace Playground.Application.Shared.ExternalServices
                     entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(10) : TimeSpan.FromSeconds(5)); //TODO: Extract to configJson
                 }
 
-                _logger.LogInformation($"[Shared][PokemonApi][GetByNameAsync][Ok] input:({name})");
+                _logger.LogInformation("[Shared][PokemonApi][GetByNameAsync][Ok] input:({@name})", name);
 
                 return attemptResult ?? new();
             }) ?? new();

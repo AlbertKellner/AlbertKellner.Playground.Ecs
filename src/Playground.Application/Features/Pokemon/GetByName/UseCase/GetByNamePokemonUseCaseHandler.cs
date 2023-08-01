@@ -29,7 +29,7 @@ namespace Playground.Application.Features.Pokemon.GetByName.UseCase
                 LocationAreaEncounters = pokemonApiDto.LocationAreaEncounters
             };
 
-            _logger.LogInformation($"[Features][GetByNamePokemonUseCaseHandler][Handle][Ok] input:({input.ToInformation()})");
+            _logger.LogInformation("[Features][GetByNamePokemonUseCaseHandler][Handle][Ok] input:({@input})", input.ToInformation());
 
             return output;
         }
