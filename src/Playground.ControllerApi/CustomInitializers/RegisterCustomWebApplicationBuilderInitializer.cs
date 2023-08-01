@@ -11,6 +11,7 @@ using Playground.Application.Features.Country.Command.Create.Interface;
 using Playground.Application.Shared.Domain;
 using MySqlConnector;
 using Serilog.Events;
+using Playground.Application.Shared.AsyncLocals;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -58,11 +59,12 @@ namespace Microsoft.AspNetCore.Builder
 
             var loggerConfiguration = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
+                //.Enrich.WithProperty("CorrelationIdProp", CorrelationContext.GetCorrelationId())
                 .Enrich.FromLogContext()
                 .Enrich.With<ExecutionTimeEnricher>()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateWithoutProperties));
+                .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateWithProperties));
 
             if (environment.IsDevelopment())
             {
