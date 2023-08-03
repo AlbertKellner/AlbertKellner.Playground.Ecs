@@ -62,6 +62,7 @@ namespace Microsoft.AspNetCore.Builder
                 //.Enrich.WithProperty("CorrelationIdProp", CorrelationContext.GetCorrelationId())
                 .Enrich.FromLogContext()
                 .Enrich.With<ExecutionTimeEnricher>()
+                .Enrich.With<UserAuthorizationEnricher>()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateWithProperties));

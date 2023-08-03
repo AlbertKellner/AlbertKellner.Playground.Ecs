@@ -86,7 +86,30 @@ namespace Microsoft.AspNetCore.Builder
                     });
 
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                options.OperationFilter<AddCorrelationIdHeaderOnOpenApiFilter>();
+                options.OperationFilter<AddCustomHeaderOnOpenApiFilter>();
+
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter JWT with 'Bearer ' into field",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
             });
         }
 

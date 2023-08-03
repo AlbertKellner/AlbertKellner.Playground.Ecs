@@ -12,6 +12,7 @@ namespace Microsoft.AspNetCore.Builder
             }
 
             app.UseMiddleware<ExecutionTimeMiddleware>();
+            app.UseMiddleware<BearerTokenMiddleware>();
             app.UseMiddleware<CorrelationIdMiddleware>();
 
             return app;

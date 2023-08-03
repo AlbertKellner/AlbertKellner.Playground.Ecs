@@ -1,9 +1,10 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Playground.Application.Infrastructure.Filter
 {
-    public class AddCorrelationIdHeaderOnOpenApiFilter : IOperationFilter
+    public class AddCustomHeaderOnOpenApiFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
