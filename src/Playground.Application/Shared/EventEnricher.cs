@@ -1,7 +1,9 @@
-﻿using Playground.Application.Shared.AsyncLocals;
+﻿using Castle.DynamicProxy;
+using Playground.Application.Shared.AsyncLocals;
 using Serilog.Context;
 using Serilog.Core;
 using Serilog.Events;
+using System.Diagnostics;
 
 namespace Playground.Application.Shared
 {

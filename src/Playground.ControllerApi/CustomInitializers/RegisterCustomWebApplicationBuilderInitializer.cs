@@ -11,7 +11,8 @@ using Playground.Application.Features.Country.Command.Create.Interface;
 using Playground.Application.Shared.Domain;
 using MySqlConnector;
 using Serilog.Events;
-using Playground.Application.Shared.AsyncLocals;
+using Autofac.Core;
+using Playground.Controllers;
 
 namespace Microsoft.AspNetCore.Builder
 {

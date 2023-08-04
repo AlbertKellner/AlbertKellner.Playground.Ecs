@@ -14,14 +14,14 @@ namespace Playground.Application.Shared.ExternalServices
 {
     internal class PokemonApi : IPokemonApi
     {
-        private readonly ILogger<IPokemonApi> _logger;
+        private readonly ILogger<PokemonApi> _logger;
         private readonly IPokemonApi _pokemonApi;
         private readonly IAsyncPolicy _policyWrap;
         private readonly IMemoryCache _memoryCache;
         private readonly ExternalApiOptions _externalApiOptions;
 
         public PokemonApi(
-            ILogger<IPokemonApi> logger,
+            ILogger<PokemonApi> logger,
             IMemoryCache memoryCache,
             ExternalApiOptions externalApiOptions)
         {
