@@ -66,10 +66,10 @@ namespace Microsoft.AspNetCore.Builder
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateWithProperties));
 
-            if (environment.IsDevelopment())
-            {
-                loggerConfiguration.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, outputTemplate: outputTemplateWithProperties);
-            }
+            //if (environment.IsDevelopment())
+            //{
+            //    loggerConfiguration.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, outputTemplate: outputTemplateWithProperties);
+            //}
 
             Log.Logger = loggerConfiguration.CreateLogger();
         }
