@@ -2,8 +2,8 @@
 using Flunt.Validations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Playground.Application.Shared;
 using Playground.Application.Shared.Features.Models;
-using System.Diagnostics.Contracts;
 using System.Text.Json.Serialization;
 
 namespace Playground.Application.Features.Pokemon.GetByName.Models
@@ -14,7 +14,11 @@ namespace Playground.Application.Features.Pokemon.GetByName.Models
         [JsonPropertyName("name")]
         public string Name { get; internal set; } = string.Empty;
 
-        public void SetName(string name) => Name = name;
+        public void SetName(string name)
+        {
+            Name = name;
+            LogEnricher.PushPropertyCustomerName(name);
+        }
 
         public override IEnumerable<string> ErrosList()
         {

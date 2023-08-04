@@ -61,8 +61,7 @@ namespace Microsoft.AspNetCore.Builder
                 .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
                 //.Enrich.WithProperty("CorrelationIdProp", CorrelationContext.GetCorrelationId())
                 .Enrich.FromLogContext()
-                .Enrich.With<ExecutionTimeEnricher>()
-                .Enrich.With<UserAuthorizationEnricher>()
+                .Enrich.With<LogEnricher>()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateWithProperties));
