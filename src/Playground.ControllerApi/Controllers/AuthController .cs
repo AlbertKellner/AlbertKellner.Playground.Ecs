@@ -19,10 +19,10 @@ namespace Playground.Controllers
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public class AuthController : ControllerBase
     {
-        private readonly ILogger<CountryController> _logger;
+        private readonly ILogger<AuthController> _logger;
 
         public AuthController(
-            ILogger<CountryController> logger)
+            ILogger<AuthController> logger)
         {
             _logger = logger;
         }
