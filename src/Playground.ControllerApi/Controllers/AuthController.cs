@@ -52,7 +52,7 @@ namespace Playground.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            _logger.LogInformation($"[Api][AuthController][GenerateToken][Ok]");
+            _logger.LogInformation($"[AuthController][GenerateToken] Token gerado com sucesso");
 
             return Ok(new { Token = tokenHandler.WriteToken(token) });
         }

@@ -45,8 +45,6 @@ namespace Playground.Application.Shared.ExternalServices
 
         public async Task<PokemonOutApiDto> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("[Shared][PokemonApi][GetByNameAsync][Start] input:({@pokemonName})", name);
-
             return await _memoryCache.GetOrCreateAsync($"{name}-{CorrelationContext.GetCorrelationId()}", async entry =>
             {
                 PokemonOutApiDto attemptResult = new();
@@ -58,7 +56,7 @@ namespace Playground.Application.Shared.ExternalServices
                     attemptResult = await _policyWrap.ExecuteAsync(async (ct) =>
                     {
                         _logger.Log(attempt == 1 ? LogLevel.Information : LogLevel.Warning,
-                                    "[Shared][PokemonApi][GetByNameAsync][Attempt {@attemptNumber}] input:({pokemonName})", attempt++, name);
+                            "[PokemonApi][GetByNameAsync] Consultando API, Tentativa: {@attemptNumber}. input:({pokemonName})", attempt++, name);
 
                         apiResult = await _pokemonApi.GetByNameAsync(name, ct);
 
@@ -67,41 +65,40 @@ namespace Playground.Application.Shared.ExternalServices
                 }
                 catch (TaskCanceledException exception)
                 {
-                    _logger.LogError(exception, $"[Shared][PokemonApi][GetByNameAsync][Timeout] input:({name})");
+                    _logger.LogError(exception, $"[PokemonApi][GetByNameAsync] Erro de Timeout. input:({name})");
 
                     throw;
                 }
                 catch (ApiException exception) when
                     (exception.StatusCode is HttpStatusCode.NoContent)
                 {
-                    _logger.LogWarning($"[Shared][PokemonApi][GetByNameAsync][NoContent] input:({name})");
+                    _logger.LogWarning($"[PokemonApi][GetByNameAsync] Nenhum dado retornou da API. input:({name})");
                 }
                 catch (ApiException exception) when
                     (exception.StatusCode is HttpStatusCode.InternalServerError)
                 {
-                    _logger.LogError(exception, $"[Shared][PokemonApi][GetByNameAsync][InternalServerError] input:({name})");
+                    _logger.LogError(exception, $"[PokemonApi][GetByNameAsync] Erro de integração. Erro: {exception.InnerException}. input:({name})");
 
                     throw;
                 }
                 catch (Exception exception)
                 {
-                    _logger.LogError(exception, $"[Shared][PokemonApi][GetByNameAsync][UntrackedError] input:({name})");
+                    _logger.LogError(exception, $"[PokemonApi][GetByNameAsync] Erro desconhecido input:({name})");
 
                     throw;
                 }
                 finally
                 {
-                    _logger.LogTroubleshooting($"[Troubleshooting][Shared][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApiUrl}");
-                    _logger.LogTroubleshooting($"[Troubleshooting][Shared][PokemonApi][GetByNameAsync] apiResult:{apiResult.ToTroubleshooting()}");
+                    _logger.LogTroubleshooting($"[Troubleshooting][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApiUrl}");
+                    _logger.LogTroubleshooting($"[Troubleshooting][PokemonApi][GetByNameAsync] apiResult:{apiResult.ToTroubleshooting()}");
 
-                    entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(10) : TimeSpan.FromSeconds(5)); //TODO: Extract to configJson
+                    entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(3) : TimeSpan.FromSeconds(1)); //TODO: Extract to configJson
                 }
 
-                _logger.LogInformation("[Shared][PokemonApi][GetByNameAsync][Ok] input:({@name})", name);
+                _logger.LogInformation("[PokemonApi][GetByNameAsync] Consulta realizada com sucesso. input:({@name})", name);
 
                 return attemptResult ?? new();
             }) ?? new();
         }
-
     }
 }

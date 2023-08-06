@@ -39,21 +39,23 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                _logger.LogWarning("[Api][PokemonController][GetByNameExternalAsync][BadRequest] input:({@input})", input.ToWarning());
+                _logger.LogWarning("[PokemonController][GetByNameExternalAsync] Erro de validação. input:({@input})", input.ToWarning());
 
                 return BadRequest(input.ErrosList());
             }
+
+            _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Iniciando caso de uso. input:({@input})", input.ToInformation());
 
             var output = await _mediator.Send(input, cancellationToken);
 
             if (output.IsValid())
             {
-                _logger.LogInformation("[Api][PokemonController][GetByNameExternalAsync][Ok] input:({@input})", input.ToInformation());
+                _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Retorno da API com sucesso. input:({@input})", input.ToInformation());
 
                 return Ok(output);
             }
 
-            _logger.LogInformation("[Api][PokemonController][GetByNameExternalAsync][NoContent] input:({@input})", input.ToInformation());
+            _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Retorno da API sem dados. input:({@input})", input.ToInformation());
 
             return NoContent();
         }
@@ -66,7 +68,7 @@ namespace Playground.Controllers
         {
             if (name == "pikachu")
             {
-                _logger.LogInformation("[Api][PokemonController][GetByNameInternalAsync][Ok] input:({@pokemonName})", name);
+                _logger.LogInformation("[PokemonController][GetByNameInternalAsync] Retorno do endpoint internal com sucesso. input:({@pokemonName})", name);
 
                 return Ok(
                     new PokemonOutApiDto
@@ -77,7 +79,7 @@ namespace Playground.Controllers
                     });
             }
 
-            _logger.LogInformation("[Api][PokemonController][GetByNameInternalAsync][NoContent] input:({@pokemonName})", name);
+            _logger.LogInformation("[PokemonController][GetByNameInternalAsync] Retorno do endpoint internal sem dados. input:({@pokemonName})", name);
 
             return NoContent();
         }
