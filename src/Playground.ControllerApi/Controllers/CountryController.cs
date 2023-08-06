@@ -63,16 +63,18 @@ namespace Playground.Controllers
         public async Task<IActionResult> GetAllAsync(
             CancellationToken cancellationToken)
         {
+            _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Iniciando caso de uso");
+
             var output = await _mediator.Send(new GetAllCountryQuery(), cancellationToken);
 
             if (output.Any())
             {
-                _logger.LogInformation($"[Api][CountryController][GetAllAsync][Ok]");
+                _logger.LogInformation($"[CountryController][GetAllAsync] Retornando API com sucesso");
 
                 return Ok(output);
             }
 
-            _logger.LogWarning($"[Api][CountryController][GetAllAsync][NoContent]");
+            _logger.LogWarning($"[CountryController][GetAllAsync] Retornando API sem dados");
 
             return NoContent();
         }

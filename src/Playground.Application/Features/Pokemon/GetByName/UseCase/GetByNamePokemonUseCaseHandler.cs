@@ -20,6 +20,8 @@ namespace Playground.Application.Features.Pokemon.GetByName.UseCase
 
         public async Task<GetByNamePokemonOutput> Handle(GetByNamePokemonQuery input, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("[GetByNamePokemonUseCaseHandler][Handle] Iniciando consulta na API Pokemon");
+
             var pokemonApiDto = await _pokemonApi.GetByNameAsync(input.Name, cancellationToken);
 
              var output = new GetByNamePokemonOutput

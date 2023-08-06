@@ -84,11 +84,12 @@ namespace Microsoft.AspNetCore.Builder
             {
                 var memoryCache = container.Resolve<IMemoryCache>();
                 var databaseOptions = container.Resolve<IOptions<ConnectionstringsOptions>>();
+                var logger = container.Resolve<ILogger<GetAllCountryRepository>>();
 
                 //var connection = new MySqlConnection(databaseOptions.Value.MySqlConnectionString);
                 var connection = new MySqlConnection("server=localhost;user id=admin;password=123456;database=world;");
 
-                return new GetAllCountryRepository(connection, memoryCache);
+                return new GetAllCountryRepository(connection, memoryCache, logger);
             }).As<IGetAllCountryRepository>();
         }
     }

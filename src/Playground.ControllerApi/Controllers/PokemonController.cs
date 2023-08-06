@@ -39,7 +39,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                _logger.LogWarning("[PokemonController][GetByNameExternalAsync] Erro de validação. input:({@input})", input.ToWarning());
+                _logger.LogWarning("[PokemonController][GetByNameExternalAsync] Retornando API com erro de validação. input:({@input})", input.ToWarning());
 
                 return BadRequest(input.ErrosList());
             }
@@ -50,12 +50,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Retorno da API com sucesso. input:({@input})", input.ToInformation());
+                _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Retornando API com sucesso. input:({@input})", input.ToInformation());
 
                 return Ok(output);
             }
 
-            _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Retorno da API sem dados. input:({@input})", input.ToInformation());
+            _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Retornando API sem dados. input:({@input})", input.ToInformation());
 
             return NoContent();
         }

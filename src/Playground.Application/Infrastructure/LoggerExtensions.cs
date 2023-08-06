@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using Serilog.Context;
-using System.Runtime.CompilerServices;
+﻿//using Microsoft.Extensions.Logging;
+//using Serilog.Context;
+//using System.Runtime.CompilerServices;
 
 //public static class LoggerExtensions
 //{
