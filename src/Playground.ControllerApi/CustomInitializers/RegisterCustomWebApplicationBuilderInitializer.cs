@@ -55,6 +55,7 @@ namespace Microsoft.AspNetCore.Builder
 
         private static void SerilogConfig(WebApplicationBuilder builder, IWebHostEnvironment environment)
         {
+            //const string outputTemplateWithoutProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] [{ExecutionTimeSinceLastLog}] {Message:lj} {NewLine}{Exception}";
             const string outputTemplateWithoutProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] {Message:lj} {NewLine}{Exception}";
             const string outputTemplateWithProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] {Message:lj} {NewLine}{Exception}{Properties:j}{NewLine}{NewLine}";
 
@@ -64,6 +65,7 @@ namespace Microsoft.AspNetCore.Builder
                 .Enrich.With<LogEnricher>()
                 .MinimumLevel.Information()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                //.WriteTo.Console(outputTemplate: outputTemplateWithoutProperties);
                 .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateWithProperties));
 
             //if (environment.IsDevelopment())
