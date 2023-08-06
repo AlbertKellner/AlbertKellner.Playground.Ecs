@@ -45,7 +45,7 @@ namespace Playground.Application.Shared.ExternalServices
 
         public async Task<PokemonOutApiDto> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
-            return await _memoryCache.GetOrCreateAsync($"{name}-{CorrelationContext.GetCorrelationId()}", async entry =>
+            return await _memoryCache.GetOrCreateAsync($"{name}", async entry =>
             {
                 PokemonOutApiDto attemptResult = new();
                 PokemonOutApiDto apiResult = new();
