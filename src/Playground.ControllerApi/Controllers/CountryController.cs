@@ -34,11 +34,13 @@ namespace Playground.Controllers
             [FromQuery] GetByNameCountryQuery input,
             CancellationToken cancellationToken)
         {
+            _logger.LogInformation("[CountryController][GetByNameAsync][Metrica] Iniciando requisição");
+
             input.SetId(id);
 
             if (input.IsInvalid())
             {
-                _logger.LogWarning($"[Api][CountryController][GetByIdAsync][BadRequest] input:({input.ToWarning()})");
+                _logger.LogWarning($"[Api][CountryController][GetByNameAsync][BadRequest] input:({input.ToWarning()})");
 
                 return BadRequest(input.ErrosList());
             }
@@ -47,12 +49,12 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogInformation($"[Api][CountryController][GetByIdAsync][Ok] input:({input.ToInformation()})");
+                _logger.LogInformation($"[Api][CountryController][GetByNameAsync][Ok] input:({input.ToInformation()})");
 
                 return Ok(output);
             }
 
-            _logger.LogWarning($"[Api][CountryController][GetByIdAsync][NoContent] input:({input.ToInformation()})");
+            _logger.LogWarning($"[Api][CountryController][GetByNameAsync][NoContent] input:({input.ToInformation()})");
 
             return NoContent();
         }
@@ -63,7 +65,9 @@ namespace Playground.Controllers
         public async Task<IActionResult> GetAllAsync(
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation("[PokemonController][GetByNameExternalAsync] Iniciando caso de uso");
+            _logger.LogInformation("[CountryController][GetByNameAsync][Metrica] Iniciando requisição");
+
+            _logger.LogInformation("[CountryController][GetAllAsync] Iniciando caso de uso");
 
             var output = await _mediator.Send(new GetAllCountryQuery(), cancellationToken);
 
