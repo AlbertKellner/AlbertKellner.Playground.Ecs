@@ -34,7 +34,7 @@ namespace Playground.Controllers
             [FromQuery] GetByNameCountryQuery input,
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation("[CountryController][GetByNameAsync][Metrica] Iniciando requisição");
+            _logger.LogInformation("[CountryController][GetByNameAsync][Metric] Iniciando requisição");
 
             input.SetId(id);
 
@@ -65,7 +65,7 @@ namespace Playground.Controllers
         public async Task<IActionResult> GetAllAsync(
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation("[CountryController][GetByNameAsync][Metrica] Iniciando requisição");
+            _logger.LogInformation("[CountryController][GetByNameAsync][Metric] Iniciando requisição");
 
             _logger.LogInformation("[CountryController][GetAllAsync] Iniciando caso de uso");
 
