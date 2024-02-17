@@ -39,18 +39,16 @@ namespace Playground.Controllers
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][ToDoItemController][CreateAsync][BadRequest] input:({input.ToWarning()})");
-
                 return BadRequest(input.ErrosList());
             }
 
             var output = await _mediator.Send(input, cancellationToken);
 
             _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Created] input:({input.ToInformation()})");
-
             return CreatedAtRoute(
                 routeName: "GetById",
                 routeValues: new { id = output.Id },
-                default);
+                value: output);
         }
 
         [HttpGet("{id:long}", Name = "GetById")]
@@ -67,7 +65,6 @@ namespace Playground.Controllers
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][BadRequest] input:({input.ToWarning()})");
-
                 return BadRequest(input.ErrosList());
             }
 
@@ -75,13 +72,11 @@ namespace Playground.Controllers
 
             if (output.IsValid())
             {
-                _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][Ok] input:({input.ToInformation()})");
-
+                _logger.LogInformation($"[Api][ToDoItemController][GetByIdAsync][Ok] input:({input.ToInformation()})");
                 return Ok(output);
             }
 
-            _logger.LogWarning($"[Api][ToDoItemController][GetByIdAsync][NoContent] input:({input.ToInformation()})");
-
+            _logger.LogInformation($"[Api][ToDoItemController][GetByIdAsync][NoContent] input:({input.ToInformation()})");
             return NoContent();
         }
 
@@ -95,9 +90,11 @@ namespace Playground.Controllers
 
             if (output.Any())
             {
+                _logger.LogInformation($"[Api][ToDoItemController][GetAllAsync][Ok]");
                 return Ok(output);
             }
 
+            _logger.LogInformation($"[Api][ToDoItemController][GetAllAsync][NoContent]");
             return NoContent();
         }
 
@@ -115,7 +112,6 @@ namespace Playground.Controllers
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][ToDoItemController][UpdateAsync][BadRequest] input:({input.ToWarning()})");
-
                 return BadRequest(input.ErrosList());
             }
 
@@ -124,12 +120,10 @@ namespace Playground.Controllers
             if (output.IsValid())
             {
                 _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][Ok] input:({input.ToInformation()})");
-
                 return Ok();
             }
 
             _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][NoContent] input:({input.ToInformation()})");
-
             return NoContent();
         }
 
@@ -138,10 +132,10 @@ namespace Playground.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> PatchTaskNameAsync(
-            [FromRoute] long id,
-            [FromRoute] string taskName,
-            [FromRoute] PatchTaskNameToDoItemCommand input,
-            CancellationToken cancellationToken)
+        [FromRoute] long id,
+        [FromRoute] string taskName,
+        [FromRoute] PatchTaskNameToDoItemCommand input,
+        CancellationToken cancellationToken)
         {
             input.SetId(id);
             input.SetTaskName(taskName);
@@ -149,7 +143,6 @@ namespace Playground.Controllers
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][ToDoItemController][PatchTaskNameAsync][BadRequest] input:({input.ToWarning()})");
-
                 return BadRequest(input.ErrosList());
             }
 
@@ -158,12 +151,10 @@ namespace Playground.Controllers
             if (output.IsValid())
             {
                 _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][Ok] input:({input.ToInformation()})");
-
                 return Ok();
             }
 
             _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][NoContent] input:({input.ToInformation()})");
-            
             return NoContent();
         }
 
@@ -183,7 +174,6 @@ namespace Playground.Controllers
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][ToDoItemController][PatchIsCompletedAsync][BadRequest] input:({input.ToWarning()})");
-
                 return BadRequest(input.ErrosList());
             }
 
@@ -192,12 +182,10 @@ namespace Playground.Controllers
             if (output.IsValid())
             {
                 _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][Ok] input:({input.ToInformation()})");
-
                 return Ok();
             }
 
             _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][NoContent] input:({input.ToInformation()})");
-
             return NoContent();
         }
 
@@ -214,7 +202,6 @@ namespace Playground.Controllers
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][ToDoItemController][DeleteAsync][BadRequest] input:({input.ToWarning()})");
-
                 return BadRequest(input.ErrosList());
             }
 
@@ -223,12 +210,10 @@ namespace Playground.Controllers
             if (output.IsValid())
             {
                 _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][Ok] input:({input.ToInformation()})");
-
                 return Ok();
             }
 
             _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][NoContent] input:({input.ToInformation()})");
-
             return NoContent();
         }
     }
