@@ -5,7 +5,6 @@ using Playground.Application.Infrastructure.Filter;
 using Playground.Application.Infrastructure.Handlers;
 using Playground.Configs;
 
-
 namespace Microsoft.AspNetCore.Builder
 {
     public static partial class RegisterCustomServicesInitializer
@@ -36,6 +35,9 @@ namespace Microsoft.AspNetCore.Builder
                 AddCacheProfile(options, durationInSeconds: 15, ResponseCacheProfile.For15Seconds);
                 AddCacheProfile(options, durationInSeconds: 120, ResponseCacheProfile.For2Minutes);
             });
+
+            services.AddHealthChecks()
+                .AddUrlGroup(new Uri("https://pokeapi.co/api/v2"), name: "API Pokemon");
 
             return services;
         }
