@@ -36,6 +36,8 @@ namespace Playground.Controllers
             [FromBody] CreateToDoItemCommand input,
             CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"[Api][ToDoItemController][CreateAsync][Start] input:({input.ToInformation()})");
+
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][ToDoItemController][CreateAsync][BadRequest] input:({input.ToWarning()})");
@@ -60,6 +62,8 @@ namespace Playground.Controllers
             [FromQuery] GetByIdToDoItemQuery input,
             CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"[Api][ToDoItemController][GetByIdAsync][Start] input:({input.ToInformation()})");
+
             input.SetId(id);
 
             if (input.IsInvalid())
@@ -86,6 +90,8 @@ namespace Playground.Controllers
         public async Task<IActionResult> GetAllAsync(
             CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"[Api][ToDoItemController][GetAllAsync][Start]");
+
             var output = await _mediator.Send(new GetAllToDoItemQuery(), cancellationToken);
 
             if (output.Any())
@@ -107,6 +113,8 @@ namespace Playground.Controllers
             [FromBody] UpdateToDoItemCommand input,
             CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"[Api][ToDoItemController][UpdateAsync][Start] input:({input.ToInformation()})");
+
             input.SetId(id);
 
             if (input.IsInvalid())
@@ -137,6 +145,8 @@ namespace Playground.Controllers
         [FromRoute] PatchTaskNameToDoItemCommand input,
         CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"[Api][ToDoItemController][PatchTaskNameAsync][Start] input:({input.ToInformation()})");
+
             input.SetId(id);
             input.SetTaskName(taskName);
 
@@ -167,7 +177,10 @@ namespace Playground.Controllers
             [FromRoute] bool isCompleted,
             CancellationToken cancellationToken)
         {
-            var input = new IsCompletedToDoItemCommand();
+            var input = new IsCompletedToDoItemCommand(); //TODO: Extrair para parametro
+            
+            _logger.LogInformation($"[Api][ToDoItemController][PatchIsCompletedAsync][Start] input:({input.ToInformation()})");
+
             input.SetId(id);
             input.SetIsCompleted(isCompleted);
 
@@ -197,7 +210,9 @@ namespace Playground.Controllers
             [FromRoute] long id,
             CancellationToken cancellationToken)
         {
-            var input = new DeleteToDoItemCommand(id);
+            var input = new DeleteToDoItemCommand(id); //TODO: Extrair para parametro
+
+            _logger.LogInformation($"[Api][ToDoItemController][DeleteAsync][Start] input:({input.ToInformation()})");
 
             if (input.IsInvalid())
             {
