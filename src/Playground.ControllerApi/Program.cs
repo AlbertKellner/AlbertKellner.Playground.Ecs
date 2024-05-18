@@ -19,7 +19,7 @@ app.MapControllers();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHealthChecks("/health", new HealthCheckOptions
+    _ = endpoints.MapHealthChecks("/health", new HealthCheckOptions
     {
         ResponseWriter = async (context, report) =>
         {
