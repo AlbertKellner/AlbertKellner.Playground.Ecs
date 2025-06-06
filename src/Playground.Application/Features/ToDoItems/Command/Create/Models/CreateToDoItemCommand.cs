@@ -12,7 +12,7 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.Models
         public string Task { get; set; } = string.Empty;
 
         [JsonPropertyName("is_completed")]
-        public bool IsCompleted = false;
+        public bool IsCompleted { get; set; } = false;
 
         public override IEnumerable<string> ErrosList()
         {
