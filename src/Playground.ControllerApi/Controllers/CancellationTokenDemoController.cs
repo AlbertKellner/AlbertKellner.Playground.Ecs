@@ -26,7 +26,7 @@ namespace Playground.Controllers
         public IActionResult WithCancellationTokenDemo(
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithCancellationTokenDemo][Start] Iniciando Execução");
+            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithCancellationTokenDemo][Start] Iniciando ExecuÃ§Ã£o");
 
             try
             {
@@ -34,7 +34,7 @@ namespace Playground.Controllers
             }
             catch (OperationCanceledException)
             {
-                _logger.LogWarning($"[Api][CancellationTokenDemoController][WithCancellationTokenDemo][OperationCanceledException] Execução interrompida");
+                _logger.LogWarning($"[Api][CancellationTokenDemoController][WithCancellationTokenDemo][OperationCanceledException] ExecuÃ§Ã£o interrompida");
 
                 return NoContent();
             }
@@ -43,7 +43,7 @@ namespace Playground.Controllers
                 GC.Collect();
             }
 
-            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithCancellationTokenDemo][Ok] Execução completa");
+            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithCancellationTokenDemo][Ok] ExecuÃ§Ã£o completa");
 
             return Ok("Operation Completed Successfully");
         }
@@ -52,7 +52,7 @@ namespace Playground.Controllers
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public IActionResult WithoutCancellationTokenDemo()
         {
-            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithoutCancellationTokenDemo][Start] Iniciando Execução");
+            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithoutCancellationTokenDemo][Start] Iniciando ExecuÃ§Ã£o");
 
             try
             {
@@ -63,7 +63,7 @@ namespace Playground.Controllers
                 GC.Collect();
             }
 
-            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithoutCancellationTokenDemo][Ok] Execução completa");
+            _logger.LogInformation($"[Api][CancellationTokenDemoController][WithoutCancellationTokenDemo][Ok] ExecuÃ§Ã£o completa");
 
             return Ok("Operation Completed Successfully");
         }
