@@ -1,10 +1,10 @@
 ﻿using Dapper;
-using Playground.Application.Features.Country.Command.Create.Interface;
-using Playground.Application.Features.Country.Command.Create.Repositories.Script;
+using Playground.Application.Features.Country.Query.GetByName.Interface;
+using Playground.Application.Features.Country.Query.GetByName.Repositories.Script;
 using Playground.Application.Features.Country.Query.GetByName.Models;
 using System.Data;
 
-namespace Playground.Application.Features.Country.Command.Create.Repositories
+namespace Playground.Application.Features.Country.Query.GetByName.Repositories
 {
     public class GetByNameCountryRepository : IGetByNameCountryRepository
     {
