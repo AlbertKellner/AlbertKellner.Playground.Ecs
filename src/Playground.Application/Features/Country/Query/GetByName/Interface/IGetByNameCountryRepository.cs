@@ -4,6 +4,6 @@ namespace Playground.Application.Features.Country.Command.Create.Interface
 {
     public interface IGetByNameCountryRepository
     {
-        Task<GetByNameCountryOutput> CreateToDoItemAsync(GetByNameCountryQuery input, CancellationToken cancellationToken);
+        Task<GetByNameCountryOutput?> CreateToDoItemAsync(GetByNameCountryQuery input, CancellationToken cancellationToken);
     }
 }
