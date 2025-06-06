@@ -15,13 +15,15 @@ namespace Playground.Application.Features.Country.Command.Create.Repositories
             _connection = connection;
         }
 
-        public async Task<GetByNameCountryOutput> CreateToDoItemAsync(GetByNameCountryQuery input, CancellationToken cancellationToken)
+        public async Task<GetByNameCountryOutput> GetByNameAsync(GetByNameCountryQuery input, CancellationToken cancellationToken)
         {
-            return await _connection.QueryFirstOrDefaultAsync<GetByNameCountryOutput>(new CommandDefinition(
+            var result = await _connection.QueryFirstOrDefaultAsync<GetByNameCountryOutput>(new CommandDefinition(
                 commandText: GetByNameCountryRepositoryScript.SqlScript,
                 cancellationToken: cancellationToken,
                 commandTimeout: 1
             ));
+
+            return result ?? new GetByNameCountryOutput();
         }
     }
 }
