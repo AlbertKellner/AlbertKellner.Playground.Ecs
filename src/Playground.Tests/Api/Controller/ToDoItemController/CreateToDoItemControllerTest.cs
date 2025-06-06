@@ -43,7 +43,7 @@ namespace Playground.Tests.Controllers
             var response = Assert.IsType<CreatedAtRouteResult>(actionResult);
 
             Assert.Equal(StatusCodes.Status201Created, response.StatusCode);
-            Assert.Null(response.Value);
+            Assert.Equal(_validOutput, response.Value);
         }
 
         [Fact]
