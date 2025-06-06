@@ -7,10 +7,10 @@ namespace Playground.Application.Infrastructure.Extensions
     {
         public static void LogTroubleshooting(this ILogger logger, string message)
         {
-            Guid correlationIdToDebud = new("550e8400-1234-5678-9999-999900000001"); //TODO: Take from FeatureManager
+            Guid correlationIdToDebug = new("550e8400-1234-5678-9999-999900000001"); //TODO: Take from FeatureManager
             var correlationId = CorrelationContext.GetCorrelationId();
 
-            if (correlationId == correlationIdToDebud)
+            if (correlationId == correlationIdToDebug)
             {
                 logger.LogInformation(message);
             }
