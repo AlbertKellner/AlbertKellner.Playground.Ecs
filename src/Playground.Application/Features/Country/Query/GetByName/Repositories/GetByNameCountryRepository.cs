@@ -15,7 +15,7 @@ namespace Playground.Application.Features.Country.Command.Create.Repositories
             _connection = connection;
         }
 
-        public async Task<GetByNameCountryOutput> CreateToDoItemAsync(GetByNameCountryQuery input, CancellationToken cancellationToken)
+        public async Task<GetByNameCountryOutput?> CreateToDoItemAsync(GetByNameCountryQuery input, CancellationToken cancellationToken)
         {
             return await _connection.QueryFirstOrDefaultAsync<GetByNameCountryOutput>(new CommandDefinition(
                 commandText: GetByNameCountryRepositoryScript.SqlScript,
