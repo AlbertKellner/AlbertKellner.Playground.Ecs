@@ -1,9 +1,9 @@
 ﻿using Playground.Application.Features.Country.Query.GetByName.Models;
 
-namespace Playground.Application.Features.Country.Command.Create.Interface
+namespace Playground.Application.Features.Country.Query.GetByName.Interface
 {
     public interface IGetByNameCountryRepository
     {
-        Task<GetByNameCountryOutput?> CreateToDoItemAsync(GetByNameCountryQuery input, CancellationToken cancellationToken);
+        Task<GetByNameCountryOutput?> GetByNameCountryAsync(GetByNameCountryQuery input, CancellationToken cancellationToken);
     }
 }

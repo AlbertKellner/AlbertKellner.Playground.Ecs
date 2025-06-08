@@ -1,4 +1,4 @@
-﻿namespace Playground.Application.Features.Country.Command.Create.Repositories.Script
+namespace Playground.Application.Features.Country.Query.GetAll.Repositories.Script
 {
     internal static class GetAllCountryRepositoryScript
     {

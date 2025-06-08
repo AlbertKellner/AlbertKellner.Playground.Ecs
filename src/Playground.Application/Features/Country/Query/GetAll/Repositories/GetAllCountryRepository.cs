@@ -1,13 +1,13 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using Playground.Application.Features.Country.Command.Create.Interface;
-using Playground.Application.Features.Country.Command.Create.Repositories.Script;
+using Playground.Application.Features.Country.Query.GetAll.Interface;
+using Playground.Application.Features.Country.Query.GetAll.Repositories.Script;
 using Playground.Application.Features.Country.Query.GetAll.Models;
 using Playground.Application.Shared.AsyncLocals;
 using System.Data;
 
-namespace Playground.Application.Features.Country.Command.Create.Repositories
+namespace Playground.Application.Features.Country.Query.GetAll.Repositories
 {
     public class GetAllCountryRepository : IGetAllCountryRepository
     {

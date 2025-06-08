@@ -10,16 +10,16 @@ namespace Playground.Application.Features.Country.Query.GetByName.Models
     public class GetByNameCountryQuery : ValidatableInputBase, IRequest<GetByNameCountryOutput>
     {
         [BindNever]
-        [JsonPropertyName("id")]
-        public long Id { get; internal set; }
+        [JsonPropertyName("name")]
+        public string Name { get; internal set; } = string.Empty;
 
-        public void SetId(long id) => Id = id;
+        public void SetName(string name) => Name = name;
 
         public override IEnumerable<string> ErrosList()
         {
             var contract = new Contract<Notification>()
                 .Requires()
-                .IsGreaterThan(Id, (long)0, nameof(Id), $"{nameof(Id)} precisa ser maior que zero");
+                .IsNotNullOrWhiteSpace(Name, nameof(Name), $"{nameof(Name)} não pode ser vazio ou somente espaços em branco");
 
             return GenerateErrorList(contract);
         }
