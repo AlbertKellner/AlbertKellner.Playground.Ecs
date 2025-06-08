@@ -20,6 +20,16 @@ using Playground.Application.Features.ToDoItems.Query.GetAll.Models;
 using Playground.Application.Features.ToDoItems.Query.GetAll.UseCase;
 using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 using Playground.Application.Features.ToDoItems.Query.GetById.UseCase;
+using Playground.Application.Features.Invoices.Command.Create.Models;
+using Playground.Application.Features.Invoices.Command.Create.UseCase;
+using Playground.Application.Features.Invoices.Command.Update.Models;
+using Playground.Application.Features.Invoices.Command.Update.UseCase;
+using Playground.Application.Features.Invoices.Command.Delete.Models;
+using Playground.Application.Features.Invoices.Command.Delete.UseCase;
+using Playground.Application.Features.Invoices.Query.GetById.Models;
+using Playground.Application.Features.Invoices.Query.GetById.UseCase;
+using Playground.Application.Features.Invoices.Query.GetAll.Models;
+using Playground.Application.Features.Invoices.Query.GetAll.UseCase;
 using System.Reflection;
 
 namespace Playground.Application.Shared.AutofacModules
@@ -57,6 +67,21 @@ namespace Playground.Application.Shared.AutofacModules
 
             builder.RegisterAssemblyTypes(typeof(GetAllCountryQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
             builder.RegisterAssemblyTypes(typeof(GetAllCountryUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(CreateInvoiceCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(CreateInvoiceUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(GetByIdInvoiceQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(GetByIdInvoiceUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(GetAllInvoiceQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(GetAllInvoiceUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(UpdateInvoiceCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(UpdateInvoiceUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+
+            builder.RegisterAssemblyTypes(typeof(DeleteInvoiceCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(DeleteInvoiceUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
         }
     }
 }
