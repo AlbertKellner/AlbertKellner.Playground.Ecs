@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Playground.Application.Features.Country.Command.Create.Interface;
+using Playground.Application.Features.Country.Query.GetAll.Interface;
 using Playground.Application.Features.Country.Query.GetAll.Models;
 
 namespace Playground.Application.Features.Country.Query.GetAll.UseCase

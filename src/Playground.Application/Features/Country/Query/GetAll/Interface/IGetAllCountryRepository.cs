@@ -1,6 +1,6 @@
 ﻿using Playground.Application.Features.Country.Query.GetAll.Models;
 
-namespace Playground.Application.Features.Country.Command.Create.Interface
+namespace Playground.Application.Features.Country.Query.GetAll.Interface
 {
     public interface IGetAllCountryRepository
     {

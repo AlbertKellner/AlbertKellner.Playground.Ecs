@@ -9,15 +9,12 @@ namespace Playground.Application.Features.Country.Query.GetByName.UseCase
         {
             var items = new List<GetByNameCountryOutput>
             {
-                new GetByNameCountryOutput
-                {
-                    Id = 99,
-                    Task = "GetById - ToDoItem - UseCaseHandler",
-                    IsCompleted = true
-                }
+                new GetByNameCountryOutput { Name = "Brazil" },
+                new GetByNameCountryOutput { Name = "Canada" }
             };
 
-            return items.SingleOrDefault(item => item.Id == input.Id) ?? new GetByNameCountryOutput();
+            return items.SingleOrDefault(item => item.Name.Equals(input.Name, StringComparison.OrdinalIgnoreCase))
+                ?? new GetByNameCountryOutput();
         }
     }
 }

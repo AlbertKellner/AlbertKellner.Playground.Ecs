@@ -25,16 +25,16 @@ namespace Playground.Controllers
         }
 
 
-        [HttpGet("{id:long}", Name = "GetByName")]
+        [HttpGet("{name}", Name = "GetByName")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetByNameCountryOutput), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByNameAsync(
-            [FromRoute] long id,
+            [FromRoute] string name,
             [FromQuery] GetByNameCountryQuery input,
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation("[CountryController][GetByNameAsync][Metric] Iniciando requisição");
+            input.SetName(name);
 
             input.SetId(id);
 
@@ -65,7 +65,7 @@ namespace Playground.Controllers
         public async Task<IActionResult> GetAllAsync(
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation("[CountryController][GetByNameAsync][Metric] Iniciando requisição");
+            _logger.LogInformation("[CountryController][GetByNameAsync][Metric] Iniciando requisiÃ§Ã£o");
 
             _logger.LogInformation("[CountryController][GetAllAsync] Iniciando caso de uso");
 
