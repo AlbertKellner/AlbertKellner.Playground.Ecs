@@ -25,6 +25,11 @@ jobs:
     - name: Build
       run: dotnet build src/Playground.Ecs.sln --no-restore
     - name: Test
-      run: dotnet test src/Playground.Ecs.sln --no-build --verbosity normal
+      run: dotnet test src/Playground.Ecs.sln --no-build --verbosity normal --collect:"XPlat Code Coverage"
+    - name: Generate coverage report
+      run: |
+        dotnet tool install --global dotnet-reportgenerator-globaltool
+        reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:TextSummary
+        cat coveragereport/Summary.txt
     - name: Publish AOT
       run: dotnet publish src/Playground.ControllerApi/Playground.csproj -c Release -r linux-x64 /p:PublishAot=true
