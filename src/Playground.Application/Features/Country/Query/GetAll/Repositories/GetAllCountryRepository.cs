@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Playground.Application.Features.Country.Query.GetAll.Interface;
 using Playground.Application.Features.Country.Query.GetAll.Repositories.Script;
 using Playground.Application.Features.Country.Query.GetAll.Models;
+using Playground.Application.Infrastructure.Extensions;
 using Playground.Application.Shared.AsyncLocals;
 using System.Data;
 
@@ -23,6 +24,8 @@ namespace Playground.Application.Features.Country.Query.GetAll.Repositories
             _connection = connection;
             _memoryCache = memoryCache;
             _logger = logger;
+
+            DapperMappingExtensions.RegisterMappings();
         }
 
         public async Task<IEnumerable<GetAllCountryOutput>> GetAllCountryAsync(CancellationToken cancellationToken)

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
 using Playground.Application.Infrastructure.Filter;
 using Playground.Application.Infrastructure.Handlers;
+using Playground.Application.Shared.Extensions;
 using Playground.Configs;
 
 namespace Microsoft.AspNetCore.Builder
@@ -55,9 +56,11 @@ namespace Microsoft.AspNetCore.Builder
         public static void ConfigureMediatR(IServiceCollection services)
         {
             services.AddMediatR(cfg =>
-             {
-                 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
-             });
+            {
+                cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            });
+
+            services.AddRequestHandlers();
         }
 
         private static void RegisterCustomDependencies(IServiceCollection services)

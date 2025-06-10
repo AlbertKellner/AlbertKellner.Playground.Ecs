@@ -2,6 +2,7 @@
 using Playground.Application.Features.Country.Query.GetByName.Interface;
 using Playground.Application.Features.Country.Query.GetByName.Repositories.Script;
 using Playground.Application.Features.Country.Query.GetByName.Models;
+using Playground.Application.Infrastructure.Extensions;
 using System.Data;
 
 namespace Playground.Application.Features.Country.Query.GetByName.Repositories
@@ -13,6 +14,8 @@ namespace Playground.Application.Features.Country.Query.GetByName.Repositories
         public GetByNameCountryRepository(IDbConnection connection)
         {
             _connection = connection;
+
+            DapperMappingExtensions.RegisterMappings();
         }
 
         public async Task<GetByNameCountryOutput?> GetByNameCountryAsync(GetByNameCountryQuery input, CancellationToken cancellationToken)
