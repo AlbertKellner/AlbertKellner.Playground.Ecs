@@ -5,7 +5,7 @@ namespace Playground.Application.Features.Country.Query.GetByName.UseCase
 {
     public class GetByNameCountryUseCaseHandler : IRequestHandler<GetByNameCountryQuery, GetByNameCountryOutput>
     {
-        public Task<GetByNameCountryOutput> Handle(GetByNameCountryQuery input, CancellationToken cancellationToken)
+        public async Task<GetByNameCountryOutput> Handle(GetByNameCountryQuery input, CancellationToken cancellationToken)
         {
             var items = new List<GetByNameCountryOutput>
             {
@@ -13,9 +13,8 @@ namespace Playground.Application.Features.Country.Query.GetByName.UseCase
                 new GetByNameCountryOutput { Name = "Canada" }
             };
 
-            var result = items.SingleOrDefault(item => item.Name.Equals(input.Name, StringComparison.OrdinalIgnoreCase))
+            return items.SingleOrDefault(item => item.Name.Equals(input.Name, StringComparison.OrdinalIgnoreCase))
                 ?? new GetByNameCountryOutput();
-            return Task.FromResult(result);
         }
     }
 }

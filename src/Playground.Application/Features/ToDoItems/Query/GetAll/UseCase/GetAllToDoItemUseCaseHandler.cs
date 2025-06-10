@@ -5,7 +5,7 @@ namespace Playground.Application.Features.ToDoItems.Query.GetAll.UseCase
 {
     public class GetAllToDoItemUseCaseHandler : IRequestHandler<GetAllToDoItemQuery, IEnumerable<GetAllToDoItemOutput>>
     {
-        public Task<IEnumerable<GetAllToDoItemOutput>> Handle(GetAllToDoItemQuery input, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetAllToDoItemOutput>> Handle(GetAllToDoItemQuery input, CancellationToken cancellationToken)
         {
             var items = new List<GetAllToDoItemOutput>
             {
@@ -23,7 +23,7 @@ namespace Playground.Application.Features.ToDoItems.Query.GetAll.UseCase
                 }
             };
 
-            return Task.FromResult<IEnumerable<GetAllToDoItemOutput>>(items);
+            return items;
         }
     }
 }

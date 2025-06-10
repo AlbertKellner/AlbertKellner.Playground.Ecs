@@ -5,14 +5,13 @@ namespace Playground.Application.Features.ToDoItems.Command.PatchTaskName.UseCas
 {
     public class PatchTaskNameToDoItemUseCaseHandler : IRequestHandler<PatchTaskNameToDoItemCommand, PatchTaskNameToDoItemOutput>
     {
-        public Task<PatchTaskNameToDoItemOutput> Handle(PatchTaskNameToDoItemCommand input, CancellationToken cancellationToken)
+        public async Task<PatchTaskNameToDoItemOutput> Handle(PatchTaskNameToDoItemCommand input, CancellationToken cancellationToken)
         {
-            var result = new PatchTaskNameToDoItemOutput
+            return new PatchTaskNameToDoItemOutput
             {
                 Id = input.Id,
                 Task = input.TaskName
             };
-            return Task.FromResult(result);
         }
     }
 }

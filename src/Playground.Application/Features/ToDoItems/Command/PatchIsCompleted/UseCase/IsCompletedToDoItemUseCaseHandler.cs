@@ -5,14 +5,13 @@ namespace Playground.Application.Features.ToDoItems.Command.PatchIsCompleted.Use
 {
     public class IsCompletedToDoItemUseCaseHandler : IRequestHandler<IsCompletedToDoItemCommand, IsCompletedToDoItemOutput>
     {
-        public Task<IsCompletedToDoItemOutput> Handle(IsCompletedToDoItemCommand input, CancellationToken cancellationToken)
+        public async Task<IsCompletedToDoItemOutput> Handle(IsCompletedToDoItemCommand input, CancellationToken cancellationToken)
         {
-            var result = new IsCompletedToDoItemOutput
+            return new IsCompletedToDoItemOutput
             {
                 Id = input.Id,
                 IsCompleted = input.IsCompleted
             };
-            return Task.FromResult(result);
         }
     }
 }
