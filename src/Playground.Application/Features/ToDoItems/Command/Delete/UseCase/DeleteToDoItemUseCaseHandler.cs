@@ -5,9 +5,9 @@ namespace Playground.Application.Features.ToDoItems.Command.Delete.UseCase
 {
     public class DeleteToDoItemUseCaseHandler : IRequestHandler<DeleteToDoItemCommand, DeleteToDoItemOutput>
     {
-        public async Task<DeleteToDoItemOutput> Handle(DeleteToDoItemCommand input, CancellationToken cancellationToken)
+        public Task<DeleteToDoItemOutput> Handle(DeleteToDoItemCommand input, CancellationToken cancellationToken)
         {
-            return new();
+            return Task.FromResult(new DeleteToDoItemOutput());
         }
     }
 }
