@@ -56,8 +56,6 @@ namespace Microsoft.AspNetCore.Builder
         private static void SerilogConfig(WebApplicationBuilder builder, IWebHostEnvironment environment)
         {
             const string outputTemplateWithoutProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{CorrelationId}] [{ExecutionTime}] [{ExecutionTimeSinceLastLog}] {Message:lj} {NewLine}{Exception}";
-            //const string outputTemplateWithoutProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] {Message:lj} {NewLine}{Exception}";
-            const string outputTemplateWithProperties = "[{Timestamp:HH:mm:ss.fff} {Level:u3}] {Message:lj} {NewLine}{Exception}{Properties:j}{NewLine}{NewLine}";
 
             var loggerConfiguration = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
@@ -70,7 +68,7 @@ namespace Microsoft.AspNetCore.Builder
 
             //if (environment.IsDevelopment())
             //{
-            //    loggerConfiguration.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, outputTemplate: outputTemplateWithProperties);
+            //    loggerConfiguration.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, outputTemplate: outputTemplateWithoutProperties);
             //}
 
             Log.Logger = loggerConfiguration.CreateLogger();

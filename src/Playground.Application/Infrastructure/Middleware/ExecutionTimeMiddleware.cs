@@ -19,8 +19,7 @@ namespace Playground.Application.Infrastructure.Middleware
 
             context.Response.OnStarting(() =>
             {
-                context.Response.Headers.Add("Execution-Time", ExecutionTimeContext.GetFormattedExecutionTime());
-
+                context.Response.Headers["Execution-Time"] = ExecutionTimeContext.GetFormattedExecutionTime();
                 return Task.CompletedTask;
             });
 

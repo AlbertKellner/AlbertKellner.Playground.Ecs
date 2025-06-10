@@ -33,9 +33,9 @@ namespace Playground.Application.Infrastructure.Middleware
                     context.Response.StatusCode = StatusCodes.Status400BadRequest;
                     context.Response.ContentType = "application/json";
 
-                    var errorResponse = new { error = $"CorrelationId inválido. CorrelationId fornecido: {correlationIdValue}. Ele deve ser um GUID válido." };
-
-                    await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+                    var errorMessage = $"CorrelationId inválido. CorrelationId fornecido: {correlationIdValue}. Ele deve ser um GUID válido.";
+                    var json = $"{{\"error\":\"{System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(errorMessage)}\"}}";
+                    await context.Response.WriteAsync(json);
 
                     _logger.LogWarning("[CorrelationIdMiddleware] CorrelationId inválido. CorrelationId fornecido: {@CorrelationId}",
                         correlationIdValue.ToString());
@@ -54,8 +54,7 @@ namespace Playground.Application.Infrastructure.Middleware
 
             context.Response.OnStarting(() =>
             {
-                context.Response.Headers.Add("CorrelationId", correlationId.ToString());
-
+                context.Response.Headers["CorrelationId"] = correlationId.ToString();
                 return Task.CompletedTask;
             });
 
