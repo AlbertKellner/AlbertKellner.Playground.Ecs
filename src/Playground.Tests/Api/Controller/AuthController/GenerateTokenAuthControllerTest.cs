@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Moq;
 using Playground.Controllers;
 
 namespace Playground.Tests.Controllers
