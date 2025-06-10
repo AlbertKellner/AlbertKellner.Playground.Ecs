@@ -11,6 +11,11 @@ namespace Playground.Application.Features.Country.Query.GetAll.Repositories
 {
     public class GetAllCountryRepository : IGetAllCountryRepository
     {
+        static GetAllCountryRepository()
+        {
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+        }
+
         private readonly IDbConnection _connection;
         private readonly IMemoryCache _memoryCache;
         private readonly ILogger<GetAllCountryRepository> _logger;
