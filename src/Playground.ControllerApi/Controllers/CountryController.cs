@@ -36,8 +36,6 @@ namespace Playground.Controllers
         {
             input.SetName(name);
 
-            input.SetId(id);
-
             if (input.IsInvalid())
             {
                 _logger.LogWarning($"[Api][CountryController][GetByNameAsync][BadRequest] input:({input.ToWarning()})");

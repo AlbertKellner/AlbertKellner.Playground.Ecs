@@ -20,7 +20,6 @@ using Playground.Application.Features.ToDoItems.Query.GetAll.Models;
 using Playground.Application.Features.ToDoItems.Query.GetAll.UseCase;
 using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 using Playground.Application.Features.ToDoItems.Query.GetById.UseCase;
-using System.Reflection;
 
 namespace Playground.Application.Shared.AutofacModules
 {
@@ -28,35 +27,35 @@ namespace Playground.Application.Shared.AutofacModules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(CreateToDoItemCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(CreateToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<CreateToDoItemUseCaseHandler>()
+                .As<IRequestHandler<CreateToDoItemCommand, CreateToDoItemOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(GetByIdToDoItemQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(GetByIdToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<GetByIdToDoItemUseCaseHandler>()
+                .As<IRequestHandler<GetByIdToDoItemQuery, GetByIdToDoItemOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(GetAllToDoItemQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(GetAllToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<GetAllToDoItemUseCaseHandler>()
+                .As<IRequestHandler<GetAllToDoItemQuery, IEnumerable<GetAllToDoItemOutput>>>();
 
-            builder.RegisterAssemblyTypes(typeof(UpdateToDoItemCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(UpdateToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<UpdateToDoItemUseCaseHandler>()
+                .As<IRequestHandler<UpdateToDoItemCommand, UpdateToDoItemOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(DeleteToDoItemCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(DeleteToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<DeleteToDoItemUseCaseHandler>()
+                .As<IRequestHandler<DeleteToDoItemCommand, DeleteToDoItemOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(PatchTaskNameToDoItemCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(PatchTaskNameToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<PatchTaskNameToDoItemUseCaseHandler>()
+                .As<IRequestHandler<PatchTaskNameToDoItemCommand, PatchTaskNameToDoItemOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(IsCompletedToDoItemCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(IsCompletedToDoItemUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<IsCompletedToDoItemUseCaseHandler>()
+                .As<IRequestHandler<IsCompletedToDoItemCommand, IsCompletedToDoItemOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(GetByNamePokemonQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(GetByNamePokemonUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<GetByNamePokemonUseCaseHandler>()
+                .As<IRequestHandler<GetByNamePokemonQuery, GetByNamePokemonOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(GetByNameCountryQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(GetByNameCountryUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<GetByNameCountryUseCaseHandler>()
+                .As<IRequestHandler<GetByNameCountryQuery, GetByNameCountryOutput>>();
 
-            builder.RegisterAssemblyTypes(typeof(GetAllCountryQuery).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
-            builder.RegisterAssemblyTypes(typeof(GetAllCountryUseCaseHandler).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<>));
+            builder.RegisterType<GetAllCountryUseCaseHandler>()
+                .As<IRequestHandler<GetAllCountryQuery, IEnumerable<GetAllCountryOutput>>>();
         }
     }
 }
