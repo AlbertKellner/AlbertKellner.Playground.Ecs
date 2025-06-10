@@ -28,10 +28,10 @@ namespace Playground.Controllers
             _logger = logger;
         }
 
-        public record User(string UserId, string UserName, string AccessGroup);
+        public record AuthUser(string UserId, string UserName, string AccessGroup);
 
         [HttpPost("generate-token")]
-        public IActionResult GenerateToken([FromBody] User user)
+        public IActionResult GenerateToken([FromBody] AuthUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -59,12 +59,9 @@ namespace Playground.Controllers
 
         private static string GetUniqueKey(int size)
         {
-            using (var generator = new RNGCryptoServiceProvider())
-            {
-                var secretKey = new byte[size];
-                generator.GetBytes(secretKey);
-                return Convert.ToBase64String(secretKey);
-            }
+            var secretKey = new byte[size];
+            RandomNumberGenerator.Fill(secretKey);
+            return Convert.ToBase64String(secretKey);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Playground.Application.Features.ToDoItems.Query.GetById.UseCase
 {
     public class GetByIdToDoItemUseCaseHandler : IRequestHandler<GetByIdToDoItemQuery, GetByIdToDoItemOutput>
     {
-        public async Task<GetByIdToDoItemOutput> Handle(GetByIdToDoItemQuery input, CancellationToken cancellationToken)
+        public Task<GetByIdToDoItemOutput> Handle(GetByIdToDoItemQuery input, CancellationToken cancellationToken)
         {
             var items = new List<GetByIdToDoItemOutput>
             {
@@ -17,7 +17,8 @@ namespace Playground.Application.Features.ToDoItems.Query.GetById.UseCase
                 }
             };
 
-            return items.SingleOrDefault(item => item.Id == input.Id) ?? new GetByIdToDoItemOutput();
+            var result = items.SingleOrDefault(item => item.Id == input.Id) ?? new GetByIdToDoItemOutput();
+            return Task.FromResult(result);
         }
     }
 }
