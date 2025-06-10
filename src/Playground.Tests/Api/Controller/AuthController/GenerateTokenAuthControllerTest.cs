@@ -24,9 +24,12 @@ namespace Playground.Tests.Controllers
             var actionResult = _controller.GenerateToken(user);
 
             var response = Assert.IsType<OkObjectResult>(actionResult);
-            dynamic value = response.Value!;
-            Assert.NotNull(value.Token);
-            Assert.NotEqual(string.Empty, value.Token.ToString());
+
+            Assert.NotNull(response.Value);
+            var tokenProperty = response.Value!.GetType().GetProperty("Token");
+            Assert.NotNull(tokenProperty);
+            var token = tokenProperty!.GetValue(response.Value) as string;
+            Assert.False(string.IsNullOrEmpty(token));
         }
     }
 }
