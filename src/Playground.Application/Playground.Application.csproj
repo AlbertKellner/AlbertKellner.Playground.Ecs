@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <RefitGenerateStubs>true</RefitGenerateStubs>
   </PropertyGroup>
 
   <ItemGroup>
