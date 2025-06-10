@@ -52,6 +52,9 @@ namespace Playground.Tests.Controllers
             var response = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(StatusCodes.Status200OK, response.StatusCode);
             Assert.Equal(_validOutput, response.Value);
+            _mockMediator.Verify(m =>
+                m.Send(_validInput, It.IsAny<CancellationToken>()),
+                Times.Once);
         }
 
         [Fact]
@@ -66,6 +69,9 @@ namespace Playground.Tests.Controllers
             var response = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal(StatusCodes.Status400BadRequest, response.StatusCode);
             Assert.NotNull(response.Value);
+            _mockMediator.Verify(m =>
+                m.Send(It.IsAny<GetByNamePokemonQuery>(), It.IsAny<CancellationToken>()),
+                Times.Never);
         }
 
         [Fact]
@@ -79,6 +85,9 @@ namespace Playground.Tests.Controllers
 
             var response = Assert.IsType<NoContentResult>(result);
             Assert.Equal(StatusCodes.Status204NoContent, response.StatusCode);
+            _mockMediator.Verify(m =>
+                m.Send(_validInput, It.IsAny<CancellationToken>()),
+                Times.Once);
         }
     }
 }

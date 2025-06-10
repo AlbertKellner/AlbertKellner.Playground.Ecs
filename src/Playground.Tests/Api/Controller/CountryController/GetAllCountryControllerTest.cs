@@ -39,6 +39,9 @@ namespace Playground.Tests.Controllers
             var responseData = Assert.IsType<List<GetAllCountryOutput>>(response.Value);
             Assert.Equal(StatusCodes.Status200OK, response.StatusCode);
             Assert.Equal(output, responseData);
+            _mockMediator.Verify(m =>
+                m.Send(It.IsAny<GetAllCountryQuery>(), It.IsAny<CancellationToken>()),
+                Times.Once);
         }
 
         [Fact]
@@ -54,6 +57,9 @@ namespace Playground.Tests.Controllers
 
             var response = Assert.IsType<NoContentResult>(result);
             Assert.Equal(StatusCodes.Status204NoContent, response.StatusCode);
+            _mockMediator.Verify(m =>
+                m.Send(It.IsAny<GetAllCountryQuery>(), It.IsAny<CancellationToken>()),
+                Times.Once);
         }
     }
 }
