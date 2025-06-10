@@ -5,14 +5,15 @@ namespace Playground.Application.Features.ToDoItems.Command.Update.UseCase
 {
     public class UpdateToDoItemUseCaseHandler : IRequestHandler<UpdateToDoItemCommand, UpdateToDoItemOutput>
     {
-        public async Task<UpdateToDoItemOutput> Handle(UpdateToDoItemCommand input, CancellationToken cancellationToken)
+        public Task<UpdateToDoItemOutput> Handle(UpdateToDoItemCommand input, CancellationToken cancellationToken)
         {
-            return new UpdateToDoItemOutput
+            var result = new UpdateToDoItemOutput
             {
                 Id = input.Id,
                 Task = input.Task,
                 IsCompleted = input.IsCompleted
             };
+            return Task.FromResult(result);
         }
     }
 }
