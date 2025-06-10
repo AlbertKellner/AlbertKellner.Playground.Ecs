@@ -8,6 +8,11 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.Repositories
 {
     public class CreateTodoItemRepository : ICreateTodoItemRepository
     {
+        static CreateTodoItemRepository()
+        {
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+        }
+
         private readonly IDbConnection _connection;
 
         public CreateTodoItemRepository(IDbConnection connection)
@@ -17,13 +22,11 @@ namespace Playground.Application.Features.ToDoItems.Command.Create.Repositories
 
         public async Task<CreateToDoItemOutput> CreateToDoItemAsync(CreateToDoItemCommand input, CancellationToken cancellationToken)
         {
-            return new() { Id = 1 };
-
-            //return await _connection.QueryFirstOrDefaultAsync<CreateToDoItemOutput>(new CommandDefinition(
-            //    commandText: CreateTodoItemRepositoryScript.SqlScript,
-            //    cancellationToken: cancellationToken,
-            //    commandTimeout: 1
-            //));
+            return await _connection.QueryFirstOrDefaultAsync<CreateToDoItemOutput>(new CommandDefinition(
+                commandText: CreateTodoItemRepositoryScript.SqlScript,
+                cancellationToken: cancellationToken,
+                commandTimeout: 1
+            )) ?? new CreateToDoItemOutput();
         }
     }
 }

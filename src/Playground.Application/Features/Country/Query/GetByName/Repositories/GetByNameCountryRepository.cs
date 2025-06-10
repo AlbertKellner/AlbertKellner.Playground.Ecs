@@ -8,6 +8,11 @@ namespace Playground.Application.Features.Country.Query.GetByName.Repositories
 {
     public class GetByNameCountryRepository : IGetByNameCountryRepository
     {
+        static GetByNameCountryRepository()
+        {
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+        }
+
         private readonly IDbConnection _connection;
 
         public GetByNameCountryRepository(IDbConnection connection)
