@@ -26,3 +26,5 @@ jobs:
       run: dotnet build src/Playground.Ecs.sln --no-restore
     - name: Test
       run: dotnet test src/Playground.Ecs.sln --no-build --verbosity normal
+    - name: Publish AOT
+      run: dotnet publish src/Playground.ControllerApi/Playground.csproj -c Release -r linux-x64 /p:PublishAot=true

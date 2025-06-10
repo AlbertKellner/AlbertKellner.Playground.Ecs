@@ -55,10 +55,8 @@ namespace Microsoft.AspNetCore.Builder
 
         public static void ConfigureMediatR(IServiceCollection services)
         {
-            services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
-            });
+            // Configure MediatR without assembly scanning to avoid reflection
+            services.AddMediatR(cfg => { });
 
             services.AddRequestHandlers();
         }
