@@ -44,6 +44,9 @@ namespace Playground.Tests.Controllers
 
             Assert.Equal(StatusCodes.Status201Created, response.StatusCode);
             Assert.Equal(_validOutput, response.Value);
+            _mockMediator.Verify(m =>
+                m.Send(_validInput, It.IsAny<CancellationToken>()),
+                Times.Once);
         }
 
         [Fact]
@@ -60,6 +63,9 @@ namespace Playground.Tests.Controllers
 
             Assert.Equal(StatusCodes.Status400BadRequest, response.StatusCode);
             Assert.NotNull(response.Value);
+            _mockMediator.Verify(m =>
+                m.Send(It.IsAny<CreateToDoItemCommand>(), It.IsAny<CancellationToken>()),
+                Times.Never);
         }
     }
 }
