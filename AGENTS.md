@@ -29,6 +29,7 @@ Este documento descreve como escrever e organizar testes unitários neste projet
 ## Requisitos de workflow
 
 Sempre que modificar ou criar testes, execute `dotnet build` e `dotnet test` no `src/Playground.Ecs.sln` para garantir que o projeto compila e que os testes passam.
+Toda alteração no repositório deve resultar em `dotnet build` e `dotnet test` executados com sucesso na solução `src/Playground.Ecs.sln`.
 No CI do repositório a cobertura de código é calculada automaticamente e o resumo pode ser conferido no arquivo `coveragereport/Summary.txt` gerado pelo passo `reportgenerator`.
 
 ## Padrões das Controllers e Middlewares
