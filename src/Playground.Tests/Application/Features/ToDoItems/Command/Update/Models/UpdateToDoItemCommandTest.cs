@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class UpdateToDoItemCommandTest
     {
-        [Fact]
+        [Fact(DisplayName = "Setters DeveAlterarValores")]
         public void Setters_DeveAlterarValores()
         {
             var command = new UpdateToDoItemCommand();
@@ -17,7 +17,7 @@ namespace Playground.Tests.Controllers
             Assert.True(command.IsCompleted);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ErrosList QuandoDadosInvalidos DeveRetornarErro")]
         public void ErrosList_QuandoDadosInvalidos_DeveRetornarErro()
         {
             var command = new UpdateToDoItemCommand();

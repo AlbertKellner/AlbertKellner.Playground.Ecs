@@ -12,7 +12,7 @@ namespace Playground.Tests.Controllers
             _handler = new UpdateToDoItemUseCaseHandler();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle DeveRetornarOutputComMesmoId")]
         public async Task Handle_DeveRetornarOutputComMesmoId()
         {
             var command = new UpdateToDoItemCommand { Task = "task", IsCompleted = true };

@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class UpdateToDoItemOutputTest
     {
-        [Fact]
+        [Fact(DisplayName = "IsValid QuandoDadosValidos DeveRetornarTrue")]
         public void IsValid_QuandoDadosValidos_DeveRetornarTrue()
         {
             var output = new UpdateToDoItemOutput { Id = 1, Task = "task", IsCompleted = true };

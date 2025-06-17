@@ -40,7 +40,7 @@ namespace Playground.Tests.Controllers
             _invalidOutput = new GetByNamePokemonOutput();
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameExternalAsync QuandoValido DeveRetornarOk")]
         public async Task GetByNameExternalAsync_QuandoValido_DeveRetornarOk()
         {
             _mockMediator
@@ -57,7 +57,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameExternalAsync QuandoEntradaInvalida DeveRetornarBadRequest")]
         public async Task GetByNameExternalAsync_QuandoEntradaInvalida_DeveRetornarBadRequest()
         {
             _mockMediator
@@ -74,7 +74,7 @@ namespace Playground.Tests.Controllers
                 Times.Never);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameExternalAsync QuandoOutputInvalido DeveRetornarNoContent")]
         public async Task GetByNameExternalAsync_QuandoOutputInvalido_DeveRetornarNoContent()
         {
             _mockMediator

@@ -12,7 +12,7 @@ namespace Playground.Tests.Controllers
             _handler = new GetByIdToDoItemUseCaseHandler();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoIdExistente DeveRetornarItem")]
         public async Task Handle_QuandoIdExistente_DeveRetornarItem()
         {
             var query = new GetByIdToDoItemQuery();
@@ -24,7 +24,7 @@ namespace Playground.Tests.Controllers
             Assert.NotEmpty(result.Task);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoIdNaoExistente DeveRetornarVazio")]
         public async Task Handle_QuandoIdNaoExistente_DeveRetornarVazio()
         {
             var query = new GetByIdToDoItemQuery();

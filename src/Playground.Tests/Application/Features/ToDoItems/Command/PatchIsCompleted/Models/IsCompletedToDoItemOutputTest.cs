@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class IsCompletedToDoItemOutputTest
     {
-        [Fact]
+        [Fact(DisplayName = "IsValid QuandoIdValido DeveRetornarTrue")]
         public void IsValid_QuandoIdValido_DeveRetornarTrue()
         {
             var output = new IsCompletedToDoItemOutput { Id = 2, IsCompleted = true };

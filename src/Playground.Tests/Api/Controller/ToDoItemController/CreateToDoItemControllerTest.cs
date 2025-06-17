@@ -30,7 +30,7 @@ namespace Playground.Tests.Controllers
             _validOutput = new CreateToDoItemOutput { Id = 1, Task = "Sample task", IsCompleted = false };
         }
 
-        [Fact]
+        [Fact(DisplayName = "CreateAsync QuandoEntradaEValida DeveRetornarCriado")]
         public async Task CreateAsync_QuandoEntradaEValida_DeveRetornarCriado()
         {
             _mockMediator
@@ -49,7 +49,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "CreateAsync QuandoEntradaEInvalida DeveRetornarBadRequest")]
         public async Task CreateAsync_QuandoEntradaEInvalida_DeveRetornarBadRequest()
         {
             _mockMediator

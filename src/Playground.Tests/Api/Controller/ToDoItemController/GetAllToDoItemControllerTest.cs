@@ -25,7 +25,7 @@ namespace Playground.Tests.Controllers
             _controller = new ToDoItemController(_mockMediator.Object, _mockLogger.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetAllAsync WhenItemsExist ShouldReturnOk")]
         public async Task GetAllAsync_WhenItemsExist_ShouldReturnOk()
         {
             var output = new List<GetAllToDoItemOutput>
@@ -51,7 +51,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetAllAsync WhenNoItemsExist ShouldReturnNoContent")]
         public async Task GetAllAsync_WhenNoItemsExist_ShouldReturnNoContent()
         {
             var output = new List<GetAllToDoItemOutput>();

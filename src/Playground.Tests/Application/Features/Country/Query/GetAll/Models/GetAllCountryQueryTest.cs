@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class GetAllCountryQueryTest
     {
-        [Fact]
+        [Fact(DisplayName = "ErrosList DeveEstarVazia")]
         public void ErrosList_DeveEstarVazia()
         {
             var query = new GetAllCountryQuery();

@@ -12,7 +12,7 @@ namespace Playground.Tests.Controllers
             _handler = new DeleteToDoItemUseCaseHandler();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle DeveRetornarOutputValido")]
         public async Task Handle_DeveRetornarOutputValido()
         {
             var command = new DeleteToDoItemCommand(1);

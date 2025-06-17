@@ -19,7 +19,7 @@ namespace Playground.Tests.Controllers
             _controller = new PokemonController(Mock.Of<IMediator>(), _mockLogger.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameInternalAsync QuandoPikachu DeveRetornarOk")]
         public void GetByNameInternalAsync_QuandoPikachu_DeveRetornarOk()
         {
             var result = _controller.GetByNameInternalAsync("pikachu");
@@ -30,7 +30,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("pikachu", pokemon.Name);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameInternalAsync QuandoNaoForPikachu DeveRetornarNoContent")]
         public void GetByNameInternalAsync_QuandoNaoForPikachu_DeveRetornarNoContent()
         {
             var result = _controller.GetByNameInternalAsync("mew");

@@ -45,7 +45,7 @@ namespace Playground.Tests.Controllers
             _invalidOutput = new PatchTaskNameToDoItemOutput();
         }
 
-        [Fact]
+        [Fact(DisplayName = "PatchTaskNameAsync QuandoEntradaEValida DeveRetornarOk")]
         public async Task PatchTaskNameAsync_QuandoEntradaEValida_DeveRetornarOk()
         {
             _mockMediator
@@ -63,7 +63,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "PatchTaskNameAsync QuandoEntradaEInvalidaEFezUpdate DeveRetornarBadRequest")]
         public async Task PatchTaskNameAsync_QuandoEntradaEInvalidaEFezUpdate_DeveRetornarBadRequest()
         {
             _mockMediator
@@ -82,7 +82,7 @@ namespace Playground.Tests.Controllers
                 Times.Never);
         }
 
-        [Fact]
+        [Fact(DisplayName = "PatchTaskNameAsync QuandoEntradaEValidaENaoFezUpdate DeveRetornarNoContent")]
         public async Task PatchTaskNameAsync_QuandoEntradaEValidaENaoFezUpdate_DeveRetornarNoContent()
         {
             _mockMediator

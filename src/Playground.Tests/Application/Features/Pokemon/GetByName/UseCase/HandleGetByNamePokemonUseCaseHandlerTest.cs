@@ -20,7 +20,7 @@ namespace Playground.Tests.Controllers
             _handler = new GetByNamePokemonUseCaseHandler(_mockPokemonApi.Object, _mockLogger.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoExecutado DeveRetornarPokemon")]
         public async Task Handle_QuandoExecutado_DeveRetornarPokemon()
         {
             var query = new GetByNamePokemonQuery();

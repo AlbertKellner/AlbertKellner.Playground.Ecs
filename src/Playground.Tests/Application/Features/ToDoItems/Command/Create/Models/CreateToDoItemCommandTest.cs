@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class CreateToDoItemCommandTest
     {
-        [Fact]
+        [Fact(DisplayName = "ErrosList QuandoTaskVazia DeveRetornarErro")]
         public void ErrosList_QuandoTaskVazia_DeveRetornarErro()
         {
             var command = new CreateToDoItemCommand { Task = "" };
