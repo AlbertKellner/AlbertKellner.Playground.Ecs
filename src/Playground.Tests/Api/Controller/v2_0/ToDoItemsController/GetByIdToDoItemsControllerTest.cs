@@ -35,7 +35,7 @@ namespace Playground.Tests.Controllers
             _invalidOutput = new GetByIdToDoItemOutput { Id = 0, Task = string.Empty, IsCompleted = false };
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByIdAsync QuandoValido DeveRetornarOk")]
         public async Task GetByIdAsync_QuandoValido_DeveRetornarOk()
         {
             _mockMediator
@@ -52,7 +52,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByIdAsync QuandoEntradaInvalida DeveRetornarBadRequest")]
         public async Task GetByIdAsync_QuandoEntradaInvalida_DeveRetornarBadRequest()
         {
             _mockMediator
@@ -68,7 +68,7 @@ namespace Playground.Tests.Controllers
                 Times.Never);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByIdAsync QuandoOutputInvalido DeveRetornarNoContent")]
         public async Task GetByIdAsync_QuandoOutputInvalido_DeveRetornarNoContent()
         {
             _mockMediator

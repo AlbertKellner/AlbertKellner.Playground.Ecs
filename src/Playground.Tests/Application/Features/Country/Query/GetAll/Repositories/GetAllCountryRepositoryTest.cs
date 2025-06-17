@@ -24,7 +24,7 @@ namespace Playground.Tests.Controllers
             _repository = new GetAllCountryRepository(_mockConnection.Object, _memoryCache, _mockLogger.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetAllCountryAsync DeveUtilizarCache")]
         public async Task GetAllCountryAsync_DeveUtilizarCache()
         {
             var expected = new List<GetAllCountryOutput> { new GetAllCountryOutput { Name = "Brazil" } };

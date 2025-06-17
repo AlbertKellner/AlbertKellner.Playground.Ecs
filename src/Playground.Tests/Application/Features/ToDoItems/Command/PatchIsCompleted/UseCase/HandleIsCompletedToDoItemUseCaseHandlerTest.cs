@@ -12,7 +12,7 @@ namespace Playground.Tests.Controllers
             _handler = new IsCompletedToDoItemUseCaseHandler();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoExecutado DeveRetornarMesmoId")]
         public async Task Handle_QuandoExecutado_DeveRetornarMesmoId()
         {
             var command = new IsCompletedToDoItemCommand { Id = 1, IsCompleted = true };

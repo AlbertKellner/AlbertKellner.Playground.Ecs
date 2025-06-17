@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class GetByNameCountryQueryTest
     {
-        [Fact]
+        [Fact(DisplayName = "SetName DeveAlterarNome")]
         public void SetName_DeveAlterarNome()
         {
             var query = new GetByNameCountryQuery();
@@ -13,7 +13,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Canada", query.Name);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ErrosList QuandoNomeVazio DeveRetornarErro")]
         public void ErrosList_QuandoNomeVazio_DeveRetornarErro()
         {
             var query = new GetByNameCountryQuery();

@@ -18,7 +18,7 @@ namespace Playground.Tests.Controllers
             _repository = new CreateTodoItemRepository(_mockConnection.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "CreateToDoItemAsync DeveExecutarQuery")]
         public async Task CreateToDoItemAsync_DeveExecutarQuery()
         {
             var command = new CreateToDoItemCommand { Task = "task" };

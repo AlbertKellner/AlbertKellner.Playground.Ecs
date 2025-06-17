@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class DeleteToDoItemOutputTest
     {
-        [Fact]
+        [Fact(DisplayName = "IsValid DeveRetornarTrue")]
         public void IsValid_DeveRetornarTrue()
         {
             var output = new DeleteToDoItemOutput();

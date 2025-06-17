@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class GetByIdToDoItemQueryTest
     {
-        [Fact]
+        [Fact(DisplayName = "SetId DeveAlterarId")]
         public void SetId_DeveAlterarId()
         {
             var query = new GetByIdToDoItemQuery();
@@ -13,7 +13,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal(3, query.Id);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ErrosList QuandoIdInvalido DeveRetornarErro")]
         public void ErrosList_QuandoIdInvalido_DeveRetornarErro()
         {
             var query = new GetByIdToDoItemQuery();

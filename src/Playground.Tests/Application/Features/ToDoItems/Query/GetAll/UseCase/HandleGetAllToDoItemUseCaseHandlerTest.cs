@@ -12,7 +12,7 @@ namespace Playground.Tests.Controllers
             _handler = new GetAllToDoItemUseCaseHandler();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle DeveRetornarListaPreenchida")]
         public async Task Handle_DeveRetornarListaPreenchida()
         {
             var result = await _handler.Handle(new GetAllToDoItemQuery(), CancellationToken.None);

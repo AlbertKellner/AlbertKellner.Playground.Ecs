@@ -16,7 +16,7 @@ namespace Playground.Tests.Controllers
             _controller = new AuthController(_mockLogger.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GenerateToken DeveRetornarOkComToken")]
         public void GenerateToken_DeveRetornarOkComToken()
         {
             var user = new AuthController.AuthUser("1", "tester", "group");

@@ -19,7 +19,7 @@ namespace Playground.Tests.Controllers
             _handler = new GetAllCountryUseCaseHandler(_mockRepo.Object, _mockLogger.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoExecutado DeveRetornarLista")]
         public async Task Handle_QuandoExecutado_DeveRetornarLista()
         {
             var list = new List<GetAllCountryOutput> { new GetAllCountryOutput { Name = "Brazil" } };

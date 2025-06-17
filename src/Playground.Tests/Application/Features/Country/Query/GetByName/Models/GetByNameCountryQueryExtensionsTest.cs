@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class GetByNameCountryQueryExtensionsTest
     {
-        [Fact]
+        [Fact(DisplayName = "ToWarning DeveGerarStringCorreta")]
         public void ToWarning_DeveGerarStringCorreta()
         {
             var query = new GetByNameCountryQuery();
@@ -15,7 +15,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Name:brazil|FormattedErrosList:()", warning);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ToInformation DeveGerarStringCorreta")]
         public void ToInformation_DeveGerarStringCorreta()
         {
             var query = new GetByNameCountryQuery();

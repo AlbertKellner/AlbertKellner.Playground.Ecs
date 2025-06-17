@@ -16,7 +16,7 @@ namespace Playground.Tests.Controllers
             _handler = new CreateToDoItemUseCaseHandler(_mockRepo.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoExecutado DeveRetornarItemCriado")]
         public async Task Handle_QuandoExecutado_DeveRetornarItemCriado()
         {
             var command = new CreateToDoItemCommand { Task = "task" };

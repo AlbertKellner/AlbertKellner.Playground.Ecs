@@ -12,7 +12,7 @@ namespace Playground.Tests.Controllers
             _handler = new GetByNameCountryUseCaseHandler();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoNomeExistente DeveRetornarPais")]
         public async Task Handle_QuandoNomeExistente_DeveRetornarPais()
         {
             var query = new GetByNameCountryQuery();
@@ -23,7 +23,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Brazil", result.Name);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle QuandoNomeNaoExistente DeveRetornarVazio")]
         public async Task Handle_QuandoNomeNaoExistente_DeveRetornarVazio()
         {
             var query = new GetByNameCountryQuery();

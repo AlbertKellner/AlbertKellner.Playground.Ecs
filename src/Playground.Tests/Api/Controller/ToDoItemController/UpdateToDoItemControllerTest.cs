@@ -35,7 +35,7 @@ namespace Playground.Tests.Controllers
             _validOutput = new UpdateToDoItemOutput { Id = 1, Task = "Sample task", IsCompleted = false };
         }
 
-        [Fact]
+        [Fact(DisplayName = "UpdateAsync QuandoEntradaEValida DeveRetornarOk")]
         public async Task UpdateAsync_QuandoEntradaEValida_DeveRetornarOk()
         {
             _mockMediator
@@ -53,7 +53,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "UpdateAsync QuandoEntradaEInvalida DeveRetornarBadRequest")]
         public async Task UpdateAsync_QuandoEntradaEInvalida_DeveRetornarBadRequest()
         {
             _mockMediator

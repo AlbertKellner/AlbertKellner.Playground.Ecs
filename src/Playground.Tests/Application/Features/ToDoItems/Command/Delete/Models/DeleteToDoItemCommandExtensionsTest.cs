@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class DeleteToDoItemCommandExtensionsTest
     {
-        [Fact]
+        [Fact(DisplayName = "ToWarning DeveGerarStringCorreta")]
         public void ToWarning_DeveGerarStringCorreta()
         {
             var command = new DeleteToDoItemCommand(1);
@@ -14,7 +14,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Id:1|FormattedErrosList:()", warning);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ToInformation DeveGerarStringCorreta")]
         public void ToInformation_DeveGerarStringCorreta()
         {
             var command = new DeleteToDoItemCommand(1);

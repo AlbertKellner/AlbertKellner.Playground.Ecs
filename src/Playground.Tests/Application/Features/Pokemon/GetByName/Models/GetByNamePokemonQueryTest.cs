@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class GetByNamePokemonQueryTest
     {
-        [Fact]
+        [Fact(DisplayName = "SetName DeveAlterarNome")]
         public void SetName_DeveAlterarNome()
         {
             var query = new GetByNamePokemonQuery();
@@ -13,7 +13,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("pikachu", query.Name);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ToWarning DeveGerarStringCorreta")]
         public void ToWarning_DeveGerarStringCorreta()
         {
             var query = new GetByNamePokemonQuery();

@@ -21,7 +21,7 @@ namespace Playground.Tests.Controllers
             _controller = new CountryController(_mockMediator.Object, _mockLogger.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetAllAsync QuandoExistemPaises DeveRetornarOk")]
         public async Task GetAllAsync_QuandoExistemPaises_DeveRetornarOk()
         {
             var output = new List<GetAllCountryOutput>
@@ -44,7 +44,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetAllAsync QuandoNaoExistemPaises DeveRetornarNoContent")]
         public async Task GetAllAsync_QuandoNaoExistemPaises_DeveRetornarNoContent()
         {
             var output = new List<GetAllCountryOutput>();

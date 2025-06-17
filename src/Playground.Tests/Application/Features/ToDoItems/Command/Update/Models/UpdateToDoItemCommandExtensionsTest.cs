@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class UpdateToDoItemCommandExtensionsTest
     {
-        [Fact]
+        [Fact(DisplayName = "ToWarning DeveGerarStringCorreta")]
         public void ToWarning_DeveGerarStringCorreta()
         {
             var command = new UpdateToDoItemCommand { Task = "a", IsCompleted = true };
@@ -15,7 +15,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Id:1|Task:a|IsCompleted:True|FormattedErrosList:()", warning);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ToInformation DeveGerarStringCorreta")]
         public void ToInformation_DeveGerarStringCorreta()
         {
             var command = new UpdateToDoItemCommand { Task = "a", IsCompleted = true };

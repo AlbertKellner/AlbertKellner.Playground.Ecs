@@ -28,7 +28,7 @@ namespace Playground.Tests.Controllers
             // _output = new SomeOutput { ... };
         }
 
-        [Fact]
+        [Fact(DisplayName = "Metodo QuandoCondicao DeveRetornarResultado")]
         public async Task Metodo_QuandoCondicao_DeveRetornarResultado()
         {
             var input = /* instanciar entrada */ default(SomeCommand);

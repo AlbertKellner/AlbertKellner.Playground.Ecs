@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class GetByNamePokemonQueryExtensionsTest
     {
-        [Fact]
+        [Fact(DisplayName = "ToWarning DeveGerarStringCorreta")]
         public void ToWarning_DeveGerarStringCorreta()
         {
             var query = new GetByNamePokemonQuery();
@@ -15,7 +15,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Name:pikachu|FormattedErrosList:()", warning);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ToError DeveGerarStringCorreta")]
         public void ToError_DeveGerarStringCorreta()
         {
             var query = new GetByNamePokemonQuery();
@@ -26,7 +26,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Name:pikachu", error);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ToInformation DeveGerarStringCorreta")]
         public void ToInformation_DeveGerarStringCorreta()
         {
             var query = new GetByNamePokemonQuery();

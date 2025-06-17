@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class DeleteToDoItemCommandTest
     {
-        [Fact]
+        [Fact(DisplayName = "ErrosList QuandoIdInvalido DeveRetornarErro")]
         public void ErrosList_QuandoIdInvalido_DeveRetornarErro()
         {
             var command = new DeleteToDoItemCommand(0);

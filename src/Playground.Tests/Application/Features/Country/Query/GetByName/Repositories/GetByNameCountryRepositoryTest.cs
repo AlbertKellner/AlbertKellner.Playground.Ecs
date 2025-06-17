@@ -19,7 +19,7 @@ namespace Playground.Tests.Controllers
             _repository = new GetByNameCountryRepository(_mockConnection.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameCountryAsync DeveExecutarQuery")]
         public async Task GetByNameCountryAsync_DeveExecutarQuery()
         {
             var query = new GetByNameCountryQuery();

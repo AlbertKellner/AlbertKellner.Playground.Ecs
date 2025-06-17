@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class GetByIdToDoItemQueryExtensionsTest
     {
-        [Fact]
+        [Fact(DisplayName = "ToWarning DeveGerarStringCorreta")]
         public void ToWarning_DeveGerarStringCorreta()
         {
             var query = new GetByIdToDoItemQuery();
@@ -15,7 +15,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("Id:4|FormattedErrosList:()", warning);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ToInformation DeveGerarStringCorreta")]
         public void ToInformation_DeveGerarStringCorreta()
         {
             var query = new GetByIdToDoItemQuery();

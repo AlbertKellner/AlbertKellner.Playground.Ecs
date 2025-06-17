@@ -34,7 +34,7 @@ namespace Playground.Tests.Controllers
             _invalidOutput = new GetByNameCountryOutput { Name = string.Empty };
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameAsync QuandoEntradaValida DeveRetornarOk")]
         public async Task GetByNameAsync_QuandoEntradaValida_DeveRetornarOk()
         {
             _mockMediator
@@ -51,7 +51,7 @@ namespace Playground.Tests.Controllers
                 Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameAsync QuandoEntradaInvalida DeveRetornarBadRequest")]
         public async Task GetByNameAsync_QuandoEntradaInvalida_DeveRetornarBadRequest()
         {
             _mockMediator
@@ -68,7 +68,7 @@ namespace Playground.Tests.Controllers
                 Times.Never);
         }
 
-        [Fact]
+        [Fact(DisplayName = "GetByNameAsync QuandoOutputInvalido DeveRetornarNoContent")]
         public async Task GetByNameAsync_QuandoOutputInvalido_DeveRetornarNoContent()
         {
             _mockMediator

@@ -4,7 +4,7 @@ namespace Playground.Tests.Controllers
 {
     public class PatchTaskNameToDoItemCommandTest
     {
-        [Fact]
+        [Fact(DisplayName = "Setters DeveAlterarValores")]
         public void Setters_DeveAlterarValores()
         {
             var command = new PatchTaskNameToDoItemCommand();
@@ -15,7 +15,7 @@ namespace Playground.Tests.Controllers
             Assert.Equal("update", command.TaskName);
         }
 
-        [Fact]
+        [Fact(DisplayName = "ErrosList QuandoDadosInvalidos DeveRetornarErro")]
         public void ErrosList_QuandoDadosInvalidos_DeveRetornarErro()
         {
             var command = new PatchTaskNameToDoItemCommand();
