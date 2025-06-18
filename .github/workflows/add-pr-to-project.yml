@@ -1,0 +1,15 @@
+name: Vincular Pull Requests ao Projeto
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Vincular PR ao projeto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./scripts/add-pr-to-project.sh https://github.com/users/AlbertKellner/projects/2

@@ -43,3 +43,46 @@ Na documentação das controles e suas actions, existentes, coloque a action por
 ```
 Os arquivos de documentação não estão aparecendo na Wiki. Crie uma Action para publicá-los sempre que um pull request for mergeado para main.
 ```
+
+## Pedido 9
+```
+Utilize essa action para publicar a documentação 
+“name: Publicar Wiki
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'wiki/**'
+      - '.github/workflows/publish-wiki.yml'
+concurrency:
+  group: publish-wiki
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  publicar-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Andrew-Chen-Wang/github-wiki-action@v4
+        with:
+          path: wiki”
+```
+
+
+## Pedido 10
+```
+Adicione uma action, para adicionar cada pull request criado ao projeto desse repositório. 
+O link para o projeto é: https://github.com/users/AlbertKellner/projects/2
+```
+
+## Pedido 11
+```
+Ao invés de importar essa action, é possível colocar o código inteiro aqui? Com o objetivo de desacoplar essa action?
+```
+
+
+## Pedido 12
+```
+Pesquise na internet se é dessa maneira que adiciona um pull request a um projeto, através de uma action
+```
