@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Playground.Application.Features.Pokemon.GetByName.Models;
 using System.Net;
 
-namespace Playground.Controllers
+namespace Playground.API.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]

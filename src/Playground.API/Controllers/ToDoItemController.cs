@@ -9,7 +9,7 @@ using Playground.Application.Features.ToDoItems.Query.GetAll.Models;
 using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 using System.Net;
 
-namespace Playground.Controllers
+namespace Playground.API.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]

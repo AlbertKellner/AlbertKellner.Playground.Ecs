@@ -3,8 +3,8 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Playground.Controllers.v2_0;
-using Playground.Controllers;
+using Playground.API.Controllers.v2_0;
+using Playground.API.Controllers;
 using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 
 namespace Playground.Tests.Controllers

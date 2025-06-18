@@ -5,7 +5,7 @@ using System.Threading;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
-using Playground.Controllers;
+using Playground.API.Controllers;
 using Playground.Application.Features.ToDoItems.Query.GetAll.Models;
 using Microsoft.AspNetCore.Http;
 

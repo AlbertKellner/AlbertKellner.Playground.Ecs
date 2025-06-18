@@ -7,9 +7,9 @@ using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using static Playground.Controllers.AuthController;
+using static Playground.API.Controllers.AuthController;
 
-namespace Playground.Controllers
+namespace Playground.API.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]

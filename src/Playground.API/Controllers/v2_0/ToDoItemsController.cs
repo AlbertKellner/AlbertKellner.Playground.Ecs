@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 using System.Net;
 
-namespace Playground.Controllers.v2_0
+namespace Playground.API.Controllers.v2_0
 {
     [ApiController]
     [ApiVersion("2.0")]

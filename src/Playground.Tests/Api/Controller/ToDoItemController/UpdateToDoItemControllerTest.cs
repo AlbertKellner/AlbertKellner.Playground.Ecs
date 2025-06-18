@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Playground.Controllers;
+using Playground.API.Controllers;
 using Playground.Application.Features.ToDoItems.Command.Update.Models;
 
 namespace Playground.Tests.Controllers

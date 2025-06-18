@@ -2,10 +2,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Playground.Application.Features.Pokemon.GetByName.Models;
 using Playground.Application.Shared.Domain.ApiDto;
-using Playground.Configs;
+using Playground.API.Configs;
 using System.Net;
 
-namespace Playground.Controllers
+namespace Playground.API.Controllers
 {
     [ApiController]
     [ApiVersion("1.0")]
@@ -39,7 +39,7 @@ namespace Playground.Controllers
 
             if (input.IsInvalid())
             {
-                _logger.LogWarning("[PokemonController][GetByNameExternalAsync] Retornando API com erro de validação. input:({@input})", input.ToWarning());
+                _logger.LogWarning("[PokemonController][GetByNameExternalAsync] Retornando API com erro de validaÃ§Ã£o. input:({@input})", input.ToWarning());
 
                 return BadRequest(input.ErrosList());
             }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Playground;
+namespace Playground.API;
 
 public record HealthCheckEntry(string name, string status, string exception, string duration);
 public record HealthCheckResponse(string status, IEnumerable<HealthCheckEntry> checks);

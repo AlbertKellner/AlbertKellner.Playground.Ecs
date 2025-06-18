@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using Playground.Application.Infrastructure.Filter;
 using Playground.Application.Infrastructure.Handlers;
 using Playground.Application.Shared.Extensions;
-using Playground.Configs;
+using Playground.API.Configs;
 
 namespace Microsoft.AspNetCore.Builder
 {

@@ -10,7 +10,7 @@ using Playground.Application.Shared.Domain;
 using MySqlConnector;
 using Serilog.Events;
 using Autofac.Core;
-using Playground.Controllers;
+using Playground.API.Controllers;
 
 namespace Microsoft.AspNetCore.Builder
 {
