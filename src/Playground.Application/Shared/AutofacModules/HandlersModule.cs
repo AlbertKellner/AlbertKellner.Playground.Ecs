@@ -1,9 +1,5 @@
 ﻿using Autofac;
 using MediatR;
-using Playground.Application.Features.Country.Query.GetAll.Models;
-using Playground.Application.Features.Country.Query.GetAll.UseCase;
-using Playground.Application.Features.Country.Query.GetByName.Models;
-using Playground.Application.Features.Country.Query.GetByName.UseCase;
 using Playground.Application.Features.Pokemon.GetByName.Models;
 using Playground.Application.Features.Pokemon.GetByName.UseCase;
 using Playground.Application.Features.ToDoItems.Command.Create.Models;
@@ -51,11 +47,6 @@ namespace Playground.Application.Shared.AutofacModules
             builder.RegisterType<GetByNamePokemonUseCaseHandler>()
                 .As<IRequestHandler<GetByNamePokemonQuery, GetByNamePokemonOutput>>();
 
-            builder.RegisterType<GetByNameCountryUseCaseHandler>()
-                .As<IRequestHandler<GetByNameCountryQuery, GetByNameCountryOutput>>();
-
-            builder.RegisterType<GetAllCountryUseCaseHandler>()
-                .As<IRequestHandler<GetAllCountryQuery, IEnumerable<GetAllCountryOutput>>>();
         }
     }
 }

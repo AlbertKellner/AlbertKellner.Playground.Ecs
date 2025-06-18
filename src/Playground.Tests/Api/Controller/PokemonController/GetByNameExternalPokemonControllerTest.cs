@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Playground.Controllers;
+using Playground.API.Controllers;
 using Playground.Application.Features.Pokemon.GetByName.Models;
 
 namespace Playground.Tests.Controllers

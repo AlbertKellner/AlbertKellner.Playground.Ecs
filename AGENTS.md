@@ -6,7 +6,7 @@ Este documento descreve como escrever e organizar testes unitários neste projet
 
 - Todos os testes unitários ficam em `src/Playground.Tests`.
 - Dentro dessa pasta a organização reproduz os controllers da API. Por exemplo:
-  - Controller `CountryController` -> testes em `src/Playground.Tests/Api/Controller/CountryController/`.
+  - Controller `PokemonController` -> testes em `src/Playground.Tests/Api/Controller/PokemonController/`.
   - Cada ação do controller possui seu próprio arquivo de teste com o nome `<NomeDaAcao><Controller>Test.cs`.
 - O namespace de todas as classes de teste é `Playground.Tests.Controllers`.
 - Sempre que criar uma nova pasta de testes, replique exatamente o nome do controller para facilitar a localização dos arquivos.
@@ -34,7 +34,7 @@ No CI do repositório a cobertura de código é calculada automaticamente e o re
 
 ## Padrões das Controllers e Middlewares
 
-- Os controllers residem em `src/Playground.ControllerApi/Controllers` e o nome
+- Os controllers residem em `src/Playground.API/Controllers` e o nome
   do arquivo segue o padrão `<Nome>Controller.cs`.
 - Cada controller é decorado com `[ApiController]`, `[ApiVersion]` e `[Route]`.
 - As dependências (por exemplo `IMediator` e `ILogger<T>`) são injetadas via
@@ -352,7 +352,7 @@ src/Playground.Application/Features/ToDoItems/Query/GetById
 
 ## Exemplos de Controllers
 
-Os controllers residem em `src/Playground.ControllerApi/Controllers`. Cada
+Os controllers residem em `src/Playground.API/Controllers`. Cada
 arquivo injeta `IMediator` e `ILogger<T>` no construtor e as a\u00E7\u00F5es validam a
 entrada, registram logs e retornam `IActionResult`.
 

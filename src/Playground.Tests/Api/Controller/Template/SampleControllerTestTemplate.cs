@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Playground.Controllers;
+using Playground.API.Controllers;
 
 namespace Playground.Tests.Controllers
 {

@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Playground.Application\Playground.Application.csproj" />
-    <ProjectReference Include="..\Playground.ControllerApi\Playground.csproj" />
+    <ProjectReference Include="..\Playground.API\Playground.API.csproj" />
   </ItemGroup>
 
 </Project>

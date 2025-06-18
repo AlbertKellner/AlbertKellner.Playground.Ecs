@@ -32,4 +32,4 @@ jobs:
         reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:TextSummary
         cat coveragereport/Summary.txt
     - name: Publish AOT
-      run: dotnet publish src/Playground.ControllerApi/Playground.csproj -c Release -r linux-x64 /p:PublishAot=true
+      run: dotnet publish src/Playground.API/Playground.API.csproj -c Release -r linux-x64 /p:PublishAot=true
