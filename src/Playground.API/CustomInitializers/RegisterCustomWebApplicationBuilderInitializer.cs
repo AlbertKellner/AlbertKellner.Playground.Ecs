@@ -6,8 +6,6 @@ using Playground.Application.Shared;
 using Playground.Application.Infrastructure.Configuration;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using Playground.Application.Features.Country.Query.GetAll.Repositories;
-using Playground.Application.Features.Country.Query.GetAll.Interface;
 using Playground.Application.Shared.Domain;
 using MySqlConnector;
 using Serilog.Events;
@@ -78,17 +76,6 @@ namespace Microsoft.AspNetCore.Builder
         {
             ThreadPool.SetMinThreads(50, 50);
 
-            builder.Register(container =>
-            {
-                var memoryCache = container.Resolve<IMemoryCache>();
-                var databaseOptions = container.Resolve<IOptions<ConnectionstringsOptions>>();
-                var logger = container.Resolve<ILogger<GetAllCountryRepository>>();
-
-                //var connection = new MySqlConnection(databaseOptions.Value.MySqlConnectionString);
-                var connection = new MySqlConnection("server=localhost;user id=admin;password=123456;database=world;");
-
-                return new GetAllCountryRepository(connection, memoryCache, logger);
-            }).As<IGetAllCountryRepository>();
         }
     }
 }

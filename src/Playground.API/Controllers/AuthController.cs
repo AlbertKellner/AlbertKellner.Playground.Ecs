@@ -1,8 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Playground.Application.Features.Country.Query.GetAll.Models;
-using Playground.Application.Features.Country.Query.GetByName.Models;
 using Serilog.Context;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;

@@ -1,9 +1,5 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Playground.Application.Features.Country.Query.GetAll.Models;
-using Playground.Application.Features.Country.Query.GetAll.UseCase;
-using Playground.Application.Features.Country.Query.GetByName.Models;
-using Playground.Application.Features.Country.Query.GetByName.UseCase;
 using Playground.Application.Features.Pokemon.GetByName.Models;
 using Playground.Application.Features.Pokemon.GetByName.UseCase;
 using Playground.Application.Features.ToDoItems.Command.Create.Models;
@@ -35,8 +31,6 @@ namespace Playground.Application.Shared.Extensions
             services.AddTransient<IRequestHandler<PatchTaskNameToDoItemCommand, PatchTaskNameToDoItemOutput>, PatchTaskNameToDoItemUseCaseHandler>();
             services.AddTransient<IRequestHandler<IsCompletedToDoItemCommand, IsCompletedToDoItemOutput>, IsCompletedToDoItemUseCaseHandler>();
             services.AddTransient<IRequestHandler<GetByNamePokemonQuery, GetByNamePokemonOutput>, GetByNamePokemonUseCaseHandler>();
-            services.AddTransient<IRequestHandler<GetByNameCountryQuery, GetByNameCountryOutput>, GetByNameCountryUseCaseHandler>();
-            services.AddTransient<IRequestHandler<GetAllCountryQuery, IEnumerable<GetAllCountryOutput>>, GetAllCountryUseCaseHandler>();
             return services;
         }
     }
