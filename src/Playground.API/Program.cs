@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using System.Text.Json;
 using Playground;
+using Playground.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
