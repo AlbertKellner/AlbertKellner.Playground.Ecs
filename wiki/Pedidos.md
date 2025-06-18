@@ -38,3 +38,8 @@ Separe a documentação das funcionalidades da documentação de exemplos, os ex
 ```
 Na documentação das controles e suas actions, existentes, coloque a action por completo, colocando toda a sua lógica para exemplificar como criar novas actions. No arquivo de Agents, adicione o comando de que toda a nova funcionalidade deve ser consultada nos arquivos de exemplo e esses exemplos devem ser seguidos para a criação dessas novas funcionalidades. Tanto Actions, nas Controllers, quanto Features, Repositórios, middlewares, etc. Na documentação de Features e Controllers de Exemplos, cada arquivo de exemplo deve ser um documento de documentação separado, e a organização desses arquivos deve seguir a mesma estrutura de pastas das suas respectivas controllers ou features.
 ```
+
+## Pedido 8
+```
+Os arquivos de documentação não estão aparecendo na Wiki. Crie uma Action para publicá-los sempre que um pull request for mergeado para main.
+```
