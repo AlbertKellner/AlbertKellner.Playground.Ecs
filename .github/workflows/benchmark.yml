@@ -17,4 +17,4 @@ jobs:
       - name: Restore
         run: dotnet restore src/Playground.Ecs.sln
       - name: Run benchmark
-        run: dotnet run --project src/Playground.Benchmarks/Playground.Benchmarks.csproj -c Release
+        run: dotnet run --project src/Playground.Benchmarks/Playground.Benchmarks.csproj -c Release -- --filter '*'

@@ -1,4 +1,5 @@
 using System.Reflection;
 using BenchmarkDotNet.Running;
 
-BenchmarkSwitcher.FromAssembly(Assembly.GetExecutingAssembly()).Run(args);
+var arguments = args.Length > 0 ? args : new[] { "--filter", "*" };
+BenchmarkSwitcher.FromAssembly(Assembly.GetExecutingAssembly()).Run(arguments);

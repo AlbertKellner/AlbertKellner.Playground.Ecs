@@ -113,3 +113,18 @@ Ps 2 testes de performance devem estar no mesmo arquivo de execução para criar
 ```
 Os testes estao quebrando, corrija
 ```
+
+## Pedido 19
+```
+O pipeline deu o seguinte erro:
+Run dotnet run --project src/Playground.Benchmarks/Playground.Benchmarks.csproj -c Release
+Available Benchmark:
+  #0 GetByIdToDoItemComparisonBenchmark
+
+You should select the target benchmark(s). Please, print a number of a benchmark (e.g. `0`) or a contained benchmark caption (e.g. `GetByIdToDoItemComparisonBenchmark`).
+If you want to select few, please separate them with space ` ` (e.g. `1 2 3`).
+You can also provide the class name in console arguments by using --filter. (e.g. `--filter '*GetByIdToDoItemComparisonBenchmark*'`).
+Enter the asterisk `*` to select all.
+To print all available benchmarks use `--list flat` or `--list tree`.
+To learn more about filtering use `--help`.
+```
