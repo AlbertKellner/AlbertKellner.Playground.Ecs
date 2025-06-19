@@ -1,0 +1,20 @@
+name: Executar Benchmark
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize]
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore src/Playground.Ecs.sln
+      - name: Run benchmark
+        run: dotnet run --project src/Playground.Benchmarks/Playground.Benchmarks.csproj -c Release -- --filter '*'

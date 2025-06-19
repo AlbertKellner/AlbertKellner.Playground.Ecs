@@ -86,3 +86,45 @@ Ao invés de importar essa action, é possível colocar o código inteiro aqui? 
 ```
 Pesquise na internet se é dessa maneira que adiciona um pull request a um projeto, através de uma action
 ```
+## Pedido 13
+```
+usando o framework Benchmark.net, faça um teste de performance da classe GetByIdToDoItemUseCaseHandler, crie um projeto a parte para armazenar esse tipo de teste
+```
+
+## Pedido 14
+```
+Crie uma action para rodar esse teste quando abrir ou atualizar um pull request
+```
+## Pedido 15
+```
+Duplique a feature de GetByIdToDoItem, adicionando a palavra “Old” após todas as palavras “ToDoItem”
+```
+
+## Pedido 16
+```
+Crie um teste de performance para GetByIdToDoItemOldUseCaseHandler idêntico ao GetByIdToDoItemUseCaseHandler
+```
+## Pedido 17
+```
+Ps 2 testes de performance devem estar no mesmo arquivo de execução para criar um comparativo
+```
+
+## Pedido 18
+```
+Os testes estao quebrando, corrija
+```
+
+## Pedido 19
+```
+O pipeline deu o seguinte erro:
+Run dotnet run --project src/Playground.Benchmarks/Playground.Benchmarks.csproj -c Release
+Available Benchmark:
+  #0 GetByIdToDoItemComparisonBenchmark
+
+You should select the target benchmark(s). Please, print a number of a benchmark (e.g. `0`) or a contained benchmark caption (e.g. `GetByIdToDoItemComparisonBenchmark`).
+If you want to select few, please separate them with space ` ` (e.g. `1 2 3`).
+You can also provide the class name in console arguments by using --filter. (e.g. `--filter '*GetByIdToDoItemComparisonBenchmark*'`).
+Enter the asterisk `*` to select all.
+To print all available benchmarks use `--list flat` or `--list tree`.
+To learn more about filtering use `--help`.
+```
