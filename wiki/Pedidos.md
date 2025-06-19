@@ -86,3 +86,12 @@ Ao invés de importar essa action, é possível colocar o código inteiro aqui? 
 ```
 Pesquise na internet se é dessa maneira que adiciona um pull request a um projeto, através de uma action
 ```
+## Pedido 13
+```
+usando o framework Benchmark.net, faça um teste de performance da classe GetByIdToDoItemUseCaseHandler, crie um projeto a parte para armazenar esse tipo de teste
+```
+
+## Pedido 14
+```
+Crie uma action para rodar esse teste quando abrir ou atualizar um pull request
+```
