@@ -37,4 +37,4 @@ msbuild.wrn
 _NCrunch_Sistema
 
 # Detritus
-*.ncrunchsolution
+*.ncrunchsolutionBenchmarkDotNet.Artifacts/
