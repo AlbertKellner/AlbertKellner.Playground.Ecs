@@ -5,20 +5,21 @@ namespace Playground.Application.Features.ToDoItems.Query.GetById.UseCase
 {
     public class GetByIdToDoItemUseCaseHandler : IRequestHandler<GetByIdToDoItemQuery, GetByIdToDoItemOutput>
     {
+        private static readonly GetByIdToDoItemOutput CachedItem = new()
+        {
+            Id = 99,
+            Task = "GetById - ToDoItem - UseCaseHandler",
+            IsCompleted = true
+        };
+
+        private static readonly GetByIdToDoItemOutput EmptyItem = new();
+
+        private static readonly Task<GetByIdToDoItemOutput> CachedTask = Task.FromResult(CachedItem);
+        private static readonly Task<GetByIdToDoItemOutput> EmptyTask = Task.FromResult(EmptyItem);
+
         public Task<GetByIdToDoItemOutput> Handle(GetByIdToDoItemQuery input, CancellationToken cancellationToken)
         {
-            var items = new List<GetByIdToDoItemOutput>
-            {
-                new GetByIdToDoItemOutput
-                {
-                    Id = 99,
-                    Task = "GetById - ToDoItem - UseCaseHandler",
-                    IsCompleted = true
-                }
-            };
-
-            var result = items.SingleOrDefault(item => item.Id == input.Id) ?? new GetByIdToDoItemOutput();
-            return Task.FromResult(result);
+            return input.Id == CachedItem.Id ? CachedTask : EmptyTask;
         }
     }
 }
