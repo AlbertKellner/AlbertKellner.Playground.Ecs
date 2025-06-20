@@ -128,3 +128,8 @@ Enter the asterisk `*` to select all.
 To print all available benchmarks use `--list flat` or `--list tree`.
 To learn more about filtering use `--help`.
 ```
+
+## Pedido 20
+```
+Alterando somente a classe GetByIdToDoItemUseCaseHandler, melhore sua performance. Antes de fazer commit, sempre rode o teste de performance e exiba os resultados
+```
