@@ -4,6 +4,7 @@ using Playground.Application.Features.ToDoItems.Query.GetById.Models;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System;
 using System.Threading.Tasks;
 
 namespace Playground.IntegrationTests;
@@ -20,7 +21,9 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     [Fact(DisplayName = "GetByIdAsync QuandoIdExiste DeveRetornarItem")]
     public async Task GetByIdAsync_QuandoIdExiste_DeveRetornarItem()
     {
-        var response = await _client.GetAsync("/todo/99");
+        using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/99");
+        request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
+        var response = await _client.SendAsync(request);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         var result = await response.Content.ReadFromJsonAsync<GetByIdToDoItemOutput>();
@@ -33,7 +36,9 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     [Fact(DisplayName = "GetByIdAsync QuandoIdNaoExiste DeveRetornarNoContent")]
     public async Task GetByIdAsync_QuandoIdNaoExiste_DeveRetornarNoContent()
     {
-        var response = await _client.GetAsync("/todo/100");
+        using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/100");
+        request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
+        var response = await _client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
     }
@@ -41,7 +46,9 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     [Fact(DisplayName = "GetByIdAsync QuandoIdInvalido DeveRetornarBadRequest")]
     public async Task GetByIdAsync_QuandoIdInvalido_DeveRetornarBadRequest()
     {
-        var response = await _client.GetAsync("/todo/0");
+        using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/0");
+        request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
+        var response = await _client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 

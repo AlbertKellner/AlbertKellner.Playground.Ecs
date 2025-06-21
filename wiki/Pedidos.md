@@ -176,3 +176,8 @@ Adicione no teste, a certificação do status code correto, e abra o json de ret
 ```
 Adicione testes para todos os status code
 ```
+
+## Pedido 28
+```
+Envie correlationId em todas as requisições
+```
