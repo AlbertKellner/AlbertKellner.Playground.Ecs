@@ -1,0 +1,22 @@
+name: Integration Tests
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize]
+
+jobs:
+  integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore src/Playground.Ecs.sln
+      - name: Build
+        run: dotnet build src/Playground.Ecs.sln --no-restore
+      - name: Run integration tests
+        run: dotnet test src/IntegrationTests/IntegrationTests.csproj --no-build --verbosity normal

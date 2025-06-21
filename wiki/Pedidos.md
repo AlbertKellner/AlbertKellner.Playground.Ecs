@@ -142,3 +142,27 @@ Crie u a nova feature, para integrar com o chatGPT, vou enviar minhas chaves de 
 Para a chave ’ExternalApiOptions’, crie um conjunto pata o PokemonApi e outro para o OpenIaApi.
 Ajuste os padrões da feature e controller da OpenIA, usando a documentação
 ```
+
+## Pedido 23
+```
+Crie um novo projeto para testes de integração, chamado IntegrationTests.
+Crie um teste de integração para testar a controller ToDoItemController, usando o endpoint ToDoItemController.
+
+Esse projeto de testes deve subir a aplicação e chamar o endpoint para testar sua execução. 
+Quais frameworks poderíamos utilizar? Já vi o wiremock para essa abordagem.
+
+Alguma duvida?
+
+Sempre responsável em português 
+```
+
+## Pedido 24
+```
+Como você poderia criar esse teste, mochando um servidor e subindo a aplicação?
+```
+
+## Pedido 25
+```
+Adicione aos agents, que sempre antes de um comitê, execute tambem os testes de integração 
+Crie tambem uma action para executa-los, quando criar ou  atualizar um pull request
+```
