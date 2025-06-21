@@ -133,3 +133,12 @@ To learn more about filtering use `--help`.
 ```
 Alterando somente a classe GetByIdToDoItemUseCaseHandler, melhore sua performance. Antes de fazer commit, sempre rode o teste de performance e exiba os resultados
 ```
+## Pedido 21
+```
+Crie u a nova feature, para integrar com o chatGPT, vou enviar minhas chaves de acesso nem outro prompt. A feature deve chamar OpenIaIntegrationFeature. Crie a Controller mo as respectivas actions. A conexão com o ChatGPT deve estar na camada equivalente de consumo de APis. O Objetivo é enviar um prompt e receber a resposta em texto. Quero ter a opção de controlar temperatura, modelo da LLM, e etc.
+```
+## Pedido 22
+```
+Para a chave ’ExternalApiOptions’, crie um conjunto pata o PokemonApi e outro para o OpenIaApi.
+Ajuste os padrões da feature e controller da OpenIA, usando a documentação
+```
