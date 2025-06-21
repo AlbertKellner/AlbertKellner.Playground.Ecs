@@ -181,3 +181,21 @@ Adicione testes para todos os status code
 ```
 Envie correlationId em todas as requisições
 ```
+
+## Pedido 29
+```
+A Action Vincular Pull Requests ao Projeto, esta dando o seguinte erro:
+
+Run ./scripts/add-pr-to-project.sh https://github.com/users/AlbertKellner/projects/2
+  ./scripts/add-pr-to-project.sh https://github.com/users/AlbertKellner/projects/2
+  shell: /usr/bin/bash -e {0}
+  env:
+    GITHUB_TOKEN: ***
+./scripts/add-pr-to-project.sh: line 23: owner: unbound variable
+Error: Process completed with exit code 1.
+
+O que pode ser? Faça uma análise completa
+Responsável em português
+
+Pode corrigir
+```
