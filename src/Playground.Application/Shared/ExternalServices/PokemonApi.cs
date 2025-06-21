@@ -29,16 +29,16 @@ namespace Playground.Application.Shared.ExternalServices
             _memoryCache = memoryCache;
             _externalApiOptions = externalApiOptions;
 
-            var httpClient = new HttpClient { BaseAddress = new Uri(externalApiOptions.PokemonApiUrl) }; //TODO: Otimizar
+            var httpClient = new HttpClient { BaseAddress = new Uri(externalApiOptions.PokemonApi.Url) }; //TODO: Otimizar
             httpClient.DefaultRequestHeaders.Add("CorrelationId", CorrelationContext.GetCorrelationId().ToString());
             _pokemonApi = RestService.For<IPokemonApi>(httpClient);
 
             var retryPolicy = Policy
                 .Handle<ApiException>(exception => exception.StatusCode is HttpStatusCode.NoContent)
-                .WaitAndRetryAsync(externalApiOptions.PokemonApiRetryCount, retryAttempt 
-                    => TimeSpan.FromSeconds(externalApiOptions.PokemonApiSleepDuration * retryAttempt));
+                .WaitAndRetryAsync(externalApiOptions.PokemonApi.RetryCount, retryAttempt
+                    => TimeSpan.FromSeconds(externalApiOptions.PokemonApi.SleepDuration * retryAttempt));
 
-            var timeoutPolicy = Policy.TimeoutAsync(externalApiOptions.PokemonApiTimeout, TimeoutStrategy.Pessimistic);
+            var timeoutPolicy = Policy.TimeoutAsync(externalApiOptions.PokemonApi.Timeout, TimeoutStrategy.Pessimistic);
 
             _policyWrap = Policy.WrapAsync(retryPolicy, timeoutPolicy);
         }
@@ -77,7 +77,7 @@ namespace Playground.Application.Shared.ExternalServices
                 }
                 finally
                 {
-                    _logger.LogTroubleshooting($"[Troubleshooting][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApiUrl}");
+                    _logger.LogTroubleshooting($"[Troubleshooting][PokemonApi][GetByNameAsync] url:{_externalApiOptions.PokemonApi.Url}");
                     _logger.LogTroubleshooting($"[Troubleshooting][PokemonApi][GetByNameAsync] apiResult:{apiResult.ToTroubleshooting()}");
 
                     entry.SetAbsoluteExpiration(attemptResult != null ? TimeSpan.FromSeconds(3) : TimeSpan.FromSeconds(1)); //TODO: Extract to configJson

@@ -9,6 +9,7 @@ namespace Playground.Application.Shared.AutofacModules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<PokemonApi>().As<IPokemonApi>();
+            builder.RegisterType<OpenAiApi>().As<IOpenAiApi>();
         }
     }
 }
