@@ -199,3 +199,13 @@ Responsável em português
 
 Pode corrigir
 ```
+
+## Pedido 30
+```
+Faça testes de integração do endpoint pokemon
+```
+## Pedido 31
+```
+Agora adicione um teste que não faz Mock da apiPokemon, e sim, consome ela de verdade. Diferencie os testes criando uma classe para cada, um mocado, e um sem mocks
+```
+
