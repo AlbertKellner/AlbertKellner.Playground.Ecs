@@ -166,3 +166,8 @@ Como você poderia criar esse teste, mochando um servidor e subindo a aplicaçã
 Adicione aos agents, que sempre antes de um comitê, execute tambem os testes de integração 
 Crie tambem uma action para executa-los, quando criar ou  atualizar um pull request
 ```
+
+## Pedido 26
+```
+Adicione no teste, a certificação do status code correto, e abra o json de retorno e verifique se o item foi respondido corretamente
+```
