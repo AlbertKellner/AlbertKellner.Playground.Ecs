@@ -20,10 +20,10 @@ PR_NODE_ID=$(jq -r '.pull_request.node_id' "$EVENT_PATH")
 
 PROJECT_ID=$(curl -s -H "Authorization: Bearer $TOKEN" \
   -X POST -H "Content-Type: application/json" \
-  -d "{\"query\":\"query($owner:String!,$number:Int!){ $OWNER_FIELD(login:$owner){ projectV2(number:$number){ id } } }\",\"variables\":{\"owner\":\"$OWNER_NAME\",\"number\":$PROJECT_NUMBER}}" https://api.github.com/graphql | jq -r ".data.$OWNER_FIELD.projectV2.id")
+  -d "{\"query\":\"query(\$owner:String!,\$number:Int!){ $OWNER_FIELD(login:\$owner){ projectV2(number:\$number){ id } } }\",\"variables\":{\"owner\":\"$OWNER_NAME\",\"number\":$PROJECT_NUMBER}}" https://api.github.com/graphql | jq -r ".data.$OWNER_FIELD.projectV2.id")
 
 curl -s -H "Authorization: Bearer $TOKEN" \
   -X POST -H "Content-Type: application/json" \
-  -d "{\"query\":\"mutation($project:ID!,$content:ID!){ addProjectV2ItemById(input:{projectId:$project, contentId:$content}){item{id}} }\",\"variables\":{\"project\":\"$PROJECT_ID\",\"content\":\"$PR_NODE_ID\"}}" https://api.github.com/graphql > /dev/null
+  -d "{\"query\":\"mutation(\$project:ID!,\$content:ID!){ addProjectV2ItemById(input:{projectId:\$project, contentId:\$content}){item{id}} }\",\"variables\":{\"project\":\"$PROJECT_ID\",\"content\":\"$PR_NODE_ID\"}}" https://api.github.com/graphql > /dev/null
 
 echo "Pull request added to project"
