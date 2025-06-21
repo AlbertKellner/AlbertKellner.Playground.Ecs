@@ -171,3 +171,8 @@ Crie tambem uma action para executa-los, quando criar ou  atualizar um pull requ
 ```
 Adicione no teste, a certificação do status code correto, e abra o json de retorno e verifique se o item foi respondido corretamente
 ```
+
+## Pedido 27
+```
+Adicione testes para todos os status code
+```

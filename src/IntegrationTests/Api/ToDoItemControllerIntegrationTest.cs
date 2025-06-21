@@ -29,4 +29,24 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         Assert.Equal("GetById - ToDoItem - UseCaseHandler", result.Task);
         Assert.True(result.IsCompleted);
     }
+
+    [Fact(DisplayName = "GetByIdAsync QuandoIdNaoExiste DeveRetornarNoContent")]
+    public async Task GetByIdAsync_QuandoIdNaoExiste_DeveRetornarNoContent()
+    {
+        var response = await _client.GetAsync("/todo/100");
+
+        Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+    }
+
+    [Fact(DisplayName = "GetByIdAsync QuandoIdInvalido DeveRetornarBadRequest")]
+    public async Task GetByIdAsync_QuandoIdInvalido_DeveRetornarBadRequest()
+    {
+        var response = await _client.GetAsync("/todo/0");
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+
+        var errors = await response.Content.ReadFromJsonAsync<string[]>();
+        Assert.NotNull(errors);
+        Assert.Contains("Id precisa ser maior que zero", errors!);
+    }
 }
