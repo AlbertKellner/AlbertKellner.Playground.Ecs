@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Tests", "Playgro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Benchmarks", "Playground.Benchmarks\Playground.Benchmarks.csproj", "{5513A7D6-BE62-4870-B133-70B89E053BFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{ACA8C412-4251-462B-886D-5EC0B9F7AA41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5513A7D6-BE62-4870-B133-70B89E053BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5513A7D6-BE62-4870-B133-70B89E053BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5513A7D6-BE62-4870-B133-70B89E053BFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA8C412-4251-462B-886D-5EC0B9F7AA41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA8C412-4251-462B-886D-5EC0B9F7AA41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA8C412-4251-462B-886D-5EC0B9F7AA41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA8C412-4251-462B-886D-5EC0B9F7AA41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

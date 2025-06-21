@@ -29,7 +29,9 @@ Este documento descreve como escrever e organizar testes unitários neste projet
 ## Requisitos de workflow
 
 Ao criar ou alterar testes, execute `dotnet build` e `dotnet test` na solução `src/Playground.Ecs.sln` para confirmar que tudo continua compilando e que a suíte de testes está verde.
-Qualquer commit só deve ser enviado após estas duas verificações concluírem com sucesso.
+Os testes de integração residem em `src/IntegrationTests` e podem ser executados diretamente com `dotnet test src/IntegrationTests/IntegrationTests.csproj`.
+Execute esses testes de integração antes de qualquer commit, além dos testes unitários.
+Qualquer commit só deve ser enviado após todas essas verificações concluírem com sucesso.
 A geração de cobertura é automática no CI e o arquivo `coveragereport/Summary.txt`, produzido pelo passo `reportgenerator`, apresenta o resultado.
 
 ## Padrões das Controllers e Middlewares
