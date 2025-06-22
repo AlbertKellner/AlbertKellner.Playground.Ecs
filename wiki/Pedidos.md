@@ -209,3 +209,7 @@ Faça testes de integração do endpoint pokemon
 Agora adicione um teste que não faz Mock da apiPokemon, e sim, consome ela de verdade. Diferencie os testes criando uma classe para cada, um mocado, e um sem mocks
 ```
 
+## Pedido 32
+```
+Tire o Skip delas
+```
