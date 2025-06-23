@@ -213,3 +213,8 @@ Agora adicione um teste que não faz Mock da apiPokemon, e sim, consome ela de v
 ```
 Tire o Skip delas
 ```
+
+## Pedido 33
+```
+Os testes estao quebrando
+```
