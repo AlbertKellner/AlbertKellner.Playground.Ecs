@@ -31,6 +31,12 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         }
     }
 
+    private static void SaveLogs(string logs, string methodName)
+    {
+        var filePath = Path.Combine(AppContext.BaseDirectory, $"{methodName}ExecutionLogs");
+        File.WriteAllText(filePath, logs);
+    }
+
     public ToDoItemControllerIntegrationTest(WebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
@@ -42,6 +48,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/99");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
         var (response, logs) = await SendAsync(_client, request);
+        SaveLogs(logs, nameof(GetByIdAsync_QuandoIdExiste_DeveRetornarItem));
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         var result = await response.Content.ReadFromJsonAsync<GetByIdToDoItemOutput>();
@@ -59,6 +66,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/100");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
         var (response, logs) = await SendAsync(_client, request);
+        SaveLogs(logs, nameof(GetByIdAsync_QuandoIdNaoExiste_DeveRetornarNoContent));
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         Assert.DoesNotContain("[ERR]", logs);
@@ -70,6 +78,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/0");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
         var (response, logs) = await SendAsync(_client, request);
+        SaveLogs(logs, nameof(GetByIdAsync_QuandoIdInvalido_DeveRetornarBadRequest));
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 

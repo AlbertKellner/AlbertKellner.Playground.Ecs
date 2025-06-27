@@ -224,3 +224,8 @@ Os testes estao quebrando
 No teste integrado que não é no mockado, classe ToDoItemControllerIntegrationTest, verifique se não aparece nenhum erro no log
 ```
 
+## Pedido 35
+```
+No teste integrado da classe ToDoItemControllerIntegrationTest, grave a saída dos logs em um arquivo com o nome do método de teste seguido por a palavra ExecutionLogs
+```
+
