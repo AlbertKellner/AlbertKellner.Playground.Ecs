@@ -218,3 +218,9 @@ Tire o Skip delas
 ```
 Os testes estao quebrando
 ```
+
+## Pedido 34
+```
+No teste integrado que não é no mockado, classe ToDoItemControllerIntegrationTest, verifique se não aparece nenhum erro no log
+```
+
