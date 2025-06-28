@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -14,7 +16,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
 {
     private readonly HttpClient _client;
 
-    private static async Task<(HttpResponseMessage Response, string Logs)>
+    private static async Task<(HttpResponseMessage Response, string Logs, TimeSpan Duration)>
         SendAsync(HttpClient client, HttpRequestMessage request)
     {
         var original = Console.Out;
@@ -23,12 +25,38 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         try
         {
             var response = await client.SendAsync(request);
-            return (response, writer.ToString());
+            var duration = ReadExecutionTimeHeader(response);
+            return (response, writer.ToString(), duration);
         }
         finally
         {
             Console.SetOut(original);
         }
+    }
+
+    private static TimeSpan ReadExecutionTimeHeader(HttpResponseMessage response)
+    {
+        if (response.Headers.TryGetValues("Execution-Time", out var values))
+            return ParseExecutionTime(values.First());
+
+        return TimeSpan.Zero;
+    }
+
+    private static TimeSpan ParseExecutionTime(string value)
+    {
+        var match = Regex.Match(value, @"^(?<m>\d+)m (?<s>\d+)s (?<ms>\d+)ms (?<ns>\d+)ns$");
+        if (!match.Success)
+            return TimeSpan.Zero;
+
+        int minutes = int.Parse(match.Groups["m"].Value);
+        int seconds = int.Parse(match.Groups["s"].Value);
+        int milliseconds = int.Parse(match.Groups["ms"].Value);
+        int nanoseconds = int.Parse(match.Groups["ns"].Value);
+
+        return TimeSpan.FromMinutes(minutes)
+            + TimeSpan.FromSeconds(seconds)
+            + TimeSpan.FromMilliseconds(milliseconds)
+            + TimeSpan.FromTicks(nanoseconds / 100);
     }
 
     private static void SaveLogs(string logs, string methodName)
@@ -47,7 +75,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/99");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
-        var (response, logs) = await SendAsync(_client, request);
+        var (response, logs, duration) = await SendAsync(_client, request);
         SaveLogs(logs, nameof(GetByIdAsync_QuandoIdExiste_DeveRetornarItem));
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -58,6 +86,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         Assert.True(result.IsCompleted);
 
         Assert.DoesNotContain("[ERR]", logs);
+        Assert.True(duration < TimeSpan.FromSeconds(1));
     }
 
     [Fact(DisplayName = "GetByIdAsync QuandoIdNaoExiste DeveRetornarNoContent")]
@@ -65,11 +94,12 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/100");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
-        var (response, logs) = await SendAsync(_client, request);
+        var (response, logs, duration) = await SendAsync(_client, request);
         SaveLogs(logs, nameof(GetByIdAsync_QuandoIdNaoExiste_DeveRetornarNoContent));
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         Assert.DoesNotContain("[ERR]", logs);
+        Assert.True(duration < TimeSpan.FromSeconds(1));
     }
 
     [Fact(DisplayName = "GetByIdAsync QuandoIdInvalido DeveRetornarBadRequest")]
@@ -77,7 +107,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/0");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
-        var (response, logs) = await SendAsync(_client, request);
+        var (response, logs, duration) = await SendAsync(_client, request);
         SaveLogs(logs, nameof(GetByIdAsync_QuandoIdInvalido_DeveRetornarBadRequest));
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -86,5 +116,6 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         Assert.NotNull(errors);
         Assert.Contains("Id precisa ser maior que zero", errors!);
         Assert.DoesNotContain("[ERR]", logs);
+        Assert.True(duration < TimeSpan.FromSeconds(1));
     }
 }

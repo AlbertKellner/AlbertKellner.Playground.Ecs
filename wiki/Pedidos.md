@@ -229,3 +229,14 @@ No teste integrado que não é no mockado, classe ToDoItemControllerIntegrationT
 No teste integrado da classe ToDoItemControllerIntegrationTest, grave a saída dos logs em um arquivo com o nome do método de teste seguido por a palavra ExecutionLogs
 ```
 
+## Pedido 36
+```
+No teste integrado classe ToDoItemControllerIntegrationTest, verifique se a requisição demorou menos de 1 segundo
+```
+
+
+## Pedido 37
+```
+Crie um jeito mais elegante de calcular o tempo de execução do teste
+```
+
