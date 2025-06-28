@@ -1,42 +1,45 @@
 using Moq;
-using MediatR;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Playground.API.Controllers;
+using Playground.Application.Features.Pokemon.Endpoint;
 using Playground.Application.Shared.Domain.ApiDto;
 
-namespace Playground.Tests.Controllers
+namespace Playground.Tests.Controllers;
+
+public class GetByNameInternalPokemonControllerTest
 {
-    public class GetByNameInternalPokemonControllerTest
+    private readonly Mock<ILoggerFactory> _mockLoggerFactory;
+    private readonly Mock<ILogger> _mockLogger;
+
+    public GetByNameInternalPokemonControllerTest()
     {
-        private readonly Mock<ILogger<PokemonController>> _mockLogger;
-        private readonly PokemonController _controller;
+        _mockLoggerFactory = new Mock<ILoggerFactory>();
+        _mockLogger = new Mock<ILogger>();
+        _mockLoggerFactory.Setup(l => l.CreateLogger(It.IsAny<string>()))
+            .Returns(_mockLogger.Object);
+    }
 
-        public GetByNameInternalPokemonControllerTest()
-        {
-            _mockLogger = new Mock<ILogger<PokemonController>>();
-            _controller = new PokemonController(Mock.Of<IMediator>(), _mockLogger.Object);
-        }
+    [Fact(DisplayName = "Handle QuandoPikachu DeveRetornarOk")]
+    public void Handle_QuandoPikachu_DeveRetornarOk()
+    {
+        var result = GetByNameInternalEndpoint.Handle(
+            "pikachu",
+            _mockLoggerFactory.Object);
 
-        [Fact(DisplayName = "GetByNameInternalAsync QuandoPikachu DeveRetornarOk")]
-        public void GetByNameInternalAsync_QuandoPikachu_DeveRetornarOk()
-        {
-            var result = _controller.GetByNameInternalAsync("pikachu");
+        var okResult = Assert.IsType<Microsoft.AspNetCore.Http.HttpResults.Ok<PokemonOutApiDto>>(result);
+        Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
+        var pokemon = Assert.IsType<PokemonOutApiDto>(okResult.Value);
+        Assert.Equal("pikachu", pokemon.Name);
+    }
 
-            var response = Assert.IsType<OkObjectResult>(result);
-            var pokemon = Assert.IsType<PokemonOutApiDto>(response.Value);
-            Assert.Equal(StatusCodes.Status200OK, response.StatusCode);
-            Assert.Equal("pikachu", pokemon.Name);
-        }
+    [Fact(DisplayName = "Handle QuandoNaoForPikachu DeveRetornarNoContent")]
+    public void Handle_QuandoNaoForPikachu_DeveRetornarNoContent()
+    {
+        var result = GetByNameInternalEndpoint.Handle(
+            "mew",
+            _mockLoggerFactory.Object);
 
-        [Fact(DisplayName = "GetByNameInternalAsync QuandoNaoForPikachu DeveRetornarNoContent")]
-        public void GetByNameInternalAsync_QuandoNaoForPikachu_DeveRetornarNoContent()
-        {
-            var result = _controller.GetByNameInternalAsync("mew");
-
-            var response = Assert.IsType<NoContentResult>(result);
-            Assert.Equal(StatusCodes.Status204NoContent, response.StatusCode);
-        }
+        var noContent = Assert.IsType<Microsoft.AspNetCore.Http.HttpResults.NoContent>(result);
+        Assert.Equal(StatusCodes.Status204NoContent, noContent.StatusCode);
     }
 }
