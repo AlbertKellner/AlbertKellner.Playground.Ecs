@@ -234,3 +234,9 @@ No teste integrado da classe ToDoItemControllerIntegrationTest, grave a saída d
 No teste integrado classe ToDoItemControllerIntegrationTest, verifique se a requisição demorou menos de 1 segundo
 ```
 
+
+## Pedido 37
+```
+Crie um jeito mais elegante de calcular o tempo de execução do teste
+```
+
