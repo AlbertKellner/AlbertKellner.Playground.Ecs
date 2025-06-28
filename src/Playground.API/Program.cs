@@ -3,6 +3,7 @@ using Serilog;
 using System.Text.Json;
 using Playground;
 using Playground.API;
+using Playground.Application.Features.Pokemon.Endpoint;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ app.RegisterCustomMiddleware();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
+app.MapPokemonEndpoints();
 app.MapControllers();
 
 app.UseEndpoints(endpoints =>

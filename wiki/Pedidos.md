@@ -240,3 +240,11 @@ No teste integrado classe ToDoItemControllerIntegrationTest, verifique se a requ
 Crie um jeito mais elegante de calcular o tempo de execução do teste
 ```
 
+\n## Pedido 38
+
+
+
+## Pedido 38
+```
+Com base na PokemonController, quero que você extraia cada action para sua respectiva feature. Coloque as actions na pasta chamada Endpoint, em suas respectivas features. Os endpoints devem continuar funcionando. Garanta que ainda funciona, pelos testes de integração. Não altere os testes de integração.
+```
