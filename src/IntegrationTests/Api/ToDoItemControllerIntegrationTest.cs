@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
 {
     private readonly HttpClient _client;
 
-    private static async Task<(HttpResponseMessage Response, string Logs)>
+    private static async Task<(HttpResponseMessage Response, string Logs, TimeSpan Duration)>
         SendAsync(HttpClient client, HttpRequestMessage request)
     {
         var original = Console.Out;
@@ -22,8 +23,10 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         Console.SetOut(writer);
         try
         {
+            var stopwatch = Stopwatch.StartNew();
             var response = await client.SendAsync(request);
-            return (response, writer.ToString());
+            stopwatch.Stop();
+            return (response, writer.ToString(), stopwatch.Elapsed);
         }
         finally
         {
@@ -47,7 +50,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/99");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
-        var (response, logs) = await SendAsync(_client, request);
+        var (response, logs, duration) = await SendAsync(_client, request);
         SaveLogs(logs, nameof(GetByIdAsync_QuandoIdExiste_DeveRetornarItem));
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -58,6 +61,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         Assert.True(result.IsCompleted);
 
         Assert.DoesNotContain("[ERR]", logs);
+        Assert.True(duration < TimeSpan.FromSeconds(1));
     }
 
     [Fact(DisplayName = "GetByIdAsync QuandoIdNaoExiste DeveRetornarNoContent")]
@@ -65,11 +69,12 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/100");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
-        var (response, logs) = await SendAsync(_client, request);
+        var (response, logs, duration) = await SendAsync(_client, request);
         SaveLogs(logs, nameof(GetByIdAsync_QuandoIdNaoExiste_DeveRetornarNoContent));
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         Assert.DoesNotContain("[ERR]", logs);
+        Assert.True(duration < TimeSpan.FromSeconds(1));
     }
 
     [Fact(DisplayName = "GetByIdAsync QuandoIdInvalido DeveRetornarBadRequest")]
@@ -77,7 +82,7 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, "/todo/0");
         request.Headers.Add("CorrelationId", Guid.NewGuid().ToString());
-        var (response, logs) = await SendAsync(_client, request);
+        var (response, logs, duration) = await SendAsync(_client, request);
         SaveLogs(logs, nameof(GetByIdAsync_QuandoIdInvalido_DeveRetornarBadRequest));
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -86,5 +91,6 @@ public class ToDoItemControllerIntegrationTest : IClassFixture<WebApplicationFac
         Assert.NotNull(errors);
         Assert.Contains("Id precisa ser maior que zero", errors!);
         Assert.DoesNotContain("[ERR]", logs);
+        Assert.True(duration < TimeSpan.FromSeconds(1));
     }
 }
