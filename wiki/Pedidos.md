@@ -259,3 +259,8 @@ Você deletou os testes das controllers. Não delete, adapte para testar os novo
 As interfaces dos endpoints devem estar na passar de interface, em suas respectivas features 
 As classes de teste dos endpoints devem ter os mesmos nomes que tinham as classes de teste da controller. 
 ```
+
+## Pedido 41
+```
+O arquivo de teste deve estar com o mesmo nome, mas mesma pasta, pra que eu possa ver a diferenças no código da migração de endpoint
+```
