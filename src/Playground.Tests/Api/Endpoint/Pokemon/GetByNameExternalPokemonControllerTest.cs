@@ -7,7 +7,7 @@ using Playground.Application.Features.Pokemon.GetByName.Endpoint;
 
 namespace Playground.Tests.Controllers;
 
-public class GetByNameExternalEndpointTest
+public class GetByNameExternalPokemonControllerTest
 {
     private readonly Mock<IMediator> _mockMediator;
     private readonly Mock<ILoggerFactory> _mockLoggerFactory;
@@ -17,7 +17,7 @@ public class GetByNameExternalEndpointTest
     private readonly GetByNamePokemonOutput _validOutput;
     private readonly GetByNamePokemonOutput _invalidOutput;
 
-    public GetByNameExternalEndpointTest()
+    public GetByNameExternalPokemonControllerTest()
     {
         _mockMediator = new Mock<IMediator>();
         _mockLoggerFactory = new Mock<ILoggerFactory>();

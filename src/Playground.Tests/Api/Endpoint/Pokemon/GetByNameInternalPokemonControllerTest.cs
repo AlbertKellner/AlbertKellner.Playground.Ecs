@@ -6,12 +6,12 @@ using Playground.Application.Shared.Domain.ApiDto;
 
 namespace Playground.Tests.Controllers;
 
-public class GetByNameInternalEndpointTest
+public class GetByNameInternalPokemonControllerTest
 {
     private readonly Mock<ILoggerFactory> _mockLoggerFactory;
     private readonly Mock<ILogger> _mockLogger;
 
-    public GetByNameInternalEndpointTest()
+    public GetByNameInternalPokemonControllerTest()
     {
         _mockLoggerFactory = new Mock<ILoggerFactory>();
         _mockLogger = new Mock<ILogger>();

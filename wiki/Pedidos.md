@@ -253,3 +253,9 @@ Com base na PokemonController, quero que você extraia cada action para sua resp
 ```
 Você deletou os testes das controllers. Não delete, adapte para testar os novos métodos de endpoint.
 ```
+
+## Pedido 40
+```
+As interfaces dos endpoints devem estar na passar de interface, em suas respectivas features 
+As classes de teste dos endpoints devem ter os mesmos nomes que tinham as classes de teste da controller. 
+```
