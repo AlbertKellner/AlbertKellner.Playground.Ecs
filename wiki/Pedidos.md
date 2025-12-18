@@ -264,3 +264,8 @@ As classes de teste dos endpoints devem ter os mesmos nomes que tinham as classe
 ```
 O arquivo de teste deve estar com o mesmo nome, mas mesma pasta, pra que eu possa ver a diferenças no código da migração de endpoint
 ```
+
+## Pedido 42
+```
+Crie um teste de performance usando o framework BenchmarkDotNet, para testar o o endpoint de  GetById com o id 1 e outro teste para testar o GetAll, Crie um novo projeto para esse teste de performance.
+```
